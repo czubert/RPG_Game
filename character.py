@@ -16,8 +16,8 @@ class Character:
 
 class Warrior(Character):
     def __init__(self, attack_power):
-        Character.__init__(self, 3200)
-        self.attack_power = attack_power
+        Character.__init__(self, 1200)
+        self.attack_power = attack_power + random.randint(0, 100)
 
     def act(self, other):
         self.attack(other)
@@ -26,11 +26,14 @@ class Warrior(Character):
         other.current_hp -= self.attack_power
         if other.current_hp < 0:
             other.team.team.remove(other)
+            if len(other.team) == 0:
+                print(f"Team: {self.team.name} won the battle")
+                quit()
 
 
 class Sorceress(Character):
     def __init__(self):
-        Character.__init__(self, 1500)
+        Character.__init__(self, 500)
 
     def act(self, other):
         self.stun(other)
@@ -43,7 +46,7 @@ class Sorceress(Character):
 
 class Support(Character):
     def __init__(self, healing_power):
-        Character.__init__(self, 900)
+        Character.__init__(self, 400)
         self.healing_power = healing_power
 
     def act(self, other):

@@ -1,5 +1,6 @@
 class Team:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.team = []
 
     def __str__(self):

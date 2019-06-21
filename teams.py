@@ -1,0 +1,14 @@
+class Team:
+    def __init__(self):
+        self.team = []
+
+    def __str__(self):
+        team_characters = ' \n'.join([element.__str__() for element in self.team])
+        return team_characters
+
+    def add_character(self, character):
+        self.team.append(character)
+
+
+
+

@@ -3,6 +3,7 @@ class Character:
         self.max_hp = max_hp
         self.current_hp = self.max_hp
         self.stunned = False
+        self.team = None
 
     def __str__(self):
         return f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Stunned: {self.stunned}"
@@ -22,7 +23,7 @@ class Warrior(Character):
     def attack(self, other):
         other.current_hp -= self.attack_power
         if other.current_hp < 0:
-            print("Your hp status is under 0, means you are dead")
+            other.team.team.remove(other)
 
 
 class Sorceress(Character):

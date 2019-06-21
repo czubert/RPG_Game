@@ -8,7 +8,11 @@ class Team:
 
     def add_character(self, character):
         self.team.append(character)
+        character.team = self
 
+    def __getitem__(self, item):
+        return self.team.__getitem__(item)
 
-
+    def __len__(self):
+        return len(self.team)
 

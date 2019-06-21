@@ -33,6 +33,7 @@ class Engine:
         if char1.rounds_stunned:
             print(f'stunned, round: {self.rounds}')
             self.change_team_order()
+            char1.rounds_stunned -= 1
             return
         print(f'not stunned, round: {self.rounds}')
         if type(char1) is Support:
@@ -64,7 +65,7 @@ team2.add_character(Warrior(200))
 print(game.teams_list[0])
 print(game.teams_list[1])
 print()
-for i in range(20):
+for i in range(3):
     game.fight()
 print(game.teams_list[0])
 print(game.teams_list[1])

@@ -8,6 +8,7 @@ class Engine:
     def __init__(self):
         self.teams_list = []
         self.team_order = random.randint(0, 1)
+        self.rounds = 0
 
     def create_new_team(self):
         tmp_name = Team()
@@ -27,7 +28,13 @@ class Engine:
         return character
 
     def fight(self):
+        self.rounds += 1
         char1 = self.choose_attacking_character()
+        if char1.rounds_stunned:
+            print(f'stunned, round: {self.rounds}')
+            self.change_team_order()
+            return
+        print(f'not stunned, round: {self.rounds}')
         if type(char1) is Support:
             char2 = self.choose_attacking_character()
             char1.act(char2)
@@ -57,7 +64,7 @@ team2.add_character(Warrior(200))
 print(game.teams_list[0])
 print(game.teams_list[1])
 print()
-for i in range(10):
+for i in range(20):
     game.fight()
 print(game.teams_list[0])
 print(game.teams_list[1])

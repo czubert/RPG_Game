@@ -2,11 +2,11 @@ class Character:
     def __init__(self, max_hp):
         self.max_hp = max_hp
         self.current_hp = self.max_hp
-        self.stunned = False
+        self.rounds_stunned = 0
         self.team = None
 
     def __str__(self):
-        return f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Stunned: {self.stunned}"
+        return f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: {self.rounds_stunned}"
 
     def act(self):
         pass
@@ -32,6 +32,7 @@ class Sorceress(Character):
 
     def act(self, other):
         self.stun(other)
+        other.rounds_stunned += 3
 
     @staticmethod
     def stun(other):

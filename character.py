@@ -15,15 +15,15 @@ class Character:
             f"{self.rounds_stunned}"
 
     def act(self):
-        """
-
-        """
+        '''
+        Uses action of character
+        '''
         pass
 
     def check_if_defeted(self, other):
         """
-
-        :param other:
+        Checks if all the opponents are dead after killing particular one
+        :param other: opponent object
         """
         if len(other.team) == 0:
             print(f"Team: {self.team.name} won the battle")
@@ -34,30 +34,26 @@ class Character:
 class Warrior(Character):
     def __init__(self, attack_power, name):
         """
-
-        :param attack_power:
-        :param name:
+        Creates warrior character object
+        :param attack_power: int, damage that character deals
+        :param name: str, name of character
         """
         Character.__init__(self, 1300, name)
 
         self.attack_power = attack_power + random.randint(0, 100)
 
     def act(self, other):
-        """
-
-        :param other:
-        """
         self.attack(other)
 
     def attack(self, other):
         """
-
-        :param other:
+        Skill of character, deals damage to opponent
+        :param other: opponent character object
         """
         other.current_hp -= self.attack_power
 
-        if other.current_hp < 0:
-            other.team.team.remove(other)
+        if other.current_hp < 0:  # checks if attack killed opponent
+            other.team.team.remove(other)  # deletes dead character from its team
             self.check_if_defeted(other)
 
 

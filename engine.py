@@ -15,9 +15,9 @@ class Engine:
 
     def create_new_team(self, name):
         """
-
-        :param name:
-        :return:
+        Creates Team and sets it's name
+        :param name: str
+        :return: str
         """
         tmp_name = Team(name)
         self.teams_list.append(tmp_name)
@@ -25,7 +25,7 @@ class Engine:
 
     def change_team_order(self):
         """
-
+        Change attacking team to another one
         """
         if self.team_order == 0:
             self.team_order = 1
@@ -34,36 +34,39 @@ class Engine:
 
     def choose_attacking_character(self):
         """
-
-        :return:
+        Randomly take team which will attack first, and then randomly choose character who will attack first
+        :return: character object
         """
-        dream_team = self.teams_list[self.team_order]
-        character_order = random.randint(0, len(dream_team) - 1)
-        character = dream_team[character_order]
+        dream_team = self.teams_list[self.team_order]  # randomly takes team from teams list
+        character_order = random.randint(0, len(dream_team) - 1)  # randoms which character to take from team
+        character = dream_team[character_order]  # takes character
 
         return character
 
     def fight(self):
         """
-
-        :return:
+        Takes character that is randomed to start fight, and attacks randomed character from opponents team
+        If Character has skills working on your own team it also takes round.
+        After attack/support it changes the team to another one.
+        :return: Stops attack if chosen character is stunned
         """
-        self.rounds += 1
+        self.rounds += 1  # counts the rounds
 
         char1 = self.choose_attacking_character()
-        if char1.rounds_stunned:
+        if char1.rounds_stunned:  # checks if randomed character is stunned, if yes it stops goes to next attack
             print(f'stunned, round: {self.rounds}')
             self.change_team_order()
             if char1.rounds_stunned > 0:
-                char1.rounds_stunned -= 1
+                char1.rounds_stunned -= 1  # after round stunned characters has 1 round of stun less
             return
         print(f'not stunned, round: {self.rounds}')
 
-        if type(char1) is Support:
+        if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
+            # character from its team
             char2 = self.choose_attacking_character()
             char1.act(char2)
             self.change_team_order()
-        else:
+        else:  # use act typical for its character on the random opponent character
             self.change_team_order()
             char2 = self.choose_attacking_character()
             char1.act(char2)
@@ -78,7 +81,6 @@ team1.add_character(Warrior(200, 'Brajan'))
 team1.add_character(Sorceress('Jessica'))
 team1.add_character(Warrior(200, 'Ken'))
 team1.add_character(Support(200, 'Majk'))
-
 
 team2.add_character(Warrior(200, 'Jack'))
 team2.add_character(Warrior(200, 'Sparrow'))
@@ -96,26 +98,3 @@ print(game.teams_list[1])
 # print(game.choose_attacking_character())
 
 
-# TODO:
-'''
-- Dobrze by było, żeby bohaterowie mogli levelować, I jakoś od tego uzależnić ich moce
-- Możesz wymyślić jakiś inny rodzaj postaci i go dodać
-- A jak to będzie ogarnięte to chyba wypada się wziąć za strategię
-Żeby nie było już losowo kto i losowo kogo - tylko nadać im jakieś priorytety
-Że np. Najsilniejszy atakuje częściej, albo zawsze się atakuje najsłabszego
-- formatowanie
-- komentarze
-- check if defeated to zło! nie używaj quit() w kodzie - to paskudne 😜
-lepiej prowadzić walkę dopóki w obu drużynach jest jakaś postać. To w sumie aż się prosi o napisanie metody, 
-która w odpowiedniej pętli wywołuje fight() a po tej pętli możesz wywołać jakieś podsumowanie
-- sprawdzanie czy ktoś umarł: masz ten sam kawałek kodu w kilku miejscach. Zrób z tego metodę. To jest wspólna metoda 
-dla wszystkich, którzy potrafią zabić, więc można ją wrzucić w jakieś jedno miejsce... 🙂 
-A potem wywoływać np. w act
-act jest lepsze niż np. attack, bo attack nie brzmi jakby miał sprawdzać czy zabił. Którego atakujacego to obchodzi? xD
-- w heal(self, other) warto byłoby skorzystać z max(cośtam, cośtam_innego) zamiast z if/else
-- a Check if poisoned totalnie nie ma szansy działać. 
-1. poizonowanie powinno się odbywać tylko dla drużyny, która aktulanie wykonuje ruch, nie?
-2. to charakter wie czy jest zapoizonowany czy nie. Trzeba go o to zapytać i jeśli jeśli jest to mu odjąć życie. 
-Ile tego życia? Trzeba to gdzieś NA NIM przechowywać. Na razie zrób na sztywno jakąś wartosć, ale zaraz dodamy jakiś 
-sprytny myk na to, żeby było wiadomo ile tych HP ma tracić. check_if_poisoned wydaje mi się metodą Team a nie Engine
-'''

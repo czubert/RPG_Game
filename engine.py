@@ -45,6 +45,15 @@ class Engine:
             self.change_team_order()
             char2 = self.choose_attacking_character()
             char1.act(char2)
+        self.check_if_poisoned()
+
+    def check_if_poisoned(self):
+        for idx in range(len(self.teams_list)):
+            for character in self.teams_list[idx]:
+                if character.rounds_poisoned:
+                    Voodoo.poison(character, character)
+                    character.rounds_poisoned -= 1
+                    print(f'{character.name} got poison dmg {character.rounds_poisoned}')
 
 
 game = Engine()
@@ -52,15 +61,16 @@ game = Engine()
 team1 = game.create_new_team('Gangi Nowego Yorku')
 team2 = game.create_new_team('Piraci z Karaibów')
 
-team1.add_character(Warrior(200))
-team1.add_character(Sorceress())
-team1.add_character(Warrior(200))
-team1.add_character(Support(200))
+team1.add_character(Warrior(200, 'Brajan'))
+team1.add_character(Sorceress('Jessica'))
+team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Support(200, 'Majk'))
+team1.add_character(Voodoo(50, 'Trump'))
 
-team2.add_character(Warrior(200))
-team2.add_character(Warrior(200))
-team2.add_character(Warrior(200))
-team2.add_character(Warrior(200))
+team2.add_character(Warrior(200, 'Jack'))
+team2.add_character(Warrior(200, 'Sparrow'))
+team2.add_character(Warrior(200, 'Czarna Perla'))
+team2.add_character(Warrior(200, 'Holender'))
 
 # print(team1)
 print(game.teams_list[0])

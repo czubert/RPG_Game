@@ -11,7 +11,8 @@ class Character:
         self.team = None
 
     def __str__(self):
-        return f"Player: {self.name}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: {self.rounds_stunned}"
+        return f"Player: {self.name}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
+            f"{self.rounds_stunned}"
 
     def act(self):
         pass
@@ -22,9 +23,10 @@ class Character:
             print(f'Survivors: {self.team}')
             quit()
 
+
 class Warrior(Character):
     def __init__(self, attack_power, name):
-        Character.__init__(self, 1200, name)
+        Character.__init__(self, 1300, name)
         self.attack_power = attack_power + random.randint(0, 100)
 
     def act(self, other):
@@ -39,7 +41,7 @@ class Warrior(Character):
 
 class Sorceress(Character):
     def __init__(self, name):
-        Character.__init__(self, 500, name)
+        Character.__init__(self, 900, name)
 
     def act(self, other):
         self.stun(other)
@@ -53,7 +55,7 @@ class Sorceress(Character):
 class Support(Character):
     def __init__(self, healing_power, name):
         self.name = name
-        Character.__init__(self, 400, name)
+        Character.__init__(self, 800, name)
         self.healing_power = healing_power
 
     def act(self, other):
@@ -65,22 +67,21 @@ class Support(Character):
         else:
             other.current_hp += self.healing_power
 
+    class Voodoo(Character):
+        def __init__(self, poison_nova, name):
+            self.name = name
+            Character.__init__(self, 1000, name)
+            self.poison_nova = poison_nova
 
-class Voodoo(Character):
-    def __init__(self, poison_nova, name):
-        self.name = name
-        Character.__init__(self, 800, name)
-        self.poison_nova = poison_nova
+        def act(self, other):
+            self.poison(other)
+            other.rounds_poisoned = 3
 
-    def act(self, other):
-        self.poison(other)
-        self.rounds_poisoned = 3
-
-    def poison(self, other):
-        other.current_hp -= self.poison_nova
-        if other.current_hp < 0:
-            other.team.team.remove(other)
-            self.check_if_defeted(other)
+        def poison(self, other):
+            other.current_hp -= self.poison_nova
+            if other.current_hp < 0:
+                other.team.team.remove(other)
+                self.check_if_defeted(other)
 
 
 # if __name__ == '__main__':

@@ -45,15 +45,15 @@ class Engine:
             self.change_team_order()
             char2 = self.choose_attacking_character()
             char1.act(char2)
-        self.check_if_poisoned()
 
-    def check_if_poisoned(self):
-        for idx in range(len(self.teams_list)):
-            for character in self.teams_list[idx]:
-                if character.rounds_poisoned:
-                    Voodoo.poison(character, character)
-                    character.rounds_poisoned -= 1
-                    print(f'{character.name} got poison dmg {character.rounds_poisoned}')
+    # def check_if_poisoned(self):
+    #     for idx in range(len(self.teams_list)):
+    #         for character in self.teams_list[idx]:
+    #             if character.rounds_poisoned:
+    #                 Voodoo.poison(character, character)
+    #                 character.rounds_poisoned -= 1
+    #                 print(f'{character.name} got poison dmg {character.rounds_poisoned}')
+
 
 
 game = Engine()
@@ -76,15 +76,14 @@ team2.add_character(Warrior(200, 'Holender'))
 print(game.teams_list[0])
 print(game.teams_list[1])
 print()
-for i in range(95):
+for i in range(195):
     game.fight()
 print(game.teams_list[0])
 print(game.teams_list[1])
 # print(game.choose_attacking_character())
 
 
-
-#TODO:
+# TODO:
 '''
 - Dobrze by było, żeby bohaterowie mogli levelować
 I jakoś od tego uzależnić ich moce
@@ -93,4 +92,20 @@ I jakoś od tego uzależnić ich moce
 - A jak to będzie ogarnięte to chyba wypada się wziąć za strategię
 Żeby nie było już losowo kto i losowo kogo - tylko nadać im jakieś priorytety
 Że np. Najsilniejszy atakuje częściej, albo zawsze się atakuje najsłabszego
+- branche
+- formatowanie
+- komentarze
+- check if defeated to zło! nie używaj quit() w kodzie - to paskudne 😜
+lepiej prowadzić walkę dopóki w obu drużynach jest jakaś postać. To w sumie aż się prosi o napisanie metody, 
+która w odpowiedniej pętli wywołuje fight() a po tej pętli możesz wywołać jakieś podsumowanie
+- sprawdzanie czy ktoś umarł: masz ten sam kawałek kodu w kilku miejscach. Zrób z tego metodę. To jest wspólna metoda 
+dla wszystkich, którzy potrafią zabić, więc można ją wrzucić w jakieś jedno miejsce... 🙂 
+A potem wywoływać np. w act
+act jest lepsze niż np. attack, bo attack nie brzmi jakby miał sprawdzać czy zabił. Którego atakujacego to obchodzi? xD
+- w heal(self, other) warto byłoby skorzystać z max(cośtam, cośtam_innego) zamiast z if/else
+- a Check if poisoned totalnie nie ma szansy działać. 
+1. poizonowanie powinno się odbywać tylko dla drużyny, która aktulanie wykonuje ruch, nie?
+2. to charakter wie czy jest zapoizonowany czy nie. Trzeba go o to zapytać i jeśli jeśli jest to mu odjąć życie. 
+Ile tego życia? Trzeba to gdzieś NA NIM przechowywać. Na razie zrób na sztywno jakąś wartosć, ale zaraz dodamy jakiś 
+sprytny myk na to, żeby było wiadomo ile tych HP ma tracić. check_if_poisoned wydaje mi się metodą Team a nie Engine
 '''

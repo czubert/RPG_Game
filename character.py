@@ -67,22 +67,6 @@ class Support(Character):
         else:
             other.current_hp += self.healing_power
 
-    class Voodoo(Character):
-        def __init__(self, poison_nova, name):
-            self.name = name
-            Character.__init__(self, 1000, name)
-            self.poison_nova = poison_nova
-
-        def act(self, other):
-            self.poison(other)
-            other.rounds_poisoned = 3
-
-        def poison(self, other):
-            other.current_hp -= self.poison_nova
-            if other.current_hp < 0:
-                other.team.team.remove(other)
-                self.check_if_defeted(other)
-
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

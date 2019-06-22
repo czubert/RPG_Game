@@ -46,15 +46,6 @@ class Engine:
             char2 = self.choose_attacking_character()
             char1.act(char2)
 
-    # def check_if_poisoned(self):
-    #     for idx in range(len(self.teams_list)):
-    #         for character in self.teams_list[idx]:
-    #             if character.rounds_poisoned:
-    #                 Voodoo.poison(character, character)
-    #                 character.rounds_poisoned -= 1
-    #                 print(f'{character.name} got poison dmg {character.rounds_poisoned}')
-
-
 
 game = Engine()
 
@@ -85,14 +76,11 @@ print(game.teams_list[1])
 
 # TODO:
 '''
-- Dobrze by było, żeby bohaterowie mogli levelować
-I jakoś od tego uzależnić ich moce
+- Dobrze by było, żeby bohaterowie mogli levelować, I jakoś od tego uzależnić ich moce
 - Możesz wymyślić jakiś inny rodzaj postaci i go dodać
-- Brakuje mi nazw postaci, albo chociaż nazwy Teamu jak orientujesz "przed i po" rozgrywce
 - A jak to będzie ogarnięte to chyba wypada się wziąć za strategię
 Żeby nie było już losowo kto i losowo kogo - tylko nadać im jakieś priorytety
 Że np. Najsilniejszy atakuje częściej, albo zawsze się atakuje najsłabszego
-- branche
 - formatowanie
 - komentarze
 - check if defeated to zło! nie używaj quit() w kodzie - to paskudne 😜

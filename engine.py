@@ -6,29 +6,50 @@ from character import *
 
 class Engine:
     def __init__(self):
+        """
+
+        """
         self.teams_list = []
         self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
 
     def create_new_team(self, name):
+        """
+
+        :param name:
+        :return:
+        """
         tmp_name = Team(name)
         self.teams_list.append(tmp_name)
         return tmp_name
 
     def change_team_order(self):
+        """
+
+        """
         if self.team_order == 0:
             self.team_order = 1
         else:
             self.team_order = 0
 
     def choose_attacking_character(self):
+        """
+
+        :return:
+        """
         dream_team = self.teams_list[self.team_order]
         character_order = random.randint(0, len(dream_team) - 1)
         character = dream_team[character_order]
+
         return character
 
     def fight(self):
+        """
+
+        :return:
+        """
         self.rounds += 1
+
         char1 = self.choose_attacking_character()
         if char1.rounds_stunned:
             print(f'stunned, round: {self.rounds}')
@@ -37,6 +58,7 @@ class Engine:
                 char1.rounds_stunned -= 1
             return
         print(f'not stunned, round: {self.rounds}')
+
         if type(char1) is Support:
             char2 = self.choose_attacking_character()
             char1.act(char2)
@@ -56,7 +78,7 @@ team1.add_character(Warrior(200, 'Brajan'))
 team1.add_character(Sorceress('Jessica'))
 team1.add_character(Warrior(200, 'Ken'))
 team1.add_character(Support(200, 'Majk'))
-team1.add_character(Voodoo(50, 'Trump'))
+
 
 team2.add_character(Warrior(200, 'Jack'))
 team2.add_character(Warrior(200, 'Sparrow'))

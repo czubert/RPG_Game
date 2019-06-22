@@ -15,9 +15,16 @@ class Character:
             f"{self.rounds_stunned}"
 
     def act(self):
+        """
+
+        """
         pass
 
     def check_if_defeted(self, other):
+        """
+
+        :param other:
+        """
         if len(other.team) == 0:
             print(f"Team: {self.team.name} won the battle")
             print(f'Survivors: {self.team}')
@@ -26,14 +33,29 @@ class Character:
 
 class Warrior(Character):
     def __init__(self, attack_power, name):
+        """
+
+        :param attack_power:
+        :param name:
+        """
         Character.__init__(self, 1300, name)
+
         self.attack_power = attack_power + random.randint(0, 100)
 
     def act(self, other):
+        """
+
+        :param other:
+        """
         self.attack(other)
 
     def attack(self, other):
+        """
+
+        :param other:
+        """
         other.current_hp -= self.attack_power
+
         if other.current_hp < 0:
             other.team.team.remove(other)
             self.check_if_defeted(other)
@@ -41,27 +63,52 @@ class Warrior(Character):
 
 class Sorceress(Character):
     def __init__(self, name):
+        """
+
+        :param name:
+        """
         Character.__init__(self, 900, name)
 
     def act(self, other):
+        """
+
+        :param other:
+        """
         self.stun(other)
         other.rounds_stunned += 3
 
     @staticmethod
     def stun(other):
+        """
+
+        :param other:
+        """
         other.stunned = True
 
 
 class Support(Character):
     def __init__(self, healing_power, name):
+        """
+
+        :param healing_power:
+        :param name:
+        """
         self.name = name
         Character.__init__(self, 800, name)
         self.healing_power = healing_power
 
     def act(self, other):
+        """
+
+        :param other:
+        """
         self.heal(other)
 
     def heal(self, other):
+        """
+
+        :param other:
+        """
         if other.current_hp + self.healing_power > other.max_hp:
             other.current_hp = other.max_hp
         else:

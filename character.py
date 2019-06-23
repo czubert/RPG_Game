@@ -15,14 +15,15 @@ class Character(ABC):
         self.team = None
 
     def __str__(self):
-        return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
+        return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
+            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
             f"{self.rounds_stunned}"
 
     @abstractmethod
     def act(self, other):
-        '''
+        """
         Uses action of character
-        '''
+        """
         pass
 
     @staticmethod
@@ -38,16 +39,12 @@ class Character(ABC):
         self.exp += 250
 
         if self.exp > self.exp_for_lvl:
-            self.exp_for_lvl = 5 * (250 * self.lvl)
-            self.lvl += 1
             self.lvl_up()
 
     def lvl_up(self):
+        self.lvl += 1
+        self.exp_for_lvl = 1250 * self.lvl
         self.max_hp += 300 * self.lvl
-        # if self.rounds_stunned > 0:
-        #     self.rounds_stunned -= 1
-        # if self.rounds_poisoned > 0:
-        #     self.rounds_poisoned -= 1
 
 
 class Warrior(Character):
@@ -84,6 +81,7 @@ class Sorceress(Character):
     def act(self, other):
         self.stun(other)
         other.rounds_stunned += 1
+        self.attack(other)
 
     @staticmethod
     def stun(other):
@@ -93,11 +91,19 @@ class Sorceress(Character):
         """
         other.stunned = True
 
+    def attack(self, other):
+        """
+        Skill of character, deals damage to opponent
+        :param other: opponent character object
+        """
+        other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
+
+
 
 class Support(Character):
-    '''
+    """
     Creates support character object
-    '''
+    """
 
     def __init__(self, healing_power, name):
         """
@@ -109,7 +115,6 @@ class Support(Character):
         self.healing_power = healing_power
 
     def act(self, other):
-
         self.heal(other)
 
     def heal(self, other):
@@ -118,7 +123,6 @@ class Support(Character):
         :param other: character object, from own team
         """
         min(other.current_hp + self.healing_power, other.max_hp)
-
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

@@ -1,4 +1,5 @@
 import random
+import time
 
 from teams import Team
 from character import *
@@ -9,6 +10,7 @@ class Engine:
         self.teams_list = []
         self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
+        self.program_execution_time = 0
 
     def create_new_team(self, name):
         """
@@ -41,7 +43,9 @@ class Engine:
         return character
 
     def run_game(self):
+        start_time = time.time()
         self.fight()
+        self.program_execution_time = time.time() - start_time
         print(self.battle_summary())
 
     def fight(self):
@@ -75,16 +79,23 @@ class Engine:
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name} won the battle in {self.rounds} rounds"
+        return f"Team:{winning_team.name} \n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
 
 
+starting_time = time.time()
 game = Engine()
 
 team1 = game.create_new_team('Gangi Nowego Yorku')
 team2 = game.create_new_team('Piraci z Karaibów')
 
-team1.team_generator(1000)
-team2.team_generator(1000)
+time_after_teams_creation = time.time()
 
+team1.team_generator(10000)
+team2.team_generator(10000)
+
+time_after_team_creation = time.time()
 
 game.run_game()
+
+print(f"Time of teams creation: {starting_time - time_after_teams_creation}, time of team members: "
+      f"{time_after_team_creation - time_after_teams_creation}, general time: {time.time() - starting_time}")

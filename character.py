@@ -66,7 +66,6 @@ class Sorceress(Character):
         Character.__init__(self, 900, name)
 
     def act(self, other):
-
         self.stun(other)
         other.rounds_stunned += 4
 
@@ -83,6 +82,7 @@ class Support(Character):
     '''
     Creates support character object
     '''
+
     def __init__(self, healing_power, name):
         """
         :param healing_power: int, hp that character regenerates

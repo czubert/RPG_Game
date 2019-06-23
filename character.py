@@ -28,7 +28,6 @@ class Character:
         if len(other.team) == 0:
             print(f"Team: {self.team.name} won the battle")
             print(f'Survivors: {self.team}')
-            quit()
 
 
 class Warrior(Character):
@@ -54,7 +53,7 @@ class Warrior(Character):
 
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
-            self.check_if_defeted(other)
+            # self.check_if_defeted(other)
 
 
 class Sorceress(Character):
@@ -67,7 +66,7 @@ class Sorceress(Character):
 
     def act(self, other):
         self.stun(other)
-        other.rounds_stunned += 4
+        other.rounds_stunned += 2
 
     @staticmethod
     def stun(other):

@@ -51,17 +51,17 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
-        while len(game.teams_list[0]) and len(game.teams_list[1]) != 0 and self.rounds <= 10000:
+        while all(game.teams_list):
             self.rounds += 1  # counts the rounds
             char1 = self.choose_attacking_character()
-            if char1.rounds_stunned:  # checks if randomed character is stunned, if yes it stops goes to next attack
-                print(f'stunned, round: {self.rounds}')
+            if char1.rounds_stunned:  # checks if attacking character is stunned, if yes it stops goes to next attack
+                # print(f'stunned, round: {self.rounds}')
                 self.change_team_order()
                 if char1.rounds_stunned > 0:
                     char1.rounds_stunned -= 1  # after round stunned characters has 1 round of stun less
                 continue
-            print(f'not stunned, round: {self.rounds}')
-
+            # print(f'not stunned, round: {self.rounds}')
+            char1.get_exp()
             if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
                 # character from its team
                 char2 = self.choose_attacking_character()
@@ -75,7 +75,7 @@ class Engine:
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name} won the battle \n Survivors: {winning_team}"
+        return f"Team:{winning_team.name} won the battle in {self.rounds} rounds"
 
 
 game = Engine()
@@ -83,29 +83,8 @@ game = Engine()
 team1 = game.create_new_team('Gangi Nowego Yorku')
 team2 = game.create_new_team('Piraci z Karaibów')
 
-team1.add_character(Warrior(200, 'Brajan'))
-team1.add_character(Sorceress('Jessica'))
-team1.add_character(Sorceress('Jessica'))
-team1.add_character(Sorceress('Jessica'))
-team1.add_character(Warrior(200, 'Ken'))
-team1.add_character(Warrior(200, 'Ken'))
-team1.add_character(Warrior(200, 'Ken'))
-team1.add_character(Warrior(200, 'Ken'))
-team1.add_character(Warrior(200, 'Ken'))
-team1.add_character(Support(200, 'Majk'))
-team1.add_character(Support(200, 'Majk'))
-team1.add_character(Support(200, 'Majk'))
+team1.team_generator(1000)
+team2.team_generator(1000)
 
-team2.add_character(Warrior(200, 'Jack'))
-team2.add_character(Warrior(200, 'Sparrow'))
-team2.add_character(Warrior(200, 'Czarna Perla'))
-team2.add_character(Warrior(200, 'Holender'))
-team2.add_character(Warrior(200, 'Holender'))
-team2.add_character(Sorceress('Holender'))
-team2.add_character(Warrior(200, 'Holender'))
-team2.add_character(Warrior(200, 'Holender'))
-team2.add_character(Warrior(200, 'Holender'))
-team2.add_character(Sorceress('Holender'))
-team2.add_character(Support(200, 'Holender'))
 
 game.run_game()

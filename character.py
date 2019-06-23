@@ -5,6 +5,9 @@ from abc import ABC, abstractmethod
 class Character(ABC):
     def __init__(self, max_hp, name):
         self.name = name
+        self.lvl = 1
+        self.exp_for_lvl = 500  # experience needed to lvl_up
+        self.exp = 0
         self.max_hp = max_hp
         self.current_hp = self.max_hp
         self.rounds_stunned = 0
@@ -12,7 +15,7 @@ class Character(ABC):
         self.team = None
 
     def __str__(self):
-        return f"Player: {self.name}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
+        return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
             f"{self.rounds_stunned}"
 
     @abstractmethod
@@ -30,6 +33,21 @@ class Character(ABC):
         """
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
+
+    def get_exp(self):
+        self.exp += 250
+
+        if self.exp > self.exp_for_lvl:
+            self.exp_for_lvl = 5 * (250 * self.lvl)
+            self.lvl += 1
+            self.lvl_up()
+
+    def lvl_up(self):
+        self.max_hp += 300 * self.lvl
+        # if self.rounds_stunned > 0:
+        #     self.rounds_stunned -= 1
+        # if self.rounds_poisoned > 0:
+        #     self.rounds_poisoned -= 1
 
 
 class Warrior(Character):
@@ -52,11 +70,11 @@ class Warrior(Character):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= self.attack_power
+        other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
 
 
 class Sorceress(Character):
-    def __init__(self, name):
+    def __init__(self, attack_power, name):
         """
         Creates sorceress character object
         :param name: str, name of character
@@ -65,7 +83,7 @@ class Sorceress(Character):
 
     def act(self, other):
         self.stun(other)
-        other.rounds_stunned += 2
+        other.rounds_stunned += 1
 
     @staticmethod
     def stun(other):

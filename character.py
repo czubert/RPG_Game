@@ -1,7 +1,8 @@
 import random
+from abc import ABC, abstractmethod
 
 
-class Character:
+class Character(ABC):
     def __init__(self, max_hp, name):
         self.name = name
         self.max_hp = max_hp
@@ -14,7 +15,8 @@ class Character:
         return f"Player: {self.name}, Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
             f"{self.rounds_stunned}"
 
-    def act(self):
+    @abstractmethod
+    def act(self, other):
         '''
         Uses action of character
         '''

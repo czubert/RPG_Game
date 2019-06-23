@@ -6,9 +6,6 @@ from character import *
 
 class Engine:
     def __init__(self):
-        """
-
-        """
         self.teams_list = []
         self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
@@ -17,7 +14,7 @@ class Engine:
         """
         Creates Team and sets it's name
         :param name: str
-        :return: str
+        :return: str, teams name
         """
         tmp_name = Team(name)
         self.teams_list.append(tmp_name)
@@ -96,5 +93,3 @@ for i in range(195):
 print(game.teams_list[0])
 print(game.teams_list[1])
 # print(game.choose_attacking_character())
-
-

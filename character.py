@@ -60,56 +60,51 @@ class Warrior(Character):
 class Sorceress(Character):
     def __init__(self, name):
         """
-
-        :param name:
+        Creates sorceress character object
+        :param name: str, name of character
         """
         Character.__init__(self, 900, name)
 
     def act(self, other):
-        """
 
-        :param other:
-        """
         self.stun(other)
-        other.rounds_stunned += 3
+        other.rounds_stunned += 4
 
     @staticmethod
     def stun(other):
         """
-
-        :param other:
+        Skill of character, stuns opponent
+        :param other: opponent character object
         """
         other.stunned = True
 
 
 class Support(Character):
+    '''
+    Creates support character object
+    '''
     def __init__(self, healing_power, name):
         """
-
-        :param healing_power:
-        :param name:
+        :param healing_power: int, hp that character regenerates
+        :param name: str, name of character
         """
         self.name = name
         Character.__init__(self, 800, name)
         self.healing_power = healing_power
 
     def act(self, other):
-        """
 
-        :param other:
-        """
         self.heal(other)
 
     def heal(self, other):
         """
-
-        :param other:
+        Heals character from own team - healing_power tells how much it heals
+        :param other: character object, from own team
         """
         if other.current_hp + self.healing_power > other.max_hp:
             other.current_hp = other.max_hp
         else:
             other.current_hp += self.healing_power
-
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

@@ -19,4 +19,3 @@ class Team:
 
     def __len__(self):
         return len(self.team)
-

@@ -43,6 +43,10 @@ class Warrior(Character):
 
 class Sorceress(Character):
     def __init__(self, name):
+        """
+
+        :param name:
+        """
         Character.__init__(self, 900, name)
 
     def act(self, other):

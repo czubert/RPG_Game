@@ -58,23 +58,19 @@ class Engine:
         while all(game.teams_list):
             self.rounds += 1  # counts the rounds
             char1 = self.choose_attacking_character()
-            if char1.rounds_stunned:  # checks if attacking character is stunned, if yes it stops goes to next attack
-                # print(f'stunned, round: {self.rounds}')
-                self.change_team_order()
-                if char1.rounds_stunned > 0:
-                    char1.rounds_stunned -= 1  # after round stunned characters has 1 round of stun less
-                continue
-            # print(f'not stunned, round: {self.rounds}')
+            for modi in char1.modifier_list:
+                modi.act()
+
             char1.get_exp()
             if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
                 # character from its team
                 char2 = self.choose_attacking_character()
-                char1.act(char2)
+                char1.next_move(char2)
                 self.change_team_order()
             else:  # use act typical for its character on the random opponent character
                 self.change_team_order()
                 char2 = self.choose_attacking_character()
-                char1.act(char2)
+                char1.next_move(char2)
 
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
@@ -90,8 +86,8 @@ team2 = game.create_new_team('Piraci z Karaibów')
 
 time_after_teams_creation = time.time()
 
-team1.team_generator(10000)
-team2.team_generator(10000)
+team1.team_generator(1000)
+team2.team_generator(1000)
 
 time_after_team_creation = time.time()
 

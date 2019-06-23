@@ -1,6 +1,8 @@
 import random
 from abc import ABC, abstractmethod
 
+import modifiers
+
 
 class Character(ABC):
     def __init__(self, max_hp, name):
@@ -10,14 +12,14 @@ class Character(ABC):
         self.exp = 0
         self.max_hp = max_hp
         self.current_hp = self.max_hp
-        self.rounds_stunned = 0
         self.rounds_poisoned = 0
         self.team = None
+        self.modifier_list = []
+        self.next_move = self.act
 
     def __str__(self):
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
-            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready: " \
-            f"{self.rounds_stunned}"
+            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready:"
 
     @abstractmethod
     def act(self, other):
@@ -45,6 +47,9 @@ class Character(ABC):
         self.lvl += 1
         self.exp_for_lvl = 1250 * self.lvl
         self.max_hp += 300 * self.lvl
+
+    def do_nothing(self, other):
+        pass
 
 
 class Warrior(Character):
@@ -77,19 +82,19 @@ class Sorceress(Character):
         :param name: str, name of character
         """
         Character.__init__(self, 900, name)
+        self.attack_power = attack_power + random.randint(0, 80)
 
     def act(self, other):
         self.stun(other)
-        other.rounds_stunned += 1
         self.attack(other)
 
-    @staticmethod
-    def stun(other):
+    def stun(self, other):
         """
         Skill of character, stuns opponent
         :param other: opponent character object
         """
-        other.stunned = True
+        stun = modifiers.Stun(self, other, 2)
+        other.modifier_list.append(stun)
 
     def attack(self, other):
         """
@@ -97,7 +102,6 @@ class Sorceress(Character):
         :param other: opponent character object
         """
         other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
-
 
 
 class Support(Character):

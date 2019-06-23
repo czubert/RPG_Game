@@ -42,7 +42,7 @@ class Engine:
 
     def run_game(self):
         self.fight()
-        self.battle_summary()
+        print(self.battle_summary())
 
     def fight(self):
         """
@@ -51,7 +51,7 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
-        while len(game.teams_list[0]) and len(game.teams_list[1]) != 0:
+        while len(game.teams_list[0]) and len(game.teams_list[1]) != 0 and self.rounds <= 10000:
             self.rounds += 1  # counts the rounds
             char1 = self.choose_attacking_character()
             if char1.rounds_stunned:  # checks if randomed character is stunned, if yes it stops goes to next attack
@@ -73,9 +73,9 @@ class Engine:
                 char1.act(char2)
 
     def battle_summary(self):
-        for element in game.teams_list:
-            return f"Team: {self.team.name} won the battle \n Survivors: {self.team}"
+        winning_team = list(filter(bool, self.teams_list))[0]
 
+        return f"Team:{winning_team.name} won the battle \n Survivors: {winning_team}"
 
 
 game = Engine()
@@ -85,19 +85,27 @@ team2 = game.create_new_team('Piraci z Karaibów')
 
 team1.add_character(Warrior(200, 'Brajan'))
 team1.add_character(Sorceress('Jessica'))
+team1.add_character(Sorceress('Jessica'))
+team1.add_character(Sorceress('Jessica'))
 team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Warrior(200, 'Ken'))
+team1.add_character(Support(200, 'Majk'))
+team1.add_character(Support(200, 'Majk'))
 team1.add_character(Support(200, 'Majk'))
 
 team2.add_character(Warrior(200, 'Jack'))
 team2.add_character(Warrior(200, 'Sparrow'))
 team2.add_character(Warrior(200, 'Czarna Perla'))
 team2.add_character(Warrior(200, 'Holender'))
+team2.add_character(Warrior(200, 'Holender'))
+team2.add_character(Sorceress('Holender'))
+team2.add_character(Warrior(200, 'Holender'))
+team2.add_character(Warrior(200, 'Holender'))
+team2.add_character(Warrior(200, 'Holender'))
+team2.add_character(Sorceress('Holender'))
+team2.add_character(Support(200, 'Holender'))
 
-# print(team1)
-print(game.teams_list[0])
-print(game.teams_list[1])
-print()
-game.fight()
-print(game.teams_list[0])
-print(game.teams_list[1])
-# print(game.choose_attacking_character())
+game.run_game()

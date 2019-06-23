@@ -20,14 +20,14 @@ class Character:
         '''
         pass
 
-    def check_if_defeted(self, other):
+    @staticmethod
+    def check_if_dead(other):
         """
-        Checks if all the opponents are dead after killing particular one
+        Checks if attacked opponent is dead after attack on him, if yes delete it from the team
         :param other: opponent object
         """
-        if len(other.team) == 0:
-            print(f"Team: {self.team.name} won the battle")
-            print(f'Survivors: {self.team}')
+        if other.current_hp < 0:  # checks if attack killed opponent
+            other.team.team.remove(other)  # deletes dead character from its team
 
 
 class Warrior(Character):
@@ -43,6 +43,7 @@ class Warrior(Character):
 
     def act(self, other):
         self.attack(other)
+        self.check_if_dead(other)
 
     def attack(self, other):
         """
@@ -50,10 +51,6 @@ class Warrior(Character):
         :param other: opponent character object
         """
         other.current_hp -= self.attack_power
-
-        if other.current_hp < 0:  # checks if attack killed opponent
-            other.team.team.remove(other)  # deletes dead character from its team
-            # self.check_if_defeted(other)
 
 
 class Sorceress(Character):
@@ -100,10 +97,8 @@ class Support(Character):
         Heals character from own team - healing_power tells how much it heals
         :param other: character object, from own team
         """
-        if other.current_hp + self.healing_power > other.max_hp:
-            other.current_hp = other.max_hp
-        else:
-            other.current_hp += self.healing_power
+        min(other.current_hp + self.healing_power, other.max_hp)
+
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

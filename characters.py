@@ -139,9 +139,16 @@ class Voodoo(Character):
         self.check_if_dead(other)
 
     def poison(self, other):
-        # other.current_hp -= self.poison_nova
-        poison = modifiers.Poison(self, other, 3, self.poison_nova)
-        other.modifier_list.append(poison)
+        if not self.check_if_poisoned(other):
+            poison = modifiers.Poison(self, other, 3, self.poison_nova)
+            other.modifier_list.append(poison)
+
+    def check_if_poisoned(self, other):
+        for modifier in other.modifier_list:
+            if isinstance(modifier, modifiers.Poison):
+                modifier.duration += 3
+            else:
+                return False
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

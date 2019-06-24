@@ -30,7 +30,7 @@ class Poison(Modifier):
         if self.duration > 0:
             self.target.current_hp -= self.damage
             self.duration -= 1
-            print(f"poisoned, damage {self.damage}")
+            print(f"poisoned, damage {self.damage}, duration: {self.duration}")
         else:
             self.target.next_move = self.target.act
             self.target.modifier_list.remove(self)

@@ -2,7 +2,7 @@ import random
 import time
 
 from teams import Team
-from character import *
+from characters import *
 
 
 class Engine:
@@ -58,6 +58,7 @@ class Engine:
         while all(game.teams_list):
             self.rounds += 1  # counts the rounds
             char1 = self.choose_attacking_character()
+
             for modi in char1.modifier_list:
                 modi.act()
 

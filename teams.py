@@ -1,7 +1,7 @@
 import random
 import names
 
-import character
+import characters
 
 
 class Team:
@@ -25,9 +25,9 @@ class Team:
         generates particular hero
         :return:
         '''
-        types_of_characters = [character.Sorceress, character.Warrior, character.Support, character.Voodoo]
+        types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
-        if chosen_char is character.Sorceress or chosen_char is character.Voodoo:
+        if chosen_char is characters.Sorceress or chosen_char is characters.Voodoo:
             return chosen_char(50, names.get_first_name())  # dmg dealt, name sorcerress
         else:
             return chosen_char(200, names.get_first_name())  # dmg dealt, name others

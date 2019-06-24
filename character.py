@@ -87,6 +87,7 @@ class Sorceress(Character):
     def act(self, other):
         self.stun(other)
         self.attack(other)
+        self.check_if_dead(other)
 
     def stun(self, other):
         """
@@ -114,7 +115,6 @@ class Support(Character):
         :param healing_power: int, hp that character regenerates
         :param name: str, name of character
         """
-        self.name = name
         Character.__init__(self, 800, name)
         self.healing_power = healing_power
 
@@ -127,6 +127,21 @@ class Support(Character):
         :param other: character object, from own team
         """
         min(other.current_hp + self.healing_power, other.max_hp)
+
+
+class Voodoo(Character):
+    def __init__(self, poison_nova, name):
+        Character.__init__(self, 1000, name)
+        self.poison_nova = poison_nova
+
+    def act(self, other):
+        self.poison(other)
+        self.check_if_dead(other)
+
+    def poison(self, other):
+        # other.current_hp -= self.poison_nova
+        poison = modifiers.Poison(self, other, 3, self.poison_nova)
+        other.modifier_list.append(poison)
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

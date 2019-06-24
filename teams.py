@@ -25,9 +25,9 @@ class Team:
         generates particular hero
         :return:
         '''
-        types_of_characters = [character.Sorceress, character.Warrior, character.Support]
-        chosen_char = types_of_characters[random.randint(0, 2)]
-        if chosen_char is character.Sorceress:
+        types_of_characters = [character.Sorceress, character.Warrior, character.Support, character.Voodoo]
+        chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
+        if chosen_char is character.Sorceress or chosen_char is character.Voodoo:
             return chosen_char(50, names.get_first_name())  # dmg dealt, name sorcerress
         else:
             return chosen_char(200, names.get_first_name())  # dmg dealt, name others

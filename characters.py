@@ -12,7 +12,6 @@ class Character(ABC):
         self.exp = 0
         self.max_hp = max_hp
         self.current_hp = self.max_hp
-        self.rounds_poisoned = 0
         self.team = None
         self.modifier_list = []
         self.next_move = self.act
@@ -29,7 +28,7 @@ class Character(ABC):
         pass
 
     @staticmethod
-    def check_if_dead(other):
+    def remove_if_dead(other):
         """
         Checks if attacked opponent is dead after attack on him, if yes delete it from the team
         :param other: opponent object
@@ -65,7 +64,7 @@ class Warrior(Character):
 
     def act(self, other):
         self.attack(other)
-        self.check_if_dead(other)
+        self.remove_if_dead(other)
 
     def attack(self, other):
         """
@@ -87,7 +86,7 @@ class Sorceress(Character):
     def act(self, other):
         self.stun(other)
         self.attack(other)
-        self.check_if_dead(other)
+        self.remove_if_dead(other)
 
     def stun(self, other):
         """
@@ -136,19 +135,23 @@ class Voodoo(Character):
 
     def act(self, other):
         self.poison(other)
-        self.check_if_dead(other)
+        self.remove_if_dead(other)
 
     def poison(self, other):
-        if not self.check_if_poisoned(other):
-            poison = modifiers.Poison(self, other, 3, self.poison_nova)
-            other.modifier_list.append(poison)
-
-    def check_if_poisoned(self, other):
         for modifier in other.modifier_list:
-            if isinstance(modifier, modifiers.Poison):
-                modifier.duration += 3
+            if not isinstance(modifier, modifiers.Poison):
+                poison = modifiers.Poison(self, other, 3, self.poison_nova)
+                other.modifier_list.append(poison)
             else:
-                return False
+                if self.lvl > 10:
+                    modifier.duration += int(1 + self.lvl / 2)
+                elif self.lvl > 5:
+                    modifier.duration += int(1 + self.lvl / 3)
+                else:
+                    modifier.duration += 1
+
+
+
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

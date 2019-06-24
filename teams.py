@@ -27,7 +27,7 @@ class Team:
         '''
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
-        if chosen_char is characters.Sorceress or chosen_char is characters.Voodoo:
+        if chosen_char in [characters.Sorceress, characters.Voodoo]:
             return chosen_char(50, names.get_first_name())  # dmg dealt, name sorcerress
         else:
             return chosen_char(200, names.get_first_name())  # dmg dealt, name others

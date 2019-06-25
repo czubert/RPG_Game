@@ -140,15 +140,15 @@ class Voodoo(Character):
     def poison(self, other):
         for modifier in other.modifier_list:
             if not isinstance(modifier, modifiers.Poison):
-                poison = modifiers.Poison(self, other, 3, self.poison_nova)
-                other.modifier_list.append(poison)
-            else:
                 if self.lvl > 10:
                     modifier.duration += int(1 + self.lvl / 2)
                 elif self.lvl > 5:
                     modifier.duration += int(1 + self.lvl / 3)
                 else:
                     modifier.duration += 1
+            else:
+                poison = modifiers.Poison(self, other, 3, self.poison_nova)
+                other.modifier_list.append(poison)
 
 
 

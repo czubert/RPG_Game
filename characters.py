@@ -4,6 +4,20 @@ from abc import ABC, abstractmethod
 import modifiers
 
 
+class MagicType:
+    def __init__(self):
+        self.defence = 0.3
+        self.max_mana = 450
+        self.current_mana = self.max_mana
+
+
+class CarryType:
+    def __init__(self):
+        self.defence = 0.6
+        self.max_mana = 200
+        self.current_mana = self.max_mana
+
+
 class Character(ABC):
     def __init__(self, max_hp, name):
         self.name = name
@@ -51,7 +65,7 @@ class Character(ABC):
         pass
 
 
-class Warrior(Character):
+class Warrior(Character, CarryType):
     def __init__(self, attack_power, name):
         """
         Creates warrior character object
@@ -59,7 +73,7 @@ class Warrior(Character):
         :param name: str, name of character
         """
         Character.__init__(self, 1300, name)
-
+        CarryType.__init__(self)
         self.attack_power = attack_power + random.randint(0, 100)
 
     def act(self, other):
@@ -74,13 +88,14 @@ class Warrior(Character):
         other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
 
 
-class Sorceress(Character):
+class Sorceress(Character, MagicType):
     def __init__(self, attack_power, name):
         """
         Creates sorceress character object
         :param name: str, name of character
         """
         Character.__init__(self, 900, name)
+        MagicType.__init__(self)
         self.attack_power = attack_power + random.randint(0, 80)
 
     def act(self, other):
@@ -104,7 +119,7 @@ class Sorceress(Character):
         other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
 
 
-class Support(Character):
+class Support(Character, MagicType):
     """
     Creates support character object
     """
@@ -115,6 +130,7 @@ class Support(Character):
         :param name: str, name of character
         """
         Character.__init__(self, 800, name)
+        MagicType.__init__(self)
         self.healing_power = healing_power
 
     def act(self, other):
@@ -128,8 +144,9 @@ class Support(Character):
         min(other.current_hp + self.healing_power, other.max_hp)
 
 
-class Voodoo(Character):
+class Voodoo(Character, MagicType):
     def __init__(self, poison_nova, name):
+        MagicType.__init__(self)
         Character.__init__(self, 1000, name)
         self.poison_nova = poison_nova
 
@@ -163,7 +180,6 @@ class Voodoo(Character):
     #                     modifier.duration += int(1 + self.lvl / 3)
     #                 else:
     #                     modifier.duration += 1
-
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

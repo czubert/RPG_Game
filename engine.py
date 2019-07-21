@@ -83,14 +83,13 @@ class Engine:
 
             char1.get_exp()
             if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
-                # character from its team
-                char2 = self.choose_attacking_character()
-                char1.next_move(Team.find_weakest_opponent(char2.team))
+                # finds weakest character from its team and heals
+                char1.next_move(char1.team.find_weakest_character())
                 self.change_team_order()
             else:  # use act typical for its character on the random opponent character
                 self.change_team_order()
                 char2 = self.choose_attacking_character()
-                char1.next_move(Team.find_weakest_opponent(char2.team))
+                char1.next_move(char2.team.find_weakest_character())
 
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]

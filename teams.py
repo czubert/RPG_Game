@@ -42,10 +42,18 @@ class Team:
     def __len__(self):
         return len(self.team)
 
-    def find_strongest_warrior(self):
+    def find_strongest_character(self):
+        '''
+        finds strongest character from team
+        :return: character object
+        '''
         pass
 
-    def find_weakest_opponent(self):
+    def find_weakest_character(self):
+        '''
+        Finds weakest character from team
+        :return: character obcject
+        '''
         lowest_hp = math.inf
         weakest_character = None
         for character in self.team:

@@ -19,12 +19,11 @@ class CarryType:
 
 
 class Character(ABC):
-    def __init__(self, max_hp, name):
+    def __init__(self, name):
         self.name = name
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
         self.exp = 0
-        self.max_hp = max_hp
         self.current_hp = self.max_hp
         self.team = None
         self.modifier_list = []
@@ -72,7 +71,8 @@ class Warrior(Character, CarryType):
         :param attack_power: int, damage that character deals
         :param name: str, name of character
         """
-        Character.__init__(self, 1300, name)
+        self.max_hp = 1300
+        Character.__init__(self, name)
         CarryType.__init__(self)
         self.attack_power = attack_power + random.randint(0, 100)
 
@@ -94,7 +94,8 @@ class Sorceress(Character, MagicType):
         Creates sorceress character object
         :param name: str, name of character
         """
-        Character.__init__(self, 900, name)
+        self.max_hp = 900
+        Character.__init__(self, name)
         MagicType.__init__(self)
         self.attack_power = attack_power + random.randint(0, 80)
 
@@ -129,7 +130,8 @@ class Support(Character, MagicType):
         :param healing_power: int, hp that character regenerates
         :param name: str, name of character
         """
-        Character.__init__(self, 800, name)
+        self.max_hp = 800
+        Character.__init__(self, name)
         MagicType.__init__(self)
         self.healing_power = healing_power
 
@@ -146,8 +148,9 @@ class Support(Character, MagicType):
 
 class Voodoo(Character, MagicType):
     def __init__(self, poison_nova, name):
+        self.max_hp = 1000
         MagicType.__init__(self)
-        Character.__init__(self, 1000, name)
+        Character.__init__(self, name)
         self.poison_nova = poison_nova
 
     def act(self, other):

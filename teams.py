@@ -28,8 +28,12 @@ class Team:
         '''
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
-        if chosen_char in [characters.Sorceress, characters.Voodoo]:
-            return chosen_char(50, names.get_first_name())  # dmg dealt, name sorcerress
+        if chosen_char in [characters.Support]:
+            return chosen_char(50, 150, names.get_first_name())  # dmg dealt, spell value, name sorcerress
+        elif chosen_char in [characters.Sorceress]:
+            return chosen_char(50, 100, names.get_first_name())  # dmg dealt, spell value, name sorcerress
+        elif chosen_char in [characters.Voodoo]:
+            return chosen_char(50, 75, names.get_first_name())  # dmg dealt, spell value, name sorcerress
         else:
             return chosen_char(200, names.get_first_name())  # dmg dealt, name others
 

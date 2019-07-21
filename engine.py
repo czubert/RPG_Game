@@ -55,24 +55,6 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
-        # # working version
-        # while all(game.teams_list):
-        #     self.rounds += 1  # counts the rounds
-        #     char1 = self.choose_attacking_character()
-        #
-        #     for modi in char1.modifier_list:
-        #         modi.act()
-        #
-        #     char1.get_exp()
-        #     if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
-        #         # character from its team
-        #         char2 = self.choose_attacking_character()
-        #         char1.next_move(char2)
-        #         self.change_team_order()
-        #     else:  # use act typical for its character on the random opponent character
-        #         self.change_team_order()
-        #         char2 = self.choose_attacking_character()
-        #         char1.next_move(char2)
 
         while all(game.teams_list):
             self.rounds += 1  # counts the rounds

@@ -89,7 +89,7 @@ class Warrior(Character, CarryType):
 
 
 class Sorceress(Character, MagicType):
-    def __init__(self, attack_power, name):
+    def __init__(self, dmg, spell_dmg, name):
         """
         Creates sorceress character object
         :param name: str, name of character
@@ -97,7 +97,8 @@ class Sorceress(Character, MagicType):
         self.max_hp = 900
         Character.__init__(self, name)
         MagicType.__init__(self)
-        self.attack_power = attack_power + random.randint(0, 80)
+        self.dmg = dmg
+        self.spell_dmg = spell_dmg + random.randint(0, 80)
 
     def act(self, other):
         self.stun(other)
@@ -111,13 +112,14 @@ class Sorceress(Character, MagicType):
         """
         stun = modifiers.Stun(self, other, 2)
         other.modifier_list.append(stun)
+        other.current_hp -= int(self.spell_dmg)
 
     def attack(self, other):
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
+        other.current_hp -= int(self.dmg * (1 + self.lvl * 0.1))
 
 
 class Support(Character, MagicType):
@@ -125,7 +127,7 @@ class Support(Character, MagicType):
     Creates support character object
     """
 
-    def __init__(self, healing_power, name):
+    def __init__(self, dmg, healing_power, name):
         """
         :param healing_power: int, hp that character regenerates
         :param name: str, name of character
@@ -134,6 +136,7 @@ class Support(Character, MagicType):
         Character.__init__(self, name)
         MagicType.__init__(self)
         self.healing_power = healing_power
+        self.dmg = dmg
 
     def act(self, other):
         self.heal(other)
@@ -147,17 +150,25 @@ class Support(Character, MagicType):
 
 
 class Voodoo(Character, MagicType):
-    def __init__(self, poison_nova, name):
+    def __init__(self, dmg, spell_dmg, name):
         self.max_hp = 1000
         MagicType.__init__(self)
         Character.__init__(self, name)
-        self.poison_nova = poison_nova
+        self.dmg = dmg
+        self.spell_dmg = spell_dmg
 
     def act(self, other):
         self.poison(other)
         self.remove_if_dead(other)
 
     def poison(self, other):
+        """
+        Poison method checks if poison modifier is in the character list of modifiers.
+        If yes then according to voodoo character lvl it extends duration
+        If not then it adds poison modifier to the list of opponent modifiers
+        :param other: opponent character object
+        """
+
         poison_in_modifiers = False
         for modifier in other.modifier_list:
             if not isinstance(modifier, modifiers.Poison):
@@ -171,10 +182,8 @@ class Voodoo(Character, MagicType):
                 else:
                     modifier.duration += 1
         if not poison_in_modifiers:
-            poison = modifiers.Poison(self, other, 3, self.poison_nova)
+            poison = modifiers.Poison(self, other, 3, self.spell_dmg)
             other.modifier_list.append(poison)
-
-
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

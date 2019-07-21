@@ -158,49 +158,23 @@ class Voodoo(Character, MagicType):
         self.remove_if_dead(other)
 
     def poison(self, other):
+        poison_in_modifiers = False
         for modifier in other.modifier_list:
             if not isinstance(modifier, modifiers.Poison):
                 continue
             elif isinstance(modifier, modifiers.Poison):
+                poison_in_modifiers = True
                 if self.lvl > 10:
                     modifier.duration += int(1 + self.lvl / 2)
                 elif self.lvl > 5:
                     modifier.duration += int(1 + self.lvl / 3)
                 else:
                     modifier.duration += 1
-            else:
-                poison = modifiers.Poison(self, other, 3, self.poison_nova)
-                other.modifier_list.append(poison)
+        if not poison_in_modifiers:
+            poison = modifiers.Poison(self, other, 3, self.poison_nova)
+            other.modifier_list.append(poison)
 
-    # def poison(self, other):
-    #     if self.poison not in other.modifier_list:
-    #         poison = modifiers.Poison(self, other, 3, self.poison_nova)
-    #         other.modifier_list.append(poison)
-    #     else:
-    #         for modifier in other.modifier_list:
-    #             if not isinstance(modifier, modifiers.Poison):
-    #                 continue
-    #             elif isinstance(modifier, modifiers.Poison):
-    #                 if self.lvl > 10:
-    #                     modifier.duration += int(1 + self.lvl / 2)
-    #                 elif self.lvl > 5:
-    #                     modifier.duration += int(1 + self.lvl / 3)
-    #                 else:
-    #                     modifier.duration += 1
 
-    # def poison(self, other):
-    #     if modifiers.Poison not in other.modifier_list:
-    #         poison = modifiers.Poison(self, other, 3, self.poison_nova)
-    #         other.modifier_list.append(poison)
-    #     else:
-    #         for modifier in other.modifier_list:
-    #             if isinstance(modifier, modifiers.Poison):
-    #                 if self.lvl > 10:
-    #                     modifier.duration += int(1 + self.lvl / 2)
-    #                 elif self.lvl > 5:
-    #                     modifier.duration += int(1 + self.lvl / 3)
-    #                 else:
-    #                     modifier.duration += 1
 
 # if __name__ == '__main__':
 #     war1 = Warrior(300)

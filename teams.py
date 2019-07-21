@@ -1,5 +1,6 @@
 import random
 import names
+import math
 
 import characters
 
@@ -41,11 +42,11 @@ class Team:
     def __len__(self):
         return len(self.team)
 
-    def find_stronges_warrior(self):
+    def find_strongest_warrior(self):
         pass
 
     def find_weakest_opponent(self):
-        lowest_hp = 0
+        lowest_hp = math.inf
         weakest_character = None
         for character in self.team:
             if character.current_hp < lowest_hp or lowest_hp == 0:

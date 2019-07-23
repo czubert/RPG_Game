@@ -171,9 +171,7 @@ class Voodoo(Character, MagicType):
 
         poison_in_modifiers = False
         for modifier in other.modifier_list:
-            if not isinstance(modifier, modifiers.Poison):
-                continue
-            elif isinstance(modifier, modifiers.Poison):
+            if isinstance(modifier, modifiers.Poison):
                 poison_in_modifiers = True
                 if self.lvl > 10:
                     modifier.duration += int(1 + self.lvl / 2)

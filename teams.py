@@ -21,24 +21,24 @@ class Team:
         self.team.append(hero)
         hero.team = self
 
-    def hero_generator(self):
+    def hero_generator(self, types_of_character):
         '''
         generates particular hero
         :return:
         '''
-        types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
-        if chosen_char in [characters.Support]:
+        if chosen_char is characters.Support:
             return chosen_char(50, 150, names.get_first_name())  # dmg dealt, spell value, name sorcerress
-        elif chosen_char in [characters.Sorceress]:
+        elif chosen_char is characters.Sorceress:
             return chosen_char(50, 100, names.get_first_name())  # dmg dealt, spell value, name sorcerress
-        elif chosen_char in [characters.Voodoo]:
+        elif chosen_char is characters.Voodoo:
             return chosen_char(50, 75, names.get_first_name())  # dmg dealt, spell value, name sorcerress
         else:
             return chosen_char(200, names.get_first_name())  # dmg dealt, name others
 
     def team_generator(self, number):
-        [self.add_character(self.hero_generator()) for _ in range(number)]
+        types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
+        [self.add_character(self.hero_generator(types_of_characters)) for _ in range(number)]
 
     def __getitem__(self, item):
         return self.team.__getitem__(item)

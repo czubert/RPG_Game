@@ -1,5 +1,4 @@
 import random
-import names
 import math
 
 import characters
@@ -23,8 +22,8 @@ class Team:
 
     def team_generator(self, number):
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
-        chosen_char = types_of_characters[random.randint(0, len(types_of_characters) - 1)]
-        [self.add_character(chosen_char) for _ in range(number)]
+        # chosen_char = random.choice(types_of_characters)
+        [self.add_character(random.choice(types_of_characters)()) for _ in range(number)]
 
     def __getitem__(self, item):
         return self.team.__getitem__(item)

@@ -6,7 +6,7 @@ import modifiers
 
 
 class Character(ABC):
-    def __init__(self, name):
+    def __init__(self):
         self.name = names.get_first_name()
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
@@ -71,7 +71,6 @@ class Warrior(CarryType):
     def __init__(self):
         """
         Creates warrior character object
-        :param physical_dmg: int, damage that character deals
         """
         self.max_hp = 1300
         CarryType.__init__(self)
@@ -93,7 +92,6 @@ class Sorceress(MagicType):
     def __init__(self):
         """
         Creates sorceress character object
-        :param name: str, name of character
         """
         self.max_hp = 900
         MagicType.__init__(self)
@@ -128,10 +126,6 @@ class Support(MagicType):
     """
 
     def __init__(self):
-        """
-        :param healing_power: int, hp that character regenerates
-        :param name: str, name of character
-        """
         self.max_hp = 800
         MagicType.__init__(self)
         self.healing_power = 150

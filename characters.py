@@ -1,26 +1,13 @@
 import random
 from abc import ABC, abstractmethod
+import names
 
 import modifiers
 
 
-class MagicType:
-    def __init__(self):
-        self.defence = 0.3
-        self.max_mana = 450
-        self.current_mana = self.max_mana
-
-
-class CarryType:
-    def __init__(self):
-        self.defence = 0.6
-        self.max_mana = 200
-        self.current_mana = self.max_mana
-
-
 class Character(ABC):
     def __init__(self, name):
-        self.name = name
+        self.name = names.get_first_name()
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
         self.exp = 0
@@ -64,17 +51,31 @@ class Character(ABC):
         pass
 
 
-class Warrior(Character, CarryType):
-    def __init__(self, attack_power, name):
+class MagicType(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.defence = 0.3
+        self.max_mana = 450
+        self.current_mana = self.max_mana
+
+
+class CarryType(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.defence = 0.6
+        self.max_mana = 200
+        self.current_mana = self.max_mana
+
+
+class Warrior(CarryType):
+    def __init__(self):
         """
         Creates warrior character object
-        :param attack_power: int, damage that character deals
-        :param name: str, name of character
+        :param physical_dmg: int, damage that character deals
         """
         self.max_hp = 1300
-        Character.__init__(self, name)
         CarryType.__init__(self)
-        self.attack_power = attack_power + random.randint(0, 100)
+        self.attack_power = 200 + random.randint(0, 100)
 
     def act(self, other):
         self.attack(other)
@@ -88,17 +89,16 @@ class Warrior(Character, CarryType):
         other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
 
 
-class Sorceress(Character, MagicType):
-    def __init__(self, dmg, spell_dmg, name):
+class Sorceress(MagicType):
+    def __init__(self):
         """
         Creates sorceress character object
         :param name: str, name of character
         """
         self.max_hp = 900
-        Character.__init__(self, name)
         MagicType.__init__(self)
-        self.dmg = dmg
-        self.spell_dmg = spell_dmg + random.randint(0, 80)
+        self.spell_dmg = 100 + random.randint(0, 60)
+        self.physical_dmg = 75
 
     def act(self, other):
         self.stun(other)
@@ -122,21 +122,20 @@ class Sorceress(Character, MagicType):
         other.current_hp -= int(self.dmg * (1 + self.lvl * 0.1))
 
 
-class Support(Character, MagicType):
+class Support(MagicType):
     """
     Creates support character object
     """
 
-    def __init__(self, dmg, healing_power, name):
+    def __init__(self):
         """
         :param healing_power: int, hp that character regenerates
         :param name: str, name of character
         """
         self.max_hp = 800
-        Character.__init__(self, name)
         MagicType.__init__(self)
-        self.healing_power = healing_power
-        self.dmg = dmg
+        self.healing_power = 150
+        self.physical_dmg = 50
 
     def act(self, other):
         self.heal(other)
@@ -149,13 +148,12 @@ class Support(Character, MagicType):
         min(other.current_hp + self.healing_power, other.max_hp)
 
 
-class Voodoo(Character, MagicType):
-    def __init__(self, dmg, spell_dmg, name):
+class Voodoo(MagicType):
+    def __init__(self):
         self.max_hp = 1000
         MagicType.__init__(self)
-        Character.__init__(self, name)
-        self.dmg = dmg
-        self.spell_dmg = spell_dmg
+        self.physical_dmg = 50
+        self.spell_dmg = 75
 
     def act(self, other):
         self.poison(other)

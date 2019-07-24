@@ -15,7 +15,6 @@ class Character(ABC):
         self.team = None
         self.modifier_list = []
         self.next_move = self.act
-        self.opponent_team = self.team.opponent_team
 
     def __str__(self):
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \

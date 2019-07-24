@@ -76,7 +76,7 @@ class Engine:
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name} \n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
+        return f"Team:{winning_team.name} \nBattle took: {self.rounds} rounds, {self.program_execution_time} s"
 
 
 starting_time = time.time()

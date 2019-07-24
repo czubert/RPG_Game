@@ -94,8 +94,6 @@ team1.opponent_team = team2.team
 team2.opponent_team = team1.team
 
 time_after_team_creation = time.time()
-print(f"team1: {len(team1.team)} team1 opponents: {len(team1.opponent_team)}, team2: {len(
-    team2.team)} team2 opponents: {len(team2.opponent_team)}")
 
 game.run_game()
 

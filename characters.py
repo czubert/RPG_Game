@@ -15,10 +15,14 @@ class Character(ABC):
         self.team = None
         self.modifier_list = []
         self.next_move = self.act
+        self.opponent_team = self.team.opponent_team
 
     def __str__(self):
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
-            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Rounds to get ready:"
+            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
+
+
+
 
     @abstractmethod
     def act(self, other):
@@ -117,7 +121,7 @@ class Sorceress(MagicType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int(self.dmg * (1 + self.lvl * 0.1))
+        other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
 
 
 class Support(MagicType):

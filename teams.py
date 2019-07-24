@@ -8,6 +8,7 @@ class Team:
     def __init__(self, name):
         self.name = name
         self.team = []
+        self.opponent_team = None
 
     def __str__(self):
         return ' \n'.join([element.__str__() for element in self.team])
@@ -22,7 +23,6 @@ class Team:
 
     def team_generator(self, number):
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
-        # chosen_char = random.choice(types_of_characters)
         [self.add_character(random.choice(types_of_characters)()) for _ in range(number)]
 
     def __getitem__(self, item):

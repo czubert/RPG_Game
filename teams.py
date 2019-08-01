@@ -56,7 +56,10 @@ class Team:
         char.get_exp()
 
     def find_attacking_character(self):
-        return random.choice(self.team)
+        # return random.choice(self.team)
+        for char in self.team:
+            yield char
+        yield None
 
     def find_strongest_character(self):
         '''

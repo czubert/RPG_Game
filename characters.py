@@ -20,9 +20,6 @@ class Character(ABC):
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
             f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
 
-
-
-
     @abstractmethod
     def act(self, other):
         """

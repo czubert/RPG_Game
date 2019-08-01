@@ -48,6 +48,14 @@ class Engine:
         self.program_execution_time = time.time() - start_time
         print(self.battle_summary())
 
+    @staticmethod
+    # TODO: make lucky shot a parameter of character, so every character has it's own different lucky chance
+    def lucky_shot():
+        if random.randrange(0, 10, 1) <= 1:
+            return True
+        else:
+            return False
+
     def fight(self):
         """
         Takes character that is randomed to start fight, and attacks randomed character from opponents team
@@ -57,21 +65,23 @@ class Engine:
         """
 
         while all(game.teams_list):
+
+            for t in self.teams_list:
+                try:
+                    t.choose_char_and_act()
+                except IndexError:
+                    pass
+
             self.rounds += 1  # counts the rounds
-            char1 = self.choose_attacking_character()
 
-            for modi in char1.modifier_list:
-                modi.act()
-
-            char1.get_exp()
-            if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
-                # finds weakest character from its team and heals
-                char1.next_move(char1.team.find_weakest_character())
-                self.change_team_order()
-            else:  # use act typical for its character on the random opponent character
-                self.change_team_order()
-                char2 = self.choose_attacking_character()
-                char1.next_move(char2.team.find_weakest_character())
+            # if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
+            #     # finds weakest character from its team and heals
+            #     char1.next_move(char1.team.find_weakest_character())
+            #     self.change_team_order()
+            # else:  # use act typical for its character on the random opponent character
+            #     self.change_team_order()
+            #     char2 = self.choose_attacking_character()
+            #     char1.next_move(char2.team.find_weakest_character())
 
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
@@ -88,10 +98,11 @@ team2 = game.create_new_team('Piraci z Karaibów')
 time_after_teams_creation = time.time()
 
 team1.team_generator(1000)
-team2.team_generator(100)
+team2.team_generator(1000)
 
-team1.opponent_team = team2.team
-team2.opponent_team = team1.team
+team1.opponent_team = team2
+team2.opponent_team = team1
+print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
 
 time_after_team_creation = time.time()
 

@@ -14,10 +14,10 @@ class Team:
         return ' \n'.join([element.__str__() for element in self.team])
 
     def add_character(self, hero):
-        '''
+        """
         Adds character to a team and links character with it's team
         :param hero: Character object
-        '''
+        """
         self.team.append(hero)
         hero.team = self
 
@@ -31,6 +31,30 @@ class Team:
     def __len__(self):
         return len(self.team)
 
+    def choose_char_and_act(self):
+        char = self.find_attacking_character()
+        # checks if choosen character has modifiers on him, if yes they are activated
+        for modi in char.modifier_list:
+            modi.act()
+
+        if type(char) is characters.Support:
+            # if char.current_mana <= char.
+            target = self.find_weakest_character(self.team)
+            print('Heals')
+
+        else:
+            target = self.find_weakest_character(self.opponent_team)
+            print('attacks')
+
+        char.act(target)
+
+        self.regenerate_hp(char)
+        self.regenerate_mana(char)
+        char.get_exp()
+
+    def find_attacking_character(self):
+        return random.choice(self.team)
+
     def find_strongest_character(self):
         '''
         finds strongest character from team
@@ -38,15 +62,29 @@ class Team:
         '''
         pass
 
-    def find_weakest_character(self):
-        '''
+    def find_weakest_character(self, target):
+        """
         Finds weakest character from team
         :return: character obcject
-        '''
+        """
         lowest_hp = math.inf
         weakest_character = None
-        for character in self.team:
+        for character in target:
             if character.current_hp < lowest_hp or lowest_hp == 0:
                 lowest_hp = character.current_hp
                 weakest_character = character
         return weakest_character
+
+    def regenerate_hp(self, char):
+        # # TODO: regeneration after each round for everyone not only for a hero that attacks
+        if char.current_hp + 0.01 * char.current_hp >= char.max_hp:
+            char.current_hp = char.max_hp
+        else:
+            char.current_hp = char.current_hp + 0.02 * char.current_hp  # hp regeneration
+
+    def regenerate_mana(self, char):
+        # # TODO: regeneration after each round for everyone not only for a hero that attacks
+        if char.current_mana + 0.01 * char.current_mana >= char.max_mana:
+            char.current_mana = char.max_mana
+        else:
+            char.current_hp = char.current_mana + 0.02 * char.current_mana  # hp regeneration

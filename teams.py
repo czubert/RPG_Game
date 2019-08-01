@@ -45,7 +45,6 @@ class Team:
             modi.act()
 
         if type(char) is characters.Support:
-            # if char.current_mana <= char.
             target = self.find_weakest_character(self.team)
         else:
             target = self.find_weakest_character(self.opponent_team)
@@ -66,15 +65,15 @@ class Team:
         '''
         pass
 
-    def find_weakest_character(self, target):
+    def find_weakest_character(self, target_team):
         """
         Finds weakest character from team
         :return: character obcject
         """
         lowest_hp = math.inf
         weakest_character = None
-        for character in target:
-            if character.current_hp < lowest_hp or lowest_hp == 0:
+        for character in target_team:
+            if character.current_hp < lowest_hp:
                 lowest_hp = character.current_hp
                 weakest_character = character
         return weakest_character

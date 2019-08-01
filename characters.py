@@ -44,8 +44,8 @@ class Character(ABC):
 
     def lvl_up(self):
         self.lvl += 1
-        self.exp_for_lvl = 1250 * self.lvl
-        self.max_hp += 300 * self.lvl
+        self.exp_for_lvl = (1250 * self.lvl)
+        self.max_hp += (300 * self.lvl)
 
     def do_nothing(self, other):
         pass
@@ -149,7 +149,7 @@ class Support(MagicType):
     def __init__(self):
         self.max_hp = 800
         MagicType.__init__(self)
-        self.healing_power = 150
+        self.healing_power = 650
         self.spell_mana_cost = 55
         self.physical_dmg = 75
         # # debuggers:
@@ -159,14 +159,8 @@ class Support(MagicType):
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
             self.heal(other)
-        else:
-            self.attack(other)
 
-            self.remove_if_dead(other)
-
-        # # debugger
-        # print(
-        #     f'name: {self.name}, hp: {self.current_hp}, mana: {self.current_mana}, attacks: {self.attack_counter}, spells: {self.spell_counter}')
+        self.remove_if_dead(other)
 
     def heal(self, other):
         """
@@ -216,9 +210,9 @@ class Voodoo(MagicType):
                 if isinstance(modifier, modifiers.Poison):
                     poison_in_modifiers = True
                     if self.lvl > 10:
-                        modifier.duration += int(1 + self.lvl / 2)
+                        modifier.duration += int(1 + self.lvl / 4)
                     elif self.lvl > 5:
-                        modifier.duration += int(1 + self.lvl / 3)
+                        modifier.duration += int(1 + self.lvl / 5)
                     else:
                         modifier.duration += 1
             if not poison_in_modifiers:

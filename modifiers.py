@@ -40,10 +40,8 @@ class Poison(Modifier):
             self.target.current_hp -= self.damage
             self.caster.remove_if_dead(self.target)
             self.duration -= 1
-            print(f'poison {self.duration}')
         else:
             self.target.modifier_list.remove(self)
-            print('poison removed')
 
 # class LuckyShot(Modifier):
 #     @staticmethod

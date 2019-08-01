@@ -63,8 +63,8 @@ team2 = game.create_new_team('Piraci z Karaibów')
 time_after_teams_creation = time.time()
 
 # # creates characters for both teams and adds them to the teams
-team1.team_generator(1000)
-team2.team_generator(1000)
+team1.team_generator(8)
+team2.team_generator(8)
 
 # # now one team is known by the other one
 team1.opponent_team = team2

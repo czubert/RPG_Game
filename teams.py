@@ -32,7 +32,14 @@ class Team:
         return len(self.team)
 
     def choose_char_and_act(self):
+        """
+        Randoms hero from team, checks if it has modificators on himself (if yes act), checks if randomed char is support
+        if yes, then looks for weakest hero to heal him, if no, looks for weakest opponent to attack,
+        regenerates mana and hp at the end of the round, gives exp to attacker
+        :return:
+        """
         char = self.find_attacking_character()
+
         # checks if choosen character has modifiers on him, if yes they are activated
         for modi in char.modifier_list:
             modi.act()
@@ -40,11 +47,8 @@ class Team:
         if type(char) is characters.Support:
             # if char.current_mana <= char.
             target = self.find_weakest_character(self.team)
-            print('Heals')
-
         else:
             target = self.find_weakest_character(self.opponent_team)
-            print('attacks')
 
         char.act(target)
 
@@ -75,14 +79,16 @@ class Team:
                 weakest_character = character
         return weakest_character
 
-    def regenerate_hp(self, char):
+    @staticmethod
+    def regenerate_hp(char):
         # # TODO: regeneration after each round for everyone not only for a hero that attacks
         if char.current_hp + 0.01 * char.current_hp >= char.max_hp:
             char.current_hp = char.max_hp
         else:
             char.current_hp = char.current_hp + 0.02 * char.current_hp  # hp regeneration
 
-    def regenerate_mana(self, char):
+    @staticmethod
+    def regenerate_mana(char):
         # # TODO: regeneration after each round for everyone not only for a hero that attacks
         if char.current_mana + 0.01 * char.current_mana >= char.max_mana:
             char.current_mana = char.max_mana

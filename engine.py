@@ -74,19 +74,10 @@ class Engine:
 
             self.rounds += 1  # counts the rounds
 
-            # if type(char1) is Support:  # checks if active character is a support if yes he cast spell on random
-            #     # finds weakest character from its team and heals
-            #     char1.next_move(char1.team.find_weakest_character())
-            #     self.change_team_order()
-            # else:  # use act typical for its character on the random opponent character
-            #     self.change_team_order()
-            #     char2 = self.choose_attacking_character()
-            #     char1.next_move(char2.team.find_weakest_character())
-
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name} \nBattle took: {self.rounds} rounds, {self.program_execution_time} s"
+        return f"Team:{winning_team.name} \nBattle took: {self.rounds} acts, {self.program_execution_time} s"
 
 
 starting_time = time.time()

@@ -22,39 +22,11 @@ class Engine:
         self.teams_list.append(tmp_name)
         return tmp_name
 
-    def change_team_order(self):
-        """
-        Change attacking team to another one
-        """
-        if self.team_order == 0:
-            self.team_order = 1
-        else:
-            self.team_order = 0
-
-    def choose_attacking_character(self):
-        """
-        Randomly take team which will attack first, and then randomly choose character who will attack first
-        :return: character object
-        """
-        dream_team = self.teams_list[self.team_order]  # randomly takes team from teams list
-        character_order = random.randint(0, len(dream_team) - 1)  # randoms which character to take from team
-        character = dream_team[character_order]  # takes character
-
-        return character
-
     def run_game(self):
         start_time = time.time()
         self.fight()
         self.program_execution_time = time.time() - start_time
         print(self.battle_summary())
-
-    @staticmethod
-    # TODO: make lucky shot a parameter of character, so every character has it's own different lucky chance
-    def lucky_shot():
-        if random.randrange(0, 10, 1) <= 1:
-            return True
-        else:
-            return False
 
     def fight(self):
         """

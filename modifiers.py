@@ -43,3 +43,12 @@ class Poison(Modifier):
             self.duration -= 1
         else:
             self.target.modifier_list.remove(self)
+
+# class LuckyShot(Modifier):
+#     @staticmethod
+#     # TODO: make lucky shot a parameter of character, so every character has it's own different lucky chance
+#     def lucky_shot():
+#         if random.randrange(0, 10, 1) <= 1:
+#             return True
+#         else:
+#             return False

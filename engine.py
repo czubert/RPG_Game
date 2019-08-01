@@ -53,22 +53,27 @@ class Engine:
 
 
 starting_time = time.time()
+# # creates game object based on Engine class
 game = Engine()
 
+# # creates two opposite team objects and gives them names
 team1 = game.create_new_team('Gangi Nowego Yorku')
 team2 = game.create_new_team('Piraci z Karaibów')
 
 time_after_teams_creation = time.time()
 
+# # creates characters for both teams and adds them to the teams
 team1.team_generator(1000)
 team2.team_generator(1000)
 
+# # now one team is known by the other one
 team1.opponent_team = team2
 team2.opponent_team = team1
 print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
 
 time_after_team_creation = time.time()
 
+# # starts game
 game.run_game()
 
 print(f"Time of teams creation: {starting_time - time_after_teams_creation}, time of completing teams: "

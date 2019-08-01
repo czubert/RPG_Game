@@ -55,16 +55,33 @@ class MagicType(Character):
     def __init__(self):
         Character.__init__(self)
         self.defence = 0.3
+        self.magic_immunity = 0.65
         self.max_mana = 450
         self.current_mana = self.max_mana
+        self.mana_regen = 0.02
+        self.hp_regen = 0.01
+        self.spell_mana_cost = None
+
+    def lvl_up(self):
+        Character.lvl_up(self)
+        self.mana_regen += 0.005
+        self.hp_regen += 0.0025
 
 
 class CarryType(Character):
     def __init__(self):
         Character.__init__(self)
         self.defence = 0.6
+        self.magic_immunity = 0.25
         self.max_mana = 200
         self.current_mana = self.max_mana
+        self.mana_regen = 0.01
+        self.hp_regen = 0.02
+
+    def lvl_up(self):
+        Character.lvl_up(self)
+        self.mana_regen += 0.0025
+        self.hp_regen += 0.005
 
 
 class Warrior(CarryType):
@@ -74,7 +91,7 @@ class Warrior(CarryType):
         """
         self.max_hp = 1300
         CarryType.__init__(self)
-        self.attack_power = 200 + random.randint(0, 100)
+        self.phycial_dmg = 200 + random.randint(0, 100)
 
     def act(self, other):
         self.attack(other)
@@ -85,7 +102,7 @@ class Warrior(CarryType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int(self.attack_power * (1 + self.lvl * 0.1))
+        other.current_hp -= int((self.phycial_dmg * (1 + self.lvl * 0.1)) * (1 - other.defence))
 
 
 class Sorceress(MagicType):
@@ -96,11 +113,15 @@ class Sorceress(MagicType):
         self.max_hp = 900
         MagicType.__init__(self)
         self.spell_dmg = 100 + random.randint(0, 60)
+        self.spell_mana_cost = 35
         self.physical_dmg = 75
 
     def act(self, other):
-        self.stun(other)
-        self.attack(other)
+        if self.current_mana >= self.spell_mana_cost:
+            self.stun(other)
+        else:
+            self.attack(other)
+
         self.remove_if_dead(other)
 
     def stun(self, other):
@@ -110,14 +131,14 @@ class Sorceress(MagicType):
         """
         stun = modifiers.Stun(self, other, 2)
         other.modifier_list.append(stun)
-        other.current_hp -= int(self.spell_dmg)
+        other.current_hp -= int(self.spell_dmg * (1 - other.magic_immunity))
 
     def attack(self, other):
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
+        other.current_hp -= int((self.physical_dmg * (1 + self.lvl * 0.1)) * (1 - other.defence))
 
 
 class Support(MagicType):
@@ -129,10 +150,23 @@ class Support(MagicType):
         self.max_hp = 800
         MagicType.__init__(self)
         self.healing_power = 150
-        self.physical_dmg = 50
+        self.spell_mana_cost = 55
+        self.physical_dmg = 75
+        # # debuggers:
+        self.spell_counter = 0
+        self.attack_counter = 0
 
     def act(self, other):
-        self.heal(other)
+        if self.current_mana >= self.spell_mana_cost:
+            self.heal(other)
+        else:
+            self.attack(other)
+
+            self.remove_if_dead(other)
+
+        # # debugger
+        # print(
+        #     f'name: {self.name}, hp: {self.current_hp}, mana: {self.current_mana}, attacks: {self.attack_counter}, spells: {self.spell_counter}')
 
     def heal(self, other):
         """
@@ -140,17 +174,33 @@ class Support(MagicType):
         :param other: character object, from own team
         """
         min(other.current_hp + self.healing_power, other.max_hp)
+        self.current_mana -= self.spell_mana_cost
+        self.spell_counter += 1
+
+    # TODO: Needs improvements in engine, otherwise it will hit his own teammate
+    def attack(self, other):
+        """
+        Skill of character, deals damage to opponent
+        :param other: opponent character object
+        """
+        other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
+        self.attack_counter += 1
 
 
 class Voodoo(MagicType):
     def __init__(self):
         self.max_hp = 1000
         MagicType.__init__(self)
-        self.physical_dmg = 50
         self.spell_dmg = 75
+        self.spell_mana_cost = 55
+        self.physical_dmg = 50
 
     def act(self, other):
-        self.poison(other)
+        if self.current_mana >= self.spell_mana_cost:
+            self.poison(other)
+        else:
+            self.attack(other)
+
         self.remove_if_dead(other)
 
     def poison(self, other):
@@ -160,21 +210,27 @@ class Voodoo(MagicType):
         If not then it adds poison modifier to the list of opponent modifiers
         :param other: opponent character object
         """
+        if self.current_mana >= self.spell_mana_cost:
+            poison_in_modifiers = False
+            for modifier in other.modifier_list:
+                if isinstance(modifier, modifiers.Poison):
+                    poison_in_modifiers = True
+                    if self.lvl > 10:
+                        modifier.duration += int(1 + self.lvl / 2)
+                    elif self.lvl > 5:
+                        modifier.duration += int(1 + self.lvl / 3)
+                    else:
+                        modifier.duration += 1
+            if not poison_in_modifiers:
+                poison = modifiers.Poison(self, other, 3, self.spell_dmg)
+                other.modifier_list.append(poison)
 
-        poison_in_modifiers = False
-        for modifier in other.modifier_list:
-            if isinstance(modifier, modifiers.Poison):
-                poison_in_modifiers = True
-                if self.lvl > 10:
-                    modifier.duration += int(1 + self.lvl / 2)
-                elif self.lvl > 5:
-                    modifier.duration += int(1 + self.lvl / 3)
-                else:
-                    modifier.duration += 1
-        if not poison_in_modifiers:
-            poison = modifiers.Poison(self, other, 3, self.spell_dmg)
-            other.modifier_list.append(poison)
-
+    def attack(self, other):
+        """
+        Skill of character, deals damage to opponent
+        :param other: opponent character object
+        """
+        other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
 # if __name__ == '__main__':
 #     war1 = Warrior(300)
 #     sorc1 = Sorceress()

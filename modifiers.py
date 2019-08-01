@@ -26,7 +26,6 @@ class Stun(Modifier):
             self.target.modifier_list.remove(self)
 
 
-
 class Poison(Modifier):
     def __init__(self, caster, target, duration, damage):
         Modifier.__init__(self, caster, target, duration)
@@ -41,8 +40,10 @@ class Poison(Modifier):
             self.target.current_hp -= self.damage
             self.caster.remove_if_dead(self.target)
             self.duration -= 1
+            print(f'poison {self.duration}')
         else:
             self.target.modifier_list.remove(self)
+            print('poison removed')
 
 # class LuckyShot(Modifier):
 #     @staticmethod

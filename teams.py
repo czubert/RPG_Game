@@ -38,7 +38,7 @@ class Team:
         regenerates mana and hp at the end of the round, gives exp to attacker
         :return:
         """
-        char = self.find_attacking_character()
+        char = next(self.find_attacking_character())
 
         # checks if choosen character has modifiers on him, if yes they are activated
         for modi in char.modifier_list:

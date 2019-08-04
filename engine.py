@@ -6,17 +6,11 @@ from characters import *
 
 
 class Engine:
-    def __init__(self):
+    def __init__(self, team1_size, team2_size):
         self.teams_list = []
-        # self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
         self.program_execution_time = 0
-        self.team1_size = 1000
-        self.team2_size = 1000
-        # team1 = game.create_new_team('Gangi Nowego Yorku')
-        # team2 = game.create_new_team('Piraci z Karaibów')
-        # team1.team_generator(team1_size)
-        # team2.team_generator(team2_size)
+        self.set_teams(team1_size, team2_size)
 
     def create_new_team(self, name):
         """
@@ -27,6 +21,20 @@ class Engine:
         tmp_name = Team(name)
         self.teams_list.append(tmp_name)
         return tmp_name
+
+    def set_teams(self, team1_size, team2_size):
+        # # creates two opposite team objects and gives them names
+        team1 = self.create_new_team('Gangi Nowego Yorku')
+        team2 = self.create_new_team('Piraci z Karaibów')
+
+        # # creates characters for both teams and adds them to the teams
+        team1.team_generator(team1_size)
+        team2.team_generator(team2_size)
+
+        # # now one team is known by the other one
+        team1.opponent_team = team2
+        team2.opponent_team = team1
+        print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
 
     def run_game(self):
         start_time = time.time()
@@ -70,30 +78,13 @@ class Engine:
         return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
 
 
-starting_time = time.time()
-# # creates game object based on Engine class
-game = Engine()
+if __name__ == '__main__':
+    starting_time = time.time()
+    # # creates game object based on Engine class
+    game = Engine(1000, 1000)
 
-# # creates two opposite team objects and gives them names
-team1 = game.create_new_team('Gangi Nowego Yorku')
-team2 = game.create_new_team('Piraci z Karaibów')
+    # # starts game
+    game.run_game()
 
-time_after_teams_creation = time.time()
-
-# # creates characters for both teams and adds them to the teams
-team1.team_generator(game.team1_size)
-team2.team_generator(game.team2_size)
-
-
-# # now one team is known by the other one
-team1.opponent_team = team2
-team2.opponent_team = team1
-print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
-
-time_after_team_creation = time.time()
-
-# # starts game
-game.run_game()
-
-print(f"Time of teams creation: {starting_time - time_after_teams_creation}, time of completing teams: "
-      f"{time_after_team_creation - time_after_teams_creation}, general time: {time.time() - starting_time}")
+    # print(f"Time of teams creation: {starting_time - time_after_teams_creation}, time of completing teams: "
+    #       f"{time_after_team_creation - time_after_teams_creation}, general time: {time.time() - starting_time}")

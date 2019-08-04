@@ -8,7 +8,7 @@ from characters import *
 class Engine:
     def __init__(self):
         self.teams_list = []
-        self.team_order = random.randint(0, 1)  # randoms starting team
+        # self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
         self.program_execution_time = 0
 
@@ -35,35 +35,28 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
-        # # new engine with rounds in progress
-        # while all(game.teams_list):
-        #     tmp_list = game.tems_list.copy()
-        #
-        #     while t in self.tmp_list is not None:
-        #         for t in self.tmp_list:
-        #             try:
-        #                 t.choose_char_and_act()
-        #             except IndexError:
-        #                 pass
-        #     else:
-        #         tmp_list.remove(t)
-        #
-        #     self.rounds += 1  # counts the rounds
 
         while all(game.teams_list):
+            tmp_list = self.teams_list.copy()
 
-            for t in self.teams_list:
-                try:
-                    t.choose_char_and_act()
-                except IndexError:
-                    pass
+            for team in tmp_list:
+                team.generator_field = team.find_attacking_character()
+
+            while tmp_list:
+                for team in tmp_list:
+                    char = next(team.generator_field)
+                    if char is None:
+                        tmp_list.remove(team)
+                    else:
+                        if team.opponent_team.team:
+                            team.team_act(char)
 
             self.rounds += 1  # counts the rounds
 
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name}\n Battle took: {self.rounds} acts, {self.program_execution_time} s"
+        return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
 
 
 starting_time = time.time()
@@ -77,8 +70,8 @@ team2 = game.create_new_team('Piraci z Karaibów')
 time_after_teams_creation = time.time()
 
 # # creates characters for both teams and adds them to the teams
-team1.team_generator(1)
-team2.team_generator(1)
+team1.team_generator(1000)
+team2.team_generator(100)
 
 # # now one team is known by the other one
 team1.opponent_team = team2

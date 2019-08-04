@@ -9,6 +9,7 @@ class Team:
         self.name = name
         self.team = []
         self.opponent_team = None
+        self.generator_field = None
 
     def __str__(self):
         return ' \n'.join([element.__str__() for element in self.team])
@@ -31,18 +32,20 @@ class Team:
     def __len__(self):
         return len(self.team)
 
-    def choose_char_and_act(self):
+    def team_act(self, char):
         """
         Randoms hero from team, checks if it has modificators on himself (if yes act), checks if randomed char is support
         if yes, then looks for weakest hero to heal him, if no, looks for weakest opponent to attack,
         regenerates mana and hp at the end of the round, gives exp to attacker
         :return:
         """
-        char_gen = self.find_attacking_character()
-        char = next(char_gen)
+
         # checks if choosen character has modifiers on him, if yes they are activated
         for modi in char.modifier_list:
             modi.act()
+
+        if char.current_hp < 0:
+            return
 
         if type(char) is characters.Support:
             target = self.find_weakest_character(self.team)
@@ -51,8 +54,6 @@ class Team:
 
         char.act(target)
 
-        self.regenerate_hp(char)
-        self.regenerate_mana(char)
         char.get_exp()
 
     def find_attacking_character(self):
@@ -81,18 +82,4 @@ class Team:
                 weakest_character = character
         return weakest_character
 
-    @staticmethod
-    def regenerate_hp(char):
-        # # TODO: regeneration after each round for everyone not only for a hero that attacks
-        if char.current_hp + 0.01 * char.current_hp >= char.max_hp:
-            char.current_hp = char.max_hp
-        else:
-            char.current_hp = char.current_hp + 0.02 * char.current_hp  # hp regeneration
-
-    @staticmethod
-    def regenerate_mana(char):
-        # # TODO: regeneration after each round for everyone not only for a hero that attacks
-        if char.current_mana + 0.01 * char.current_mana >= char.max_mana:
-            char.current_mana = char.max_mana
-        else:
-            char.current_hp = char.current_mana + 0.02 * char.current_mana  # hp regeneration
+    def after_round_regenerate_mana_and_hp(self):

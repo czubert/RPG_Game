@@ -11,6 +11,8 @@ class Character(ABC):
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
         self.exp = 0
+        self.max_hp = None
+        self.max_mana = None
         self.current_hp = self.max_hp
         self.team = None
         self.modifier_list = []
@@ -35,6 +37,21 @@ class Character(ABC):
         """
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
+
+    def regenerate_hp(self):
+        # # TODO: regeneration after each round for everyone not only for a hero that attacks
+        if self.current_hp + self.hp_regen * self.current_hp >= self.max_hp:
+            self.current_hp = self.max_hp
+        else:
+            self.current_hp = self.current_hp + self.hp_regen * self.current_hp  # hp regeneration
+
+    def regenerate_mana(self):
+        # # TODO: regeneration after each round for everyone not only for a hero that attacks
+        if self.current_mana + self.mana_regen * self.current_mana >= self.max_mana:
+            self.current_mana = self.max_mana
+        else:
+            self.current_hp = self.current_mana + self.mana_regen * self.current_mana  # hp regeneration
+
 
     def get_exp(self):
         self.exp += 250
@@ -66,6 +83,8 @@ class MagicType(Character):
         Character.lvl_up(self)
         self.mana_regen += 0.005
         self.hp_regen += 0.0025
+        self.current_mana += 0.005 * self.max_mana
+        self.current_hp += 0.0025 * self.max_hp
 
 
 class CarryType(Character):
@@ -82,7 +101,8 @@ class CarryType(Character):
         Character.lvl_up(self)
         self.mana_regen += 0.0025
         self.hp_regen += 0.005
-
+        self.current_mana += 0.0025 * self.max_mana
+        self.current_hp += 0.005 * self.max_hp
 
 class Warrior(CarryType):
     def __init__(self):

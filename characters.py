@@ -49,19 +49,16 @@ class Character(ABC):
         """
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
+            return True
+        else:
+            return False
 
     def find_weakest_character(self):
         """
         Finds weakest character from team
         :return: character obcject
         """
-        lowest_hp = math.inf
-        weakest_character = None
-        for character in self.team.opponent_team:
-            if character.current_hp < lowest_hp:
-                lowest_hp = character.current_hp
-                weakest_character = character
-        return weakest_character
+        return min(self.team.opponent_team, key=lambda x: x.current_hp)
 
     def regenerate(self):
         self.regenerate_hp()
@@ -120,7 +117,9 @@ class Warrior(CarryType):
 
     def act(self, other):
         self.attack(other)
-        self.remove_if_dead(other)
+
+        if self.remove_if_dead(other):
+            self.get_exp()
 
     def attack(self, other):
         """
@@ -146,7 +145,8 @@ class Sorceress(MagicType):
         else:
             self.attack(other)
 
-        self.remove_if_dead(other)
+        if self.remove_if_dead(other):
+            self.get_exp()
 
     def stun(self, other):
         """
@@ -178,8 +178,12 @@ class Support(MagicType):
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
             self.heal(other)
-
-        self.remove_if_dead(other)
+            if other.max_hp == other.current_hp:
+                self.get_exp()
+        else:
+            self.attack(other)
+            if self.remove_if_dead(other):
+                self.get_exp()
 
     def heal(self, other):
         """
@@ -194,17 +198,17 @@ class Support(MagicType):
         Finds weakest character from team
         :return: character obcject
         """
-        return min(self.team.team, key=lambda x: x.current_hp)
+        if self.current_mana >= self.spell_mana_cost:
+            return min(self.team.team, key=lambda x: x.current_hp)
+        else:
+            return min(self.team.opponent_team, key=lambda x: x.current_hp)
 
-
-    # TODO: Needs improvements in engine, otherwise it will hit his own teammate
     def attack(self, other):
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
         other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
-        self.attack_counter += 1
 
 
 class Voodoo(MagicType):

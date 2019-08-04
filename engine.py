@@ -11,6 +11,12 @@ class Engine:
         # self.team_order = random.randint(0, 1)  # randoms starting team
         self.rounds = 0
         self.program_execution_time = 0
+        self.team1_size = 1000
+        self.team2_size = 1000
+        # team1 = game.create_new_team('Gangi Nowego Yorku')
+        # team2 = game.create_new_team('Piraci z Karaibów')
+        # team1.team_generator(team1_size)
+        # team2.team_generator(team2_size)
 
     def create_new_team(self, name):
         """
@@ -75,8 +81,9 @@ team2 = game.create_new_team('Piraci z Karaibów')
 time_after_teams_creation = time.time()
 
 # # creates characters for both teams and adds them to the teams
-team1.team_generator(1000)
-team2.team_generator(1000)
+team1.team_generator(game.team1_size)
+team2.team_generator(game.team2_size)
+
 
 # # now one team is known by the other one
 team1.opponent_team = team2

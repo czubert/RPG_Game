@@ -1,5 +1,4 @@
 import random
-import math
 
 import characters
 
@@ -47,11 +46,9 @@ class Team:
         if char.current_hp < 0:
             return
 
-        # target = self.find_weakest_character(self.opponent_team)
-
         target = char.find_weakest_character()
 
-        char.act(target)
+        char.next_move(target)
 
         char.get_exp()
 

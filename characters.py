@@ -68,16 +68,11 @@ class Character(ABC):
         self.regenerate_mana()
 
     def regenerate_hp(self):
-        if self.current_hp + self.hp_regen * self.current_hp >= self.max_hp:
-            self.current_hp = self.max_hp
-        else:
-            self.current_hp = self.current_hp + self.hp_regen * self.max_hp  # hp regeneration
+        self.current_hp = min(self.max_hp, self.current_hp + self.hp_regen * self.max_hp)  # hp regeneration
 
     def regenerate_mana(self):
-        if self.current_mana + self.mana_regen * self.current_mana >= self.max_mana:
-            self.current_mana = self.max_mana
-        else:
-            self.current_mana = self.current_mana + self.mana_regen * self.max_mana  # hp regeneration
+        self.current_mana = min(self.max_mana,
+                                self.current_mana + self.mana_regen * self.max_mana)  # hp regeneration# mana regeneration
 
     def get_exp(self):
         self.exp += 250

@@ -52,6 +52,7 @@ class Team:
 
         char.get_exp()
 
+    # generator going through team list one by one, if it reaches the end it raise an error
     def find_attacking_character(self):
         # return random.choice(self.team)
         for char in self.team:

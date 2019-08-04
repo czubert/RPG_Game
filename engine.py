@@ -35,12 +35,13 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
+        random.shuffle(self.teams_list)  # randoms starting team
 
-        while all(game.teams_list):
-            tmp_list = self.teams_list.copy()
+        while all(game.teams_list):  # works until one team is dead
+            tmp_list = self.teams_list.copy()  # copy of teams list, for generator
 
             for team in tmp_list:
-                team.generator_field = team.find_attacking_character()
+                team.generator_field = team.find_attacking_character()  # sets generator 'object'
 
             while tmp_list:
                 for team in tmp_list:

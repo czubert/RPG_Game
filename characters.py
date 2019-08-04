@@ -175,10 +175,6 @@ class Support(MagicType):
         self.healing_power = 100 + random.randint(40, 100)
         MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=55)
 
-        # # debuggers:
-        self.spell_counter = 0
-        self.attack_counter = 0
-
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
             self.heal(other)
@@ -192,20 +188,14 @@ class Support(MagicType):
         """
         other.current_hp = min(other.current_hp + self.healing_power, other.max_hp)
         self.current_mana -= self.spell_mana_cost
-        self.spell_counter += 1
 
     def find_weakest_character(self):
         """
         Finds weakest character from team
         :return: character obcject
         """
-        lowest_hp = math.inf
-        weakest_character = None
-        for character in self.team.team:
-            if character.current_hp < lowest_hp:
-                lowest_hp = character.current_hp
-                weakest_character = character
-        return weakest_character
+        return min(self.team.team, key=lambda x: x.current_hp)
+
 
     # TODO: Needs improvements in engine, otherwise it will hit his own teammate
     def attack(self, other):

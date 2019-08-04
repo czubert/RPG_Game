@@ -47,10 +47,9 @@ class Team:
         if char.current_hp < 0:
             return
 
-        if type(char) is characters.Support:
-            target = self.find_weakest_character(self.team)
-        else:
-            target = self.find_weakest_character(self.opponent_team)
+        # target = self.find_weakest_character(self.opponent_team)
+
+        target = char.find_weakest_character()
 
         char.act(target)
 
@@ -68,19 +67,6 @@ class Team:
         :return: character object
         '''
         pass
-
-    def find_weakest_character(self, target_team):
-        """
-        Finds weakest character from team
-        :return: character obcject
-        """
-        lowest_hp = math.inf
-        weakest_character = None
-        for character in target_team:
-            if character.current_hp < lowest_hp:
-                lowest_hp = character.current_hp
-                weakest_character = character
-        return weakest_character
 
     def after_round_regenerate_mana_and_hp(self):
         for char in self.team:

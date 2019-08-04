@@ -1,6 +1,7 @@
 import random
 from abc import ABC, abstractmethod
 import names
+import math
 
 import modifiers
 
@@ -49,6 +50,19 @@ class Character(ABC):
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
 
+    def find_weakest_character(self):
+        """
+        Finds weakest character from team
+        :return: character obcject
+        """
+        lowest_hp = math.inf
+        weakest_character = None
+        for character in self.team.opponent_team:
+            if character.current_hp < lowest_hp:
+                lowest_hp = character.current_hp
+                weakest_character = character
+        return weakest_character
+
     def regenerate(self):
         self.regenerate_hp()
         self.regenerate_mana()
@@ -74,7 +88,7 @@ class Character(ABC):
     def lvl_up(self):
         self.lvl += 1
         self.exp_for_lvl = (1250 * self.lvl)
-        self.max_hp += (300 * self.lvl)
+        self.max_hp += (50 * self.lvl)
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
 
@@ -86,28 +100,18 @@ class Character(ABC):
         pass
 
 
-class MagicType(Character):
+class MagicType(Character, ABC):
     def __init__(self, max_hp, physical_dmg, spell_mana_cost):
         Character.__init__(self, max_hp, max_mana=450, magic_immunity=0.65, defence=0.3, mana_regen=0.02, hp_regen=0.01,
                            mana_regen_lvl_up=0.005, hp_regen_lvl_up=0.0025, spell_mana_cost=spell_mana_cost,
                            physical_dmg=physical_dmg)
 
-    # def lvl_up(self):
-    #     Character.lvl_up(self)
-    #     self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
-    #     self.regenerate()
 
-
-class CarryType(Character):
+class CarryType(Character, ABC):
     def __init__(self, max_hp, physical_dmg, spell_mana_cost):
         Character.__init__(self, max_hp, max_mana=200, magic_immunity=0.25, defence=0.6, mana_regen=0.01, hp_regen=0.02,
                            mana_regen_lvl_up=0.0025, hp_regen_lvl_up=0.005, physical_dmg=physical_dmg,
                            spell_mana_cost=spell_mana_cost)
-
-    # def lvl_up(self):
-    #     Character.lvl_up(self)
-    #     self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
-    #     self.regenerate()
 
 
 class Warrior(CarryType):
@@ -137,7 +141,7 @@ class Sorceress(MagicType):
         Creates sorceress character object
         """
         tmp_physical_dmg = random.randint(50, 100)
-        self.spell_dmg = 100 + random.randint(0, 60)
+        self.spell_dmg = 50 + random.randint(0, 60)
         MagicType.__init__(self, max_hp=900, physical_dmg=tmp_physical_dmg,
                            spell_mana_cost=35)
 
@@ -191,9 +195,22 @@ class Support(MagicType):
         Heals character from own team - healing_power tells how much it heals
         :param other: character object, from own team
         """
-        min(other.current_hp + self.healing_power, other.max_hp)
+        other.current_hp = min(other.current_hp + self.healing_power, other.max_hp)
         self.current_mana -= self.spell_mana_cost
         self.spell_counter += 1
+
+    def find_weakest_character(self):
+        """
+        Finds weakest character from team
+        :return: character obcject
+        """
+        lowest_hp = math.inf
+        weakest_character = None
+        for character in self.team.team:
+            if character.current_hp < lowest_hp:
+                lowest_hp = character.current_hp
+                weakest_character = character
+        return weakest_character
 
     # TODO: Needs improvements in engine, otherwise it will hit his own teammate
     def attack(self, other):

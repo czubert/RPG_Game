@@ -51,7 +51,11 @@ class Engine:
                         if team.opponent_team.team:
                             team.team_act(char)
 
-            self.rounds += 1  # counts the rounds
+            # on round end
+            for team in self.teams_list:
+                team.after_round_regenerate_mana_and_hp()
+
+                self.rounds += 1  # counts the rounds
 
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
@@ -70,8 +74,8 @@ team2 = game.create_new_team('Piraci z Karaibów')
 time_after_teams_creation = time.time()
 
 # # creates characters for both teams and adds them to the teams
-team1.team_generator(1000)
-team2.team_generator(100)
+team1.team_generator(500)
+team2.team_generator(500)
 
 # # now one team is known by the other one
 team1.opponent_team = team2

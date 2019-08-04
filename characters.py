@@ -6,14 +6,25 @@ import modifiers
 
 
 class Character(ABC):
-    def __init__(self):
+    def __init__(self, max_hp, max_mana, defence, magic_immunity, mana_regen, hp_regen, spell_mana_cost,
+                 mana_regen_lvl_up, hp_regen_lvl_up, physical_dmg):
         self.name = names.get_first_name()
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
         self.exp = 0
-        self.max_hp = None
-        self.max_mana = None
+        self.max_hp = max_hp
         self.current_hp = self.max_hp
+        self.max_mana = max_mana
+        self.current_mana = self.max_mana
+        self.defence = defence
+        self.magic_immunity = magic_immunity
+        self.mana_regen = mana_regen
+        self.hp_regen = hp_regen
+        self.spell_mana_cost = spell_mana_cost
+        self.mana_regen_lvl_up = mana_regen_lvl_up
+        self.hp_regen_lvl_up = hp_regen_lvl_up
+        self.physical_dmg = physical_dmg
+
         self.team = None
         self.modifier_list = []
         self.next_move = self.act
@@ -38,20 +49,21 @@ class Character(ABC):
         if other.current_hp < 0:  # checks if attack killed opponent
             other.team.team.remove(other)  # deletes dead character from its team
 
+    def regenerate(self):
+        self.regenerate_hp()
+        self.regenerate_mana()
+
     def regenerate_hp(self):
-        # # TODO: regeneration after each round for everyone not only for a hero that attacks
         if self.current_hp + self.hp_regen * self.current_hp >= self.max_hp:
             self.current_hp = self.max_hp
         else:
-            self.current_hp = self.current_hp + self.hp_regen * self.current_hp  # hp regeneration
+            self.current_hp = self.current_hp + self.hp_regen * self.max_hp  # hp regeneration
 
     def regenerate_mana(self):
-        # # TODO: regeneration after each round for everyone not only for a hero that attacks
         if self.current_mana + self.mana_regen * self.current_mana >= self.max_mana:
             self.current_mana = self.max_mana
         else:
-            self.current_hp = self.current_mana + self.mana_regen * self.current_mana  # hp regeneration
-
+            self.current_mana = self.current_mana + self.mana_regen * self.max_mana  # hp regeneration
 
     def get_exp(self):
         self.exp += 250
@@ -63,55 +75,49 @@ class Character(ABC):
         self.lvl += 1
         self.exp_for_lvl = (1250 * self.lvl)
         self.max_hp += (300 * self.lvl)
+        self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
+        self.regenerate()
+
+    def regeneration_upgr_after_lvl_up(self, mana_regen_lvl_up, hp_regen_lvl_up):
+        self.mana_regen += mana_regen_lvl_up * self.lvl
+        self.hp_regen += hp_regen_lvl_up * self.lvl
 
     def do_nothing(self, other):
         pass
 
 
 class MagicType(Character):
-    def __init__(self):
-        Character.__init__(self)
-        self.defence = 0.3
-        self.magic_immunity = 0.65
-        self.max_mana = 450
-        self.current_mana = self.max_mana
-        self.mana_regen = 0.02
-        self.hp_regen = 0.01
-        self.spell_mana_cost = None
+    def __init__(self, max_hp, physical_dmg, spell_mana_cost):
+        Character.__init__(self, max_hp, max_mana=450, magic_immunity=0.65, defence=0.3, mana_regen=0.02, hp_regen=0.01,
+                           mana_regen_lvl_up=0.005, hp_regen_lvl_up=0.0025, spell_mana_cost=spell_mana_cost,
+                           physical_dmg=physical_dmg)
 
-    def lvl_up(self):
-        Character.lvl_up(self)
-        self.mana_regen += 0.005
-        self.hp_regen += 0.0025
-        self.current_mana += 0.005 * self.max_mana
-        self.current_hp += 0.0025 * self.max_hp
+    # def lvl_up(self):
+    #     Character.lvl_up(self)
+    #     self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
+    #     self.regenerate()
 
 
 class CarryType(Character):
-    def __init__(self):
-        Character.__init__(self)
-        self.defence = 0.6
-        self.magic_immunity = 0.25
-        self.max_mana = 200
-        self.current_mana = self.max_mana
-        self.mana_regen = 0.01
-        self.hp_regen = 0.02
+    def __init__(self, max_hp, physical_dmg, spell_mana_cost):
+        Character.__init__(self, max_hp, max_mana=200, magic_immunity=0.25, defence=0.6, mana_regen=0.01, hp_regen=0.02,
+                           mana_regen_lvl_up=0.0025, hp_regen_lvl_up=0.005, physical_dmg=physical_dmg,
+                           spell_mana_cost=spell_mana_cost)
 
-    def lvl_up(self):
-        Character.lvl_up(self)
-        self.mana_regen += 0.0025
-        self.hp_regen += 0.005
-        self.current_mana += 0.0025 * self.max_mana
-        self.current_hp += 0.005 * self.max_hp
+    # def lvl_up(self):
+    #     Character.lvl_up(self)
+    #     self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
+    #     self.regenerate()
+
 
 class Warrior(CarryType):
     def __init__(self):
         """
         Creates warrior character object
         """
-        self.max_hp = 1300
-        CarryType.__init__(self)
-        self.phycial_dmg = 200 + random.randint(0, 100)
+        tmp_physical_dmg = 200 + random.randint(0, 100)
+        self.spell_dmg = random.randint(0, 200)
+        CarryType.__init__(self, max_hp=1300, physical_dmg=tmp_physical_dmg, spell_mana_cost=200)
 
     def act(self, other):
         self.attack(other)
@@ -122,7 +128,7 @@ class Warrior(CarryType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int((self.phycial_dmg * (1 + self.lvl * 0.1)) * (1 - other.defence))
+        other.current_hp -= int((self.physical_dmg * (1 + self.lvl * 0.1)) * (1 - other.defence))
 
 
 class Sorceress(MagicType):
@@ -130,11 +136,10 @@ class Sorceress(MagicType):
         """
         Creates sorceress character object
         """
-        self.max_hp = 900
-        MagicType.__init__(self)
+        tmp_physical_dmg = random.randint(50, 100)
         self.spell_dmg = 100 + random.randint(0, 60)
-        self.spell_mana_cost = 35
-        self.physical_dmg = 75
+        MagicType.__init__(self, max_hp=900, physical_dmg=tmp_physical_dmg,
+                           spell_mana_cost=35)
 
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
@@ -167,11 +172,10 @@ class Support(MagicType):
     """
 
     def __init__(self):
-        self.max_hp = 800
-        MagicType.__init__(self)
-        self.healing_power = 650
-        self.spell_mana_cost = 55
-        self.physical_dmg = 75
+        tmp_physical_dmg = random.randint(50, 100)
+        self.healing_power = 100 + random.randint(40, 100)
+        MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=55)
+
         # # debuggers:
         self.spell_counter = 0
         self.attack_counter = 0
@@ -203,11 +207,8 @@ class Support(MagicType):
 
 class Voodoo(MagicType):
     def __init__(self):
-        self.max_hp = 1000
-        MagicType.__init__(self)
-        self.spell_dmg = 75
-        self.spell_mana_cost = 55
-        self.physical_dmg = 50
+        self.spell_dmg = 75 + random.randint(0, 30)
+        MagicType.__init__(self, max_hp=1000, physical_dmg=50, spell_mana_cost=55)
 
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
@@ -245,18 +246,18 @@ class Voodoo(MagicType):
         :param other: opponent character object
         """
         other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
-# if __name__ == '__main__':
-#     war1 = Warrior(300)
-#     sorc1 = Sorceress()
-#     supp1 = Support(100)
-#     # vodo1 = Voodoo(50)
-#
-#     war1.act(supp1)
-#     supp1.act(supp1)
-#     war1.act(supp1)
-#
-#     print(war1.current_hp)
-#     print(sorc1.current_hp)
-#     print(supp1.current_hp)
-#
-#     print(war1)
+    # if __name__ == '__main__':
+    #     war1 = Warrior(300)
+    #     sorc1 = Sorceress()
+    #     supp1 = Support(100)
+    #     # vodo1 = Voodoo(50)
+    #
+    #     war1.act(supp1)
+    #     supp1.act(supp1)
+    #     war1.act(supp1)
+    #
+    #     print(war1.current_hp)
+    #     print(sorc1.current_hp)
+    #     print(supp1.current_hp)
+    #
+    #     print(war1)

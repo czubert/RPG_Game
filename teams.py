@@ -83,3 +83,5 @@ class Team:
         return weakest_character
 
     def after_round_regenerate_mana_and_hp(self):
+        for char in self.team:
+            char.regenerate()

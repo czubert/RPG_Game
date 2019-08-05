@@ -252,6 +252,7 @@ class Voodoo(MagicType):
         :param other: opponent character object
         """
         other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
+        
     # if __name__ == '__main__':
     #     war1 = Warrior(300)
     #     sorc1 = Sorceress()

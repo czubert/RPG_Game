@@ -51,7 +51,7 @@ class Engine:
         """
         random.shuffle(self.teams_list)  # randoms starting team
 
-        while all(game.teams_list):  # works until one team is dead
+        while all(self.teams_list):  # works until one team is dead
             tmp_list = self.teams_list.copy()  # copy of teams list, for generator
 
             for team in tmp_list:

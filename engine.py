@@ -39,7 +39,7 @@ class Engine:
     def run_game(self):
         start_time = time.time()
         self.fight()
-        self.program_execution_time = time.time() - start_time
+        self.program_execution_time = round(time.time() - start_time, 4)
         print(self.battle_summary())
 
     def fight(self):
@@ -75,8 +75,8 @@ class Engine:
     def battle_summary(self):
         winning_team = list(filter(bool, self.teams_list))[0]
 
-        return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
-
+        # return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
+        return f"{self.rounds},{self.program_execution_time},{winning_team.name}"
 
 if __name__ == '__main__':
     starting_time = time.time()

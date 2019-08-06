@@ -171,9 +171,9 @@ class Support(MagicType):
     """
 
     def __init__(self):
-        tmp_physical_dmg = random.randint(50, 100)
+        tmp_physical_dmg = random.randint(50, 70)
         self.healing_power = 100 + random.randint(40, 100)
-        MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=55)
+        MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=95)
 
     def act(self, other):
         if self.current_mana >= self.spell_mana_cost:
@@ -252,7 +252,7 @@ class Voodoo(MagicType):
         :param other: opponent character object
         """
         other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
-        
+
     # if __name__ == '__main__':
     #     war1 = Warrior(300)
     #     sorc1 = Sorceress()

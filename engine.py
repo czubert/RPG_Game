@@ -72,11 +72,10 @@ class Engine:
                 self.rounds += 1  # counts the rounds
 
     def battle_summary(self) -> str:
-        # winning_team = filter(bool, self.teams_list)[0]
-        winning_team = self.teams_list[0]
+        winning_team = list(filter(bool, self.teams_list))
 
         # return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
-        return f"{self.rounds},{self.program_execution_time},{winning_team.name}"
+        return f"{self.rounds},{self.program_execution_time},{winning_team[0].name}"
 
 
 if __name__ == '__main__':

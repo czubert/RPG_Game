@@ -87,7 +87,7 @@ class Character(ABC):
         self.mana_regen += mana_regen_lvl_up * self.lvl
         self.hp_regen += hp_regen_lvl_up * self.lvl
 
-    def do_nothing(self, other: object) -> None:
+    def do_nothing(self, other) -> None:  # TODO hints
         pass
 
 

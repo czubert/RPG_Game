@@ -13,7 +13,7 @@ class Team:
     def __str__(self) -> str:
         return ' \n'.join([element.__str__() for element in self.team])
 
-    def add_character(self, hero: object) -> None:
+    def add_character(self, hero) -> None:
         """
         Adds character to a team and links character with it's team
         :param hero: Character object
@@ -25,7 +25,7 @@ class Team:
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         [self.add_character(random.choice(types_of_characters)()) for _ in range(number)]
 
-    def __getitem__(self, item: int) -> object:  # TODO: is it integer for sure?
+    def __getitem__(self, item: int):  # TODO: is it integer for sure, what is returned?
         return self.team.__getitem__(item)
 
     def __len__(self) -> int:
@@ -53,7 +53,7 @@ class Team:
         char.next_move(target)
 
     # generator going through team list one by one, if it reaches the end it raise an error
-    def find_attacking_character(self) -> object:  # TODO is yield a return?
+    def find_attacking_character(self):  # TODO hints: is yield a return?
         # return random.choice(self.team)
         for char in self.team:
             yield char

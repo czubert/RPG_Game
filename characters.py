@@ -7,7 +7,7 @@ import modifiers
 
 class Character(ABC):
     def __init__(self, max_hp, max_mana, defence, magic_immunity, mana_regen, hp_regen, spell_mana_cost,
-                 mana_regen_lvl_up, hp_regen_lvl_up, physical_dmg):
+                 mana_regen_lvl_up, hp_regen_lvl_up, physical_dmg) -> None:
         self.name = names.get_first_name()
         self.lvl = 1
         self.exp_for_lvl = 500  # experience needed to lvl_up
@@ -29,19 +29,19 @@ class Character(ABC):
         self.modifier_list = []
         self.next_move = self.act
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
             f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
 
     @abstractmethod
-    def act(self, other):
+    def act(self, other) -> None:
         """
         Uses action of character
         """
         pass
 
     @staticmethod
-    def remove_if_dead(other: "opponent character object"):
+    def remove_if_dead(other: "opponent character object") -> bool:
         """
         Checks if attacked opponent is dead after attack on him, if yes delete it from the team
         :param other: opponent object
@@ -52,61 +52,61 @@ class Character(ABC):
         else:
             return False
 
-    def find_weakest_character(self):
+    def find_weakest_character(self) -> object:
         """
         Finds weakest character from team
         :return: character obcject
         """
         return min(self.team.opponent_team, key=lambda x: x.current_hp)
 
-    def regenerate(self):
+    def regenerate(self) -> None:
         self.regenerate_hp()
         self.regenerate_mana()
 
-    def regenerate_hp(self):
+    def regenerate_hp(self) -> None:
         self.current_hp = min(self.max_hp, self.current_hp + self.hp_regen * self.max_hp)  # hp regeneration
 
-    def regenerate_mana(self):
+    def regenerate_mana(self) -> None:
         self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
                                 self.max_mana)  # hp regeneration# mana regeneration
 
-    def get_exp(self):
+    def get_exp(self) -> None:
         self.exp += 250
 
         if self.exp > self.exp_for_lvl:
             self.lvl_up()
 
-    def lvl_up(self):
+    def lvl_up(self) -> None:
         self.lvl += 1
         self.exp_for_lvl = (1250 * self.lvl)
         self.max_hp += (50 * self.lvl)
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
 
-    def regeneration_upgr_after_lvl_up(self, mana_regen_lvl_up, hp_regen_lvl_up):
+    def regeneration_upgr_after_lvl_up(self, mana_regen_lvl_up: int, hp_regen_lvl_up: int) -> None:
         self.mana_regen += mana_regen_lvl_up * self.lvl
         self.hp_regen += hp_regen_lvl_up * self.lvl
 
-    def do_nothing(self, other):
+    def do_nothing(self, other: object) -> None:
         pass
 
 
 class MagicType(Character, ABC):
-    def __init__(self, max_hp, physical_dmg, spell_mana_cost):
+    def __init__(self, max_hp: int, physical_dmg: int, spell_mana_cost: int) -> None:
         Character.__init__(self, max_hp, max_mana=450, magic_immunity=0.65, defence=0.3, mana_regen=0.02, hp_regen=0.01,
                            mana_regen_lvl_up=0.005, hp_regen_lvl_up=0.0025, spell_mana_cost=spell_mana_cost,
                            physical_dmg=physical_dmg)
 
 
 class CarryType(Character, ABC):
-    def __init__(self, max_hp, physical_dmg, spell_mana_cost):
+    def __init__(self, max_hp: int, physical_dmg: int, spell_mana_cost: int) -> None:
         Character.__init__(self, max_hp, max_mana=200, magic_immunity=0.25, defence=0.6, mana_regen=0.01, hp_regen=0.02,
                            mana_regen_lvl_up=0.0025, hp_regen_lvl_up=0.005, physical_dmg=physical_dmg,
                            spell_mana_cost=spell_mana_cost)
 
 
 class Warrior(CarryType):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Creates warrior character object
         """
@@ -114,13 +114,13 @@ class Warrior(CarryType):
         self.spell_dmg = random.randint(0, 200)
         CarryType.__init__(self, max_hp=1300, physical_dmg=tmp_physical_dmg, spell_mana_cost=200)
 
-    def act(self, other):
+    def act(self, other: object) -> None:
         self.attack(other)
 
         if self.remove_if_dead(other):
             self.get_exp()
 
-    def attack(self, other):
+    def attack(self, other: object) -> None:
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
@@ -129,7 +129,7 @@ class Warrior(CarryType):
 
 
 class Sorceress(MagicType):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Creates sorceress character object
         """
@@ -138,7 +138,7 @@ class Sorceress(MagicType):
         MagicType.__init__(self, max_hp=900, physical_dmg=tmp_physical_dmg,
                            spell_mana_cost=35)
 
-    def act(self, other):
+    def act(self, other: object) -> None:
         if self.current_mana >= self.spell_mana_cost:
             self.stun(other)
         else:
@@ -147,7 +147,7 @@ class Sorceress(MagicType):
         if self.remove_if_dead(other):
             self.get_exp()
 
-    def stun(self, other):
+    def stun(self, other: object) -> None:
         """
         Skill of character, stuns opponent
         :param other: opponent character object
@@ -156,7 +156,7 @@ class Sorceress(MagicType):
         other.modifier_list.append(stun)
         other.current_hp -= int(self.spell_dmg * (1 - other.magic_immunity))
 
-    def attack(self, other):
+    def attack(self, other: object) -> None:
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
@@ -169,12 +169,12 @@ class Support(MagicType):
     Creates support character object
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         tmp_physical_dmg = random.randint(50, 70)
         self.healing_power = 100 + random.randint(40, 100)
         MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=95)
 
-    def act(self, other):
+    def act(self, other: object) -> None:
         if self.current_mana >= self.spell_mana_cost:
             self.heal(other)
             if other.max_hp == other.current_hp:
@@ -184,7 +184,7 @@ class Support(MagicType):
             if self.remove_if_dead(other):
                 self.get_exp()
 
-    def heal(self, other):
+    def heal(self, other: object) -> None:
         """
         Heals character from own team - healing_power tells how much it heals
         :param other: character object, from own team
@@ -192,7 +192,7 @@ class Support(MagicType):
         other.current_hp = min(other.current_hp + self.healing_power, other.max_hp)
         self.current_mana -= self.spell_mana_cost
 
-    def find_weakest_character(self):
+    def find_weakest_character(self) -> object:
         """
         Finds weakest character from team
         :return: character obcject
@@ -202,7 +202,7 @@ class Support(MagicType):
         else:
             return min(self.team.opponent_team, key=lambda x: x.current_hp)
 
-    def attack(self, other):
+    def attack(self, other: object) -> None:
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object
@@ -211,11 +211,11 @@ class Support(MagicType):
 
 
 class Voodoo(MagicType):
-    def __init__(self):
+    def __init__(self) -> None:
         self.spell_dmg = 75 + random.randint(0, 30)
         MagicType.__init__(self, max_hp=1000, physical_dmg=50, spell_mana_cost=55)
 
-    def act(self, other):
+    def act(self, other: object) -> None:
         if self.current_mana >= self.spell_mana_cost:
             self.poison(other)
         else:
@@ -223,7 +223,7 @@ class Voodoo(MagicType):
 
         self.remove_if_dead(other)
 
-    def poison(self, other):
+    def poison(self, other: object) -> None:
         """
         Poison method checks if poison modifier is in the character list of modifiers.
         If yes then according to voodoo character lvl it extends duration
@@ -245,7 +245,7 @@ class Voodoo(MagicType):
                 poison = modifiers.Poison(self, other, 3, self.spell_dmg)
                 other.modifier_list.append(poison)
 
-    def attack(self, other):
+    def attack(self, other: object) -> None:
         """
         Skill of character, deals damage to opponent
         :param other: opponent character object

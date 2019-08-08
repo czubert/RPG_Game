@@ -5,43 +5,43 @@ from characters import *
 
 
 class Engine:
-    def __init__(self, team1_size, team2_size):
+    def __init__(self, team1_size: int, team2_size: int) -> None:
         self.teams_list = []
         self.rounds = 0
         self.program_execution_time = 0
         self.set_teams(team1_size, team2_size)
 
-    def create_new_team(self, name):
+    def create_new_team(self, name: str):
         """
         Creates Team and sets it's name
         :param name: str
         :return: str, teams name
         """
-        tmp_name = Team(name)
-        self.teams_list.append(tmp_name)
-        return tmp_name
+        tmp_team = Team(name)
+        self.teams_list.append(tmp_team)
+        return tmp_team
 
-    def set_teams(self, team1_size, team2_size):
+    def set_teams(self, team1_size: int, team2_size: int) -> None:
         # # creates two opposite team objects and gives them names
         team1 = self.create_new_team('Gangi Nowego Yorku')
         team2 = self.create_new_team('Piraci z Karaibów')
 
         # # creates characters for both teams and adds them to the teams
-        team1.team_generator(team1_size)
-        team2.team_generator(team2_size)
+        team1.team_generator(team1_size)  # TODO why hint doesn't work properly when create_new_team returns 'object'?
+        team2.team_generator(team2_size)  # TODO why hint doesn't work properly when create_new_team returns 'object'?
 
         # # now one team is known by the other one
         team1.opponent_team = team2
         team2.opponent_team = team1
         print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
 
-    def run_game(self):
+    def run_game(self) -> None:
         start_time = time.time()
         self.fight()
         self.program_execution_time = round(time.time() - start_time, 4)
         print(self.battle_summary())
 
-    def fight(self):
+    def fight(self) -> None:
         """
         Takes character that is randomed to start fight, and attacks randomed character from opponents team
         If Character has skills working on your own team it also takes round.
@@ -71,7 +71,7 @@ class Engine:
 
                 self.rounds += 1  # counts the rounds
 
-    def battle_summary(self):
+    def battle_summary(self) -> str:
         # winning_team = filter(bool, self.teams_list)[0]
         winning_team = self.teams_list[0]
 

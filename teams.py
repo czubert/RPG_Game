@@ -31,11 +31,13 @@ class Team:
     def __len__(self):
         return len(self.team)
 
-    def team_act(self, char):
+    @staticmethod
+    def team_act(char):
         """
-        Randoms hero from team, checks if it has modificators on himself (if yes act), checks if randomed char is support
-        if yes, then looks for weakest hero to heal him, if no, looks for weakest opponent to attack,
-        regenerates mana and hp at the end of the round, gives exp to attacker
+        Randoms hero from team, checks if it has modificators on himself (if yes act),
+        checks if randomed char is support if yes, then looks for weakest hero to heal him,
+        if no, looks for weakest opponent to attack, regenerates mana and hp at the end of the round,
+        gives exp to attacker.
         :return:
         """
 
@@ -58,10 +60,10 @@ class Team:
         yield None
 
     def find_strongest_character(self):
-        '''
+        """
         finds strongest character from team
         :return: character object
-        '''
+        """
         pass
 
     def after_round_regenerate_mana_and_hp(self):

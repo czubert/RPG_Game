@@ -1,7 +1,6 @@
 import random
 from abc import ABC, abstractmethod
 import names
-import math
 
 import modifiers
 
@@ -42,7 +41,7 @@ class Character(ABC):
         pass
 
     @staticmethod
-    def remove_if_dead(other):
+    def remove_if_dead(other: "opponent character object"):
         """
         Checks if attacked opponent is dead after attack on him, if yes delete it from the team
         :param other: opponent object
@@ -68,8 +67,8 @@ class Character(ABC):
         self.current_hp = min(self.max_hp, self.current_hp + self.hp_regen * self.max_hp)  # hp regeneration
 
     def regenerate_mana(self):
-        self.current_mana = min(self.max_mana,
-                                self.current_mana + self.mana_regen * self.max_mana)  # hp regeneration# mana regeneration
+        self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
+                                self.max_mana)  # hp regeneration# mana regeneration
 
     def get_exp(self):
         self.exp += 250

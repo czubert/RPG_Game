@@ -23,8 +23,8 @@ class Engine:
 
     def set_teams(self, team1_size: int, team2_size: int) -> None:
         # # creates two opposite team objects and gives them names
-        team1 = self.create_new_team('Gangi Nowego Yorku')
-        team2 = self.create_new_team('Piraci z Karaibów')
+        team1 = self.create_new_team('New York Gangs')
+        team2 = self.create_new_team('Pirates of the Caribbean')
 
         # # creates characters for both teams and adds them to the teams
         team1.team_generator(team1_size)
@@ -43,7 +43,7 @@ class Engine:
 
     def fight(self) -> None:
         """
-        Takes character that is randomed to start fight, and attacks randomed character from opponents team
+        Takes next character from drawn team to start fight against drawn character from opponents team
         If Character has skills working on your own team it also takes round.
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned

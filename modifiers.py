@@ -1,5 +1,5 @@
 class Modifier:
-    def __init__(self, caster: object, target: object, duration: int) -> None:
+    def __init__(self, caster, target, duration: int) -> None:
         self.caster = caster
         self.target = target
         self.duration = duration
@@ -9,7 +9,7 @@ class Modifier:
 
 
 class Stun(Modifier):
-    def __init__(self, caster: object, target: object, duration: int) -> None:
+    def __init__(self, caster, target, duration: int) -> None:
         Modifier.__init__(self, caster, target, duration)
         self.mana_cost = 100
         self.duration = duration
@@ -27,7 +27,7 @@ class Stun(Modifier):
 
 
 class Poison(Modifier):
-    def __init__(self, caster: object, target: object, duration: int, damage: int) -> None:
+    def __init__(self, caster, target, duration: int, damage: int) -> None:
         Modifier.__init__(self, caster, target, duration)
         self.damage = damage
         self.mana_cost = 150

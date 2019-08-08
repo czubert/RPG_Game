@@ -11,7 +11,7 @@ class Engine:
         self.program_execution_time = 0
         self.set_teams(team1_size, team2_size)
 
-    def create_new_team(self, name: str):
+    def create_new_team(self, name: str) -> object:
         """
         Creates Team and sets it's name
         :param name: str

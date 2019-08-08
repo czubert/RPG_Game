@@ -11,7 +11,7 @@ class Engine:
         self.program_execution_time = 0
         self.set_teams(team1_size, team2_size)
 
-    def create_new_team(self, name: str) -> object:
+    def create_new_team(self, name: str) -> Team:
         """
         Creates Team and sets it's name
         :param name: str
@@ -27,8 +27,8 @@ class Engine:
         team2 = self.create_new_team('Piraci z Karaibów')
 
         # # creates characters for both teams and adds them to the teams
-        team1.team_generator(team1_size)  # TODO why hint doesn't work properly when create_new_team returns 'object'?
-        team2.team_generator(team2_size)  # TODO why hint doesn't work properly when create_new_team returns 'object'?
+        team1.team_generator(team1_size)
+        team2.team_generator(team2_size)
 
         # # now one team is known by the other one
         team1.opponent_team = team2

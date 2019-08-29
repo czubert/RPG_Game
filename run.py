@@ -4,6 +4,10 @@ import datetime
 
 import engine
 
+# TODO: this script is generally OK. But let's try to keep this project fully object-oriented.
+#  Make a class, which can do sth like this :D
+#  Also: I'm not sure if 'run' is the best module name for that
+
 start_time = time.time()
 
 
@@ -20,6 +24,18 @@ if not os.path.exists(newpath):
     os.makedirs(newpath)
 
 # # defines saved file name
+# FIXME: Its better to use format specifiers inside constructed string.
+#  the syntax is explained here: https://pyformat.info
+#  (its this part with ':' in expressions like "lol {10.3}.format(value)")
+#  #
+#  a = 1.23456789                   # a = 12
+#  f'{a:5.2}'   -> '  1.2'          # f'{a:3}'    -> ' 12'
+#  f'{a:5.2}'   -> ' 1.23'          # f'{a:05}'   -> '00012'
+#  #
+#  Generally: number after colon is total length of a string.
+#  If it stars with 0 - leading zeros will be added to this length
+#  If its a float - number after a dot is number of digits after dot (sounds great, huh? <3)
+
 if x.minute < 10:
     if_less_than_10min = 0  # for good order of the file names 1209 not 129 (for 12:09)
 else:

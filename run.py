@@ -11,8 +11,8 @@ x = datetime.datetime.now()
 
 # # defines number of games and the size of a team (the size is 10 to the power of team_size) and it defines how
 # many different matches will be played like: 2 - 10x10 and 100x100
-num_of_games = 40
-team_size = 4
+num_of_games = 1000
+team_size = 3
 
 # # creates folder for results if it doesn't exist, if it exists then it is just setting it up
 newpath = f'results'
@@ -27,10 +27,10 @@ else:
 game_name = f'{x.year}-{x.month}-{x.day}-{x.hour}{if_less_than_10min}{x.minute} - {num_of_games} games'
 
 # # sets the header of the files
-with open(f"results/{game_name}.csv", "a") as f:
-    f.write(f"Round number, Team 1 size,Team 2 size, Game rounds, Duration, Winning team\n")
+# with open(f"results/{game_name}.csv", "a") as f:
+#     f.write(f"Round number, Team 1 size,Team 2 size, Game rounds, Duration, Winning team")
 
-for i in range(1, team_size):
+for i in range(2, team_size):
     team1_size = 10 ** i
     team2_size = 10 ** i
     round_number = 0

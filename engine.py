@@ -33,13 +33,13 @@ class Engine:
         # # now one team is known by the other one
         team1.opponent_team = team2
         team2.opponent_team = team1
-        print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
+        # print(f'team1:{len(team1.team)}, team1 opponents:{len(team1.opponent_team.team)}')
 
     def run_game(self) -> None:
         start_time = time.time()
         self.fight()
         self.program_execution_time = round(time.time() - start_time, 4)
-        print(self.battle_summary())
+        # print(self.battle_summary())
 
     def fight(self) -> None:
         """
@@ -75,7 +75,7 @@ class Engine:
         winning_team = list(filter(bool, self.teams_list))
 
         # return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
-        return f"{self.rounds},{self.program_execution_time},{winning_team[0].name}"
+        return f"{self.rounds}, {self.program_execution_time}, {winning_team[0].name}"
 
 
 if __name__ == '__main__':

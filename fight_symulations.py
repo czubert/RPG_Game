@@ -52,5 +52,6 @@ team2_characters = 100
 num_of_battles = 10
 
 for i in range(6):
+    data = f'data{i}'
     data = DataSaver(num_of_battles)
-    data.battle_symulation(team1_characters * i, team2_characters)
+    data.battle_symulation(team1_characters, team2_characters)

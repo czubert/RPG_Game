@@ -1,0 +1,584 @@
+1, 100,100,52, 0.0379, Pirates of the Caribbean
+2, 100,100,66, 0.058, New York Gangs
+3, 100,100,82, 0.0564, New York Gangs
+4, 100,100,78, 0.048, Pirates of the Caribbean
+5, 100,100,56, 0.0511, Pirates of the Caribbean
+6, 100,100,60, 0.05, Pirates of the Caribbean
+7, 100,100,64, 0.0489, New York Gangs
+8, 100,100,52, 0.0387, New York Gangs
+9, 100,100,82, 0.06, Pirates of the Caribbean
+10, 100,100,104, 0.0578, Pirates of the Caribbean
+11, 100,100,72, 0.0443, Pirates of the Caribbean
+12, 100,100,56, 0.0556, Pirates of the Caribbean
+13, 100,100,46, 0.0611, Pirates of the Caribbean
+14, 100,100,54, 0.0458, New York Gangs
+15, 100,100,54, 0.0534, Pirates of the Caribbean
+16, 100,100,64, 0.0541, New York Gangs
+17, 100,100,46, 0.0389, Pirates of the Caribbean
+18, 100,100,60, 0.0384, New York Gangs
+19, 100,100,60, 0.0415, New York Gangs
+20, 100,100,46, 0.0661, New York Gangs
+21, 100,100,54, 0.0485, New York Gangs
+22, 100,100,110, 0.0562, Pirates of the Caribbean
+23, 100,100,70, 0.0588, New York Gangs
+24, 100,100,60, 0.0485, New York Gangs
+25, 100,100,60, 0.0442, Pirates of the Caribbean
+26, 100,100,44, 0.0406, New York Gangs
+27, 100,100,52, 0.0508, New York Gangs
+28, 100,100,58, 0.0393, New York Gangs
+29, 100,100,42, 0.036, New York Gangs
+30, 100,100,52, 0.0391, New York Gangs
+31, 100,100,62, 0.0522, Pirates of the Caribbean
+32, 100,100,60, 0.0588, Pirates of the Caribbean
+33, 100,100,62, 0.0514, Pirates of the Caribbean
+34, 100,100,46, 0.0469, Pirates of the Caribbean
+35, 100,100,52, 0.1632, Pirates of the Caribbean
+36, 100,100,46, 0.0706, Pirates of the Caribbean
+37, 100,100,44, 0.043, New York Gangs
+38, 100,100,44, 0.0358, Pirates of the Caribbean
+39, 100,100,86, 0.061, New York Gangs
+40, 100,100,50, 0.0388, Pirates of the Caribbean
+41, 100,100,56, 0.0466, Pirates of the Caribbean
+42, 100,100,46, 0.038, Pirates of the Caribbean
+43, 100,100,60, 0.0523, Pirates of the Caribbean
+44, 100,100,68, 0.0564, Pirates of the Caribbean
+45, 100,100,66, 0.0408, New York Gangs
+46, 100,100,38, 0.0357, New York Gangs
+47, 100,100,68, 0.0442, New York Gangs
+48, 100,100,50, 0.0427, New York Gangs
+49, 100,100,54, 0.042, New York Gangs
+50, 100,100,40, 0.039, Pirates of the Caribbean
+51, 100,100,46, 0.0421, New York Gangs
+52, 100,100,66, 0.0432, Pirates of the Caribbean
+53, 100,100,46, 0.0547, Pirates of the Caribbean
+54, 100,100,46, 0.0429, Pirates of the Caribbean
+55, 100,100,48, 0.054, New York Gangs
+56, 100,100,58, 0.0755, New York Gangs
+57, 100,100,58, 0.0751, Pirates of the Caribbean
+58, 100,100,62, 0.0951, New York Gangs
+59, 100,100,44, 0.0391, New York Gangs
+60, 100,100,62, 0.0528, Pirates of the Caribbean
+61, 100,100,66, 0.0413, Pirates of the Caribbean
+62, 100,100,54, 0.0539, Pirates of the Caribbean
+63, 100,100,50, 0.0473, Pirates of the Caribbean
+64, 100,100,78, 0.0484, New York Gangs
+65, 100,100,48, 0.0449, Pirates of the Caribbean
+66, 100,100,54, 0.0449, New York Gangs
+67, 100,100,52, 0.0389, Pirates of the Caribbean
+68, 100,100,56, 0.051, New York Gangs
+69, 100,100,62, 0.0394, Pirates of the Caribbean
+70, 100,100,68, 0.0409, New York Gangs
+71, 100,100,62, 0.0409, Pirates of the Caribbean
+72, 100,100,92, 0.0489, New York Gangs
+73, 100,100,54, 0.0349, Pirates of the Caribbean
+74, 100,100,50, 0.0459, Pirates of the Caribbean
+75, 100,100,52, 0.0529, Pirates of the Caribbean
+76, 100,100,42, 0.0391, Pirates of the Caribbean
+77, 100,100,76, 0.0479, New York Gangs
+78, 100,100,58, 0.0416, Pirates of the Caribbean
+79, 100,100,46, 0.0302, Pirates of the Caribbean
+80, 100,100,68, 0.0611, Pirates of the Caribbean
+81, 100,100,44, 0.0379, Pirates of the Caribbean
+82, 100,100,62, 0.0508, Pirates of the Caribbean
+83, 100,100,102, 0.0519, New York Gangs
+84, 100,100,38, 0.0319, Pirates of the Caribbean
+85, 100,100,58, 0.0439, New York Gangs
+86, 100,100,64, 0.0339, Pirates of the Caribbean
+87, 100,100,76, 0.0508, Pirates of the Caribbean
+88, 100,100,46, 0.0598, Pirates of the Caribbean
+89, 100,100,74, 0.036, New York Gangs
+90, 100,100,44, 0.0349, Pirates of the Caribbean
+91, 100,100,52, 0.0319, Pirates of the Caribbean
+92, 100,100,52, 0.0399, New York Gangs
+93, 100,100,70, 0.0479, Pirates of the Caribbean
+94, 100,100,50, 0.0439, New York Gangs
+95, 100,100,42, 0.0439, Pirates of the Caribbean
+96, 100,100,54, 0.0488, New York Gangs
+97, 100,100,56, 0.0409, New York Gangs
+98, 100,100,54, 0.0544, New York Gangs
+99, 100,100,66, 0.0499, New York Gangs
+100, 100,100,76, 0.0459, Pirates of the Caribbean
+101, 100,100,52, 0.0409, Pirates of the Caribbean
+102, 100,100,48, 0.0379, New York Gangs
+103, 100,100,74, 0.0379, Pirates of the Caribbean
+104, 100,100,52, 0.0389, New York Gangs
+105, 100,100,56, 0.0377, Pirates of the Caribbean
+106, 100,100,52, 0.0369, Pirates of the Caribbean
+107, 100,100,76, 0.0429, Pirates of the Caribbean
+108, 100,100,46, 0.0349, Pirates of the Caribbean
+109, 100,100,58, 0.0384, Pirates of the Caribbean
+110, 100,100,68, 0.0449, Pirates of the Caribbean
+111, 100,100,50, 0.0429, New York Gangs
+112, 100,100,48, 0.0399, New York Gangs
+113, 100,100,52, 0.0409, New York Gangs
+114, 100,100,70, 0.0419, Pirates of the Caribbean
+115, 100,100,92, 0.0467, Pirates of the Caribbean
+116, 100,100,60, 0.0556, Pirates of the Caribbean
+117, 100,100,48, 0.0365, Pirates of the Caribbean
+118, 100,100,56, 0.0558, Pirates of the Caribbean
+119, 100,100,56, 0.0334, Pirates of the Caribbean
+120, 100,100,54, 0.0558, New York Gangs
+121, 100,100,44, 0.0301, New York Gangs
+122, 100,100,54, 0.0512, Pirates of the Caribbean
+123, 100,100,70, 0.0509, New York Gangs
+124, 100,100,60, 0.0306, Pirates of the Caribbean
+125, 100,100,56, 0.0617, New York Gangs
+126, 100,100,64, 0.0549, New York Gangs
+127, 100,100,84, 0.0628, New York Gangs
+128, 100,100,80, 0.0728, New York Gangs
+129, 100,100,76, 0.0409, New York Gangs
+130, 100,100,66, 0.0409, New York Gangs
+131, 100,100,50, 0.0389, New York Gangs
+132, 100,100,46, 0.0309, Pirates of the Caribbean
+133, 100,100,60, 0.0379, New York Gangs
+134, 100,100,72, 0.0409, Pirates of the Caribbean
+135, 100,100,56, 0.0391, New York Gangs
+136, 100,100,64, 0.0429, New York Gangs
+137, 100,100,48, 0.038, New York Gangs
+138, 100,100,36, 0.0252, Pirates of the Caribbean
+139, 100,100,66, 0.0504, New York Gangs
+140, 100,100,52, 0.0371, New York Gangs
+141, 100,100,66, 0.0404, New York Gangs
+142, 100,100,58, 0.041, New York Gangs
+143, 100,100,62, 0.0453, Pirates of the Caribbean
+144, 100,100,44, 0.046, New York Gangs
+145, 100,100,42, 0.0336, New York Gangs
+146, 100,100,62, 0.0472, Pirates of the Caribbean
+147, 100,100,60, 0.0497, New York Gangs
+148, 100,100,58, 0.03, Pirates of the Caribbean
+149, 100,100,58, 0.0417, New York Gangs
+150, 100,100,48, 0.0339, Pirates of the Caribbean
+151, 100,100,48, 0.0352, Pirates of the Caribbean
+152, 100,100,44, 0.0309, Pirates of the Caribbean
+153, 100,100,62, 0.0498, New York Gangs
+154, 100,100,56, 0.0427, Pirates of the Caribbean
+155, 100,100,72, 0.0501, New York Gangs
+156, 100,100,50, 0.0468, Pirates of the Caribbean
+157, 100,100,54, 0.0359, Pirates of the Caribbean
+158, 100,100,68, 0.0508, New York Gangs
+159, 100,100,64, 0.0568, New York Gangs
+160, 100,100,62, 0.0449, New York Gangs
+161, 100,100,60, 0.0449, Pirates of the Caribbean
+162, 100,100,70, 0.0508, Pirates of the Caribbean
+163, 100,100,50, 0.0389, New York Gangs
+164, 100,100,66, 0.0538, New York Gangs
+165, 100,100,56, 0.0409, New York Gangs
+166, 100,100,46, 0.0399, New York Gangs
+167, 100,100,54, 0.0449, Pirates of the Caribbean
+168, 100,100,40, 0.0359, Pirates of the Caribbean
+169, 100,100,72, 0.0389, Pirates of the Caribbean
+170, 100,100,46, 0.0389, New York Gangs
+171, 100,100,60, 0.0379, Pirates of the Caribbean
+172, 100,100,44, 0.032, Pirates of the Caribbean
+173, 100,100,48, 0.0409, Pirates of the Caribbean
+174, 100,100,60, 0.0509, New York Gangs
+175, 100,100,58, 0.0359, New York Gangs
+176, 100,100,60, 0.0449, Pirates of the Caribbean
+177, 100,100,62, 0.038, New York Gangs
+178, 100,100,64, 0.0429, New York Gangs
+179, 100,100,58, 0.0618, Pirates of the Caribbean
+180, 100,100,52, 0.0469, New York Gangs
+181, 100,100,72, 0.0429, Pirates of the Caribbean
+182, 100,100,70, 0.0469, Pirates of the Caribbean
+183, 100,100,42, 0.032, Pirates of the Caribbean
+184, 100,100,46, 0.0264, New York Gangs
+185, 100,100,50, 0.0404, Pirates of the Caribbean
+186, 100,100,68, 0.0551, Pirates of the Caribbean
+187, 100,100,44, 0.0502, New York Gangs
+188, 100,100,58, 0.0392, New York Gangs
+189, 100,100,72, 0.0522, New York Gangs
+190, 100,100,54, 0.0526, Pirates of the Caribbean
+191, 100,100,48, 0.0411, New York Gangs
+192, 100,100,52, 0.0411, New York Gangs
+193, 100,100,56, 0.0405, New York Gangs
+194, 100,100,48, 0.0453, New York Gangs
+195, 100,100,78, 0.037, Pirates of the Caribbean
+196, 100,100,62, 0.0566, New York Gangs
+197, 100,100,70, 0.0549, New York Gangs
+198, 100,100,72, 0.0459, New York Gangs
+199, 100,100,50, 0.0424, Pirates of the Caribbean
+200, 100,100,64, 0.0439, New York Gangs
+201, 100,100,64, 0.0538, New York Gangs
+202, 100,100,40, 0.0459, Pirates of the Caribbean
+203, 100,100,52, 0.0435, Pirates of the Caribbean
+204, 100,100,56, 0.0546, New York Gangs
+205, 100,100,58, 0.0329, New York Gangs
+206, 100,100,48, 0.0329, New York Gangs
+207, 100,100,54, 0.0504, New York Gangs
+208, 100,100,62, 0.0389, New York Gangs
+209, 100,100,64, 0.0459, New York Gangs
+210, 100,100,44, 0.0349, Pirates of the Caribbean
+211, 100,100,64, 0.0399, New York Gangs
+212, 100,100,60, 0.0628, New York Gangs
+213, 100,100,44, 0.0289, Pirates of the Caribbean
+214, 100,100,48, 0.0429, New York Gangs
+215, 100,100,82, 0.0469, New York Gangs
+216, 100,100,48, 0.0399, New York Gangs
+217, 100,100,54, 0.0359, New York Gangs
+218, 100,100,46, 0.0384, Pirates of the Caribbean
+219, 100,100,58, 0.0319, Pirates of the Caribbean
+220, 100,100,56, 0.0409, New York Gangs
+221, 100,100,74, 0.0439, Pirates of the Caribbean
+222, 100,100,44, 0.0439, New York Gangs
+223, 100,100,48, 0.0459, Pirates of the Caribbean
+224, 100,100,52, 0.0469, Pirates of the Caribbean
+225, 100,100,74, 0.0568, New York Gangs
+226, 100,100,44, 0.0404, Pirates of the Caribbean
+227, 100,100,42, 0.0419, New York Gangs
+228, 100,100,58, 0.0512, New York Gangs
+229, 100,100,46, 0.0439, Pirates of the Caribbean
+230, 100,100,50, 0.0453, New York Gangs
+231, 100,100,52, 0.0448, New York Gangs
+232, 100,100,42, 0.0449, Pirates of the Caribbean
+233, 100,100,78, 0.0489, Pirates of the Caribbean
+234, 100,100,60, 0.0429, New York Gangs
+235, 100,100,70, 0.0505, New York Gangs
+236, 100,100,58, 0.0418, New York Gangs
+237, 100,100,50, 0.0419, New York Gangs
+238, 100,100,50, 0.0399, Pirates of the Caribbean
+239, 100,100,52, 0.0399, New York Gangs
+240, 100,100,52, 0.0419, Pirates of the Caribbean
+241, 100,100,44, 0.0511, New York Gangs
+242, 100,100,46, 0.0349, New York Gangs
+243, 100,100,50, 0.0399, New York Gangs
+244, 100,100,46, 0.0369, New York Gangs
+245, 100,100,66, 0.0438, New York Gangs
+246, 100,100,52, 0.0439, Pirates of the Caribbean
+247, 100,100,50, 0.0449, Pirates of the Caribbean
+248, 100,100,108, 0.0428, Pirates of the Caribbean
+249, 100,100,38, 0.0408, New York Gangs
+250, 100,100,54, 0.0533, New York Gangs
+251, 100,100,40, 0.032, Pirates of the Caribbean
+252, 100,100,48, 0.0339, Pirates of the Caribbean
+253, 100,100,46, 0.0368, New York Gangs
+254, 100,100,74, 0.0399, Pirates of the Caribbean
+255, 100,100,52, 0.0449, Pirates of the Caribbean
+256, 100,100,72, 0.0399, Pirates of the Caribbean
+257, 100,100,66, 0.0458, Pirates of the Caribbean
+258, 100,100,50, 0.0518, Pirates of the Caribbean
+259, 100,100,78, 0.0459, Pirates of the Caribbean
+260, 100,100,72, 0.0419, New York Gangs
+261, 100,100,68, 0.0359, New York Gangs
+262, 100,100,58, 0.0373, Pirates of the Caribbean
+263, 100,100,52, 0.0459, Pirates of the Caribbean
+264, 100,100,60, 0.0349, Pirates of the Caribbean
+265, 100,100,68, 0.0529, Pirates of the Caribbean
+266, 100,100,78, 0.0558, New York Gangs
+267, 100,100,64, 0.0359, Pirates of the Caribbean
+268, 100,100,54, 0.0379, New York Gangs
+269, 100,100,66, 0.0439, New York Gangs
+270, 100,100,116, 0.0569, New York Gangs
+271, 100,100,48, 0.0489, New York Gangs
+272, 100,100,60, 0.0514, Pirates of the Caribbean
+273, 100,100,62, 0.0633, Pirates of the Caribbean
+274, 100,100,44, 0.0409, Pirates of the Caribbean
+275, 100,100,48, 0.0578, Pirates of the Caribbean
+276, 100,100,54, 0.0755, Pirates of the Caribbean
+277, 100,100,48, 0.0588, Pirates of the Caribbean
+278, 100,100,106, 0.0987, Pirates of the Caribbean
+279, 100,100,86, 0.1092, New York Gangs
+280, 100,100,64, 0.0648, Pirates of the Caribbean
+281, 100,100,62, 0.0771, Pirates of the Caribbean
+282, 100,100,50, 0.0953, New York Gangs
+283, 100,100,50, 0.0578, Pirates of the Caribbean
+284, 100,100,60, 0.0559, Pirates of the Caribbean
+285, 100,100,64, 0.0434, Pirates of the Caribbean
+286, 100,100,48, 0.0488, New York Gangs
+287, 100,100,70, 0.0646, New York Gangs
+288, 100,100,74, 0.0379, New York Gangs
+289, 100,100,46, 0.0349, New York Gangs
+290, 100,100,54, 0.0369, Pirates of the Caribbean
+291, 100,100,62, 0.0449, Pirates of the Caribbean
+292, 100,100,62, 0.0555, New York Gangs
+293, 100,100,54, 0.0529, New York Gangs
+294, 100,100,64, 0.0419, Pirates of the Caribbean
+295, 100,100,48, 0.0391, Pirates of the Caribbean
+296, 100,100,60, 0.0508, Pirates of the Caribbean
+297, 100,100,54, 0.0399, Pirates of the Caribbean
+298, 100,100,50, 0.0425, New York Gangs
+299, 100,100,50, 0.0449, New York Gangs
+300, 100,100,48, 0.0408, Pirates of the Caribbean
+301, 100,100,62, 0.0419, New York Gangs
+302, 100,100,42, 0.0299, New York Gangs
+303, 100,100,76, 0.0507, Pirates of the Caribbean
+304, 100,100,58, 0.0596, New York Gangs
+305, 100,100,70, 0.0496, New York Gangs
+306, 100,100,70, 0.0492, Pirates of the Caribbean
+307, 100,100,64, 0.0403, Pirates of the Caribbean
+308, 100,100,54, 0.0459, New York Gangs
+309, 100,100,62, 0.0383, New York Gangs
+310, 100,100,62, 0.0359, New York Gangs
+311, 100,100,48, 0.039, New York Gangs
+312, 100,100,62, 0.0509, Pirates of the Caribbean
+313, 100,100,58, 0.0608, Pirates of the Caribbean
+314, 100,100,52, 0.0399, Pirates of the Caribbean
+315, 100,100,66, 0.0559, Pirates of the Caribbean
+316, 100,100,68, 0.0519, New York Gangs
+317, 100,100,54, 0.0389, New York Gangs
+318, 100,100,46, 0.0379, Pirates of the Caribbean
+319, 100,100,54, 0.0508, New York Gangs
+320, 100,100,46, 0.048, Pirates of the Caribbean
+321, 100,100,54, 0.0453, New York Gangs
+322, 100,100,54, 0.0538, New York Gangs
+323, 100,100,62, 0.0379, Pirates of the Caribbean
+324, 100,100,54, 0.0339, Pirates of the Caribbean
+325, 100,100,62, 0.0509, Pirates of the Caribbean
+326, 100,100,58, 0.0496, Pirates of the Caribbean
+327, 100,100,38, 0.0398, New York Gangs
+328, 100,100,54, 0.0462, New York Gangs
+329, 100,100,76, 0.0558, Pirates of the Caribbean
+330, 100,100,44, 0.0349, New York Gangs
+331, 100,100,80, 0.0439, Pirates of the Caribbean
+332, 100,100,42, 0.0376, Pirates of the Caribbean
+333, 100,100,66, 0.0449, Pirates of the Caribbean
+334, 100,100,68, 0.0369, New York Gangs
+335, 100,100,52, 0.0481, New York Gangs
+336, 100,100,54, 0.0469, Pirates of the Caribbean
+337, 100,100,54, 0.0409, Pirates of the Caribbean
+338, 100,100,60, 0.0459, New York Gangs
+339, 100,100,56, 0.0379, New York Gangs
+340, 100,100,54, 0.0468, Pirates of the Caribbean
+341, 100,100,48, 0.041, New York Gangs
+342, 100,100,84, 0.0369, New York Gangs
+343, 100,100,52, 0.0478, New York Gangs
+344, 100,100,52, 0.0468, New York Gangs
+345, 100,100,58, 0.0581, Pirates of the Caribbean
+346, 100,100,46, 0.0464, New York Gangs
+347, 100,100,68, 0.0509, New York Gangs
+348, 100,100,62, 0.0482, Pirates of the Caribbean
+349, 100,100,88, 0.0479, New York Gangs
+350, 100,100,56, 0.0349, Pirates of the Caribbean
+351, 100,100,36, 0.0389, Pirates of the Caribbean
+352, 100,100,86, 0.0696, Pirates of the Caribbean
+353, 100,100,58, 0.04, New York Gangs
+354, 100,100,66, 0.0539, New York Gangs
+355, 100,100,50, 0.0439, Pirates of the Caribbean
+356, 100,100,66, 0.0409, Pirates of the Caribbean
+357, 100,100,58, 0.0369, Pirates of the Caribbean
+358, 100,100,50, 0.0349, Pirates of the Caribbean
+359, 100,100,62, 0.048, New York Gangs
+360, 100,100,80, 0.0738, New York Gangs
+361, 100,100,60, 0.0449, Pirates of the Caribbean
+362, 100,100,66, 0.0419, New York Gangs
+363, 100,100,66, 0.0588, Pirates of the Caribbean
+364, 100,100,42, 0.0402, New York Gangs
+365, 100,100,66, 0.0399, New York Gangs
+366, 100,100,46, 0.0349, Pirates of the Caribbean
+367, 100,100,46, 0.0419, New York Gangs
+368, 100,100,48, 0.0409, Pirates of the Caribbean
+369, 100,100,46, 0.0389, Pirates of the Caribbean
+370, 100,100,60, 0.0469, New York Gangs
+371, 100,100,50, 0.0499, Pirates of the Caribbean
+372, 100,100,56, 0.0473, Pirates of the Caribbean
+373, 100,100,72, 0.0459, New York Gangs
+374, 100,100,50, 0.0479, Pirates of the Caribbean
+375, 100,100,54, 0.0481, Pirates of the Caribbean
+376, 100,100,70, 0.0459, New York Gangs
+377, 100,100,42, 0.0429, New York Gangs
+378, 100,100,48, 0.0429, New York Gangs
+379, 100,100,56, 0.0407, New York Gangs
+380, 100,100,46, 0.044, New York Gangs
+381, 100,100,50, 0.0409, Pirates of the Caribbean
+382, 100,100,56, 0.0449, New York Gangs
+383, 100,100,96, 0.0548, New York Gangs
+384, 100,100,58, 0.0367, Pirates of the Caribbean
+385, 100,100,70, 0.0479, New York Gangs
+386, 100,100,76, 0.0508, Pirates of the Caribbean
+387, 100,100,42, 0.0369, Pirates of the Caribbean
+388, 100,100,52, 0.0421, Pirates of the Caribbean
+389, 100,100,60, 0.0491, New York Gangs
+390, 100,100,64, 0.0432, Pirates of the Caribbean
+391, 100,100,62, 0.0459, Pirates of the Caribbean
+392, 100,100,68, 0.0583, New York Gangs
+393, 100,100,50, 0.0399, New York Gangs
+394, 100,100,94, 0.0588, New York Gangs
+395, 100,100,62, 0.0509, New York Gangs
+396, 100,100,58, 0.0439, New York Gangs
+397, 100,100,56, 0.0459, Pirates of the Caribbean
+398, 100,100,50, 0.0509, Pirates of the Caribbean
+399, 100,100,54, 0.0399, Pirates of the Caribbean
+400, 100,100,58, 0.0392, Pirates of the Caribbean
+401, 100,100,82, 0.0419, New York Gangs
+402, 100,100,56, 0.038, New York Gangs
+403, 100,100,60, 0.0578, Pirates of the Caribbean
+404, 100,100,62, 0.0419, New York Gangs
+405, 100,100,54, 0.0399, New York Gangs
+406, 100,100,72, 0.0509, New York Gangs
+407, 100,100,98, 0.0449, New York Gangs
+408, 100,100,56, 0.0509, Pirates of the Caribbean
+409, 100,100,50, 0.0519, New York Gangs
+410, 100,100,68, 0.0508, Pirates of the Caribbean
+411, 100,100,78, 0.0599, New York Gangs
+412, 100,100,46, 0.0359, Pirates of the Caribbean
+413, 100,100,48, 0.0409, Pirates of the Caribbean
+414, 100,100,48, 0.0451, New York Gangs
+415, 100,100,44, 0.0389, Pirates of the Caribbean
+416, 100,100,48, 0.0429, Pirates of the Caribbean
+417, 100,100,82, 0.0469, Pirates of the Caribbean
+418, 100,100,66, 0.0359, Pirates of the Caribbean
+419, 100,100,66, 0.0452, New York Gangs
+420, 100,100,52, 0.0501, Pirates of the Caribbean
+421, 100,100,46, 0.0309, New York Gangs
+422, 100,100,58, 0.0409, Pirates of the Caribbean
+423, 100,100,64, 0.0409, New York Gangs
+424, 100,100,76, 0.0589, New York Gangs
+425, 100,100,46, 0.0379, Pirates of the Caribbean
+426, 100,100,56, 0.0499, New York Gangs
+427, 100,100,42, 0.0379, New York Gangs
+428, 100,100,52, 0.0429, Pirates of the Caribbean
+429, 100,100,70, 0.0568, New York Gangs
+430, 100,100,76, 0.0442, Pirates of the Caribbean
+431, 100,100,42, 0.0399, New York Gangs
+432, 100,100,52, 0.0359, New York Gangs
+433, 100,100,76, 0.0552, Pirates of the Caribbean
+434, 100,100,54, 0.0444, New York Gangs
+435, 100,100,52, 0.048, New York Gangs
+436, 100,100,60, 0.0618, New York Gangs
+437, 100,100,64, 0.0379, Pirates of the Caribbean
+438, 100,100,64, 0.0389, Pirates of the Caribbean
+439, 100,100,50, 0.0439, Pirates of the Caribbean
+440, 100,100,40, 0.0359, New York Gangs
+441, 100,100,54, 0.0529, Pirates of the Caribbean
+442, 100,100,66, 0.0381, Pirates of the Caribbean
+443, 100,100,42, 0.0369, New York Gangs
+444, 100,100,52, 0.0539, Pirates of the Caribbean
+445, 100,100,44, 0.0439, New York Gangs
+446, 100,100,40, 0.0349, Pirates of the Caribbean
+447, 100,100,46, 0.0429, New York Gangs
+448, 100,100,56, 0.0429, Pirates of the Caribbean
+449, 100,100,44, 0.0548, New York Gangs
+450, 100,100,72, 0.0499, New York Gangs
+451, 100,100,54, 0.0379, New York Gangs
+452, 100,100,66, 0.0449, Pirates of the Caribbean
+453, 100,100,90, 0.1188, Pirates of the Caribbean
+454, 100,100,46, 0.0659, Pirates of the Caribbean
+455, 100,100,54, 0.0616, New York Gangs
+456, 100,100,56, 0.0449, New York Gangs
+457, 100,100,58, 0.0538, Pirates of the Caribbean
+458, 100,100,50, 0.0459, Pirates of the Caribbean
+459, 100,100,60, 0.0409, Pirates of the Caribbean
+460, 100,100,68, 0.0594, Pirates of the Caribbean
+461, 100,100,52, 0.0418, Pirates of the Caribbean
+462, 100,100,88, 0.0429, Pirates of the Caribbean
+463, 100,100,82, 0.0529, Pirates of the Caribbean
+464, 100,100,60, 0.0594, New York Gangs
+465, 100,100,56, 0.0429, Pirates of the Caribbean
+466, 100,100,60, 0.0375, New York Gangs
+467, 100,100,52, 0.0439, New York Gangs
+468, 100,100,74, 0.0439, Pirates of the Caribbean
+469, 100,100,48, 0.0389, New York Gangs
+470, 100,100,42, 0.0439, New York Gangs
+471, 100,100,56, 0.0489, Pirates of the Caribbean
+472, 100,100,46, 0.045, New York Gangs
+473, 100,100,54, 0.0379, New York Gangs
+474, 100,100,80, 0.0479, Pirates of the Caribbean
+475, 100,100,50, 0.0419, Pirates of the Caribbean
+476, 100,100,68, 0.0459, New York Gangs
+477, 100,100,72, 0.05, Pirates of the Caribbean
+478, 100,100,70, 0.0479, New York Gangs
+479, 100,100,48, 0.0434, New York Gangs
+480, 100,100,48, 0.0378, New York Gangs
+481, 100,100,64, 0.0503, Pirates of the Caribbean
+482, 100,100,86, 0.0509, New York Gangs
+483, 100,100,66, 0.0515, New York Gangs
+484, 100,100,64, 0.043, Pirates of the Caribbean
+485, 100,100,82, 0.0499, New York Gangs
+486, 100,100,46, 0.046, Pirates of the Caribbean
+487, 100,100,42, 0.0453, Pirates of the Caribbean
+488, 100,100,84, 0.0399, New York Gangs
+489, 100,100,72, 0.0489, New York Gangs
+490, 100,100,100, 0.0419, New York Gangs
+491, 100,100,70, 0.0464, Pirates of the Caribbean
+492, 100,100,56, 0.0515, Pirates of the Caribbean
+493, 100,100,42, 0.0501, New York Gangs
+494, 100,100,54, 0.0468, New York Gangs
+495, 100,100,90, 0.0608, New York Gangs
+496, 100,100,68, 0.0449, Pirates of the Caribbean
+497, 100,100,94, 0.0488, Pirates of the Caribbean
+498, 100,100,44, 0.0378, Pirates of the Caribbean
+499, 100,100,50, 0.0454, Pirates of the Caribbean
+500, 100,100,60, 0.0499, Pirates of the Caribbean
+501, 100,100,66, 0.0504, New York Gangs
+502, 100,100,40, 0.043, New York Gangs
+503, 100,100,42, 0.0429, Pirates of the Caribbean
+504, 100,100,54, 0.0339, New York Gangs
+505, 100,100,44, 0.0448, Pirates of the Caribbean
+506, 100,100,50, 0.0458, Pirates of the Caribbean
+507, 100,100,40, 0.0379, Pirates of the Caribbean
+508, 100,100,64, 0.0499, Pirates of the Caribbean
+509, 100,100,48, 0.058, New York Gangs
+510, 100,100,42, 0.0369, New York Gangs
+511, 100,100,76, 0.0679, Pirates of the Caribbean
+512, 100,100,64, 0.0532, New York Gangs
+513, 100,100,52, 0.0415, New York Gangs
+514, 100,100,76, 0.0467, Pirates of the Caribbean
+515, 100,100,54, 0.0369, New York Gangs
+516, 100,100,66, 0.0618, Pirates of the Caribbean
+517, 100,100,66, 0.0549, New York Gangs
+518, 100,100,68, 0.0419, New York Gangs
+519, 100,100,46, 0.0389, Pirates of the Caribbean
+520, 100,100,36, 0.0448, Pirates of the Caribbean
+521, 100,100,48, 0.0485, Pirates of the Caribbean
+522, 100,100,58, 0.0428, New York Gangs
+523, 100,100,50, 0.0439, New York Gangs
+524, 100,100,62, 0.0479, New York Gangs
+525, 100,100,54, 0.0369, New York Gangs
+526, 100,100,54, 0.0449, New York Gangs
+527, 100,100,40, 0.0429, Pirates of the Caribbean
+528, 100,100,48, 0.0369, Pirates of the Caribbean
+529, 100,100,52, 0.0429, New York Gangs
+530, 100,100,58, 0.0409, New York Gangs
+531, 100,100,96, 0.0539, New York Gangs
+532, 100,100,42, 0.0339, New York Gangs
+533, 100,100,60, 0.0419, Pirates of the Caribbean
+534, 100,100,46, 0.0339, Pirates of the Caribbean
+535, 100,100,48, 0.0509, Pirates of the Caribbean
+536, 100,100,50, 0.0554, New York Gangs
+537, 100,100,62, 0.1757, New York Gangs
+538, 100,100,48, 0.0499, New York Gangs
+539, 100,100,52, 0.0561, New York Gangs
+540, 100,100,76, 0.1984, New York Gangs
+541, 100,100,48, 0.0633, Pirates of the Caribbean
+542, 100,100,58, 0.0812, New York Gangs
+543, 100,100,48, 0.0548, Pirates of the Caribbean
+544, 100,100,44, 0.0449, New York Gangs
+545, 100,100,48, 0.0382, Pirates of the Caribbean
+546, 100,100,64, 0.0489, New York Gangs
+547, 100,100,50, 0.0479, New York Gangs
+548, 100,100,56, 0.0549, Pirates of the Caribbean
+549, 100,100,44, 0.0359, Pirates of the Caribbean
+550, 100,100,50, 0.0523, New York Gangs
+551, 100,100,50, 0.0389, Pirates of the Caribbean
+552, 100,100,56, 0.0379, Pirates of the Caribbean
+553, 100,100,56, 0.0469, Pirates of the Caribbean
+554, 100,100,84, 0.0499, New York Gangs
+555, 100,100,56, 0.0399, Pirates of the Caribbean
+556, 100,100,58, 0.0668, Pirates of the Caribbean
+557, 100,100,52, 0.0429, Pirates of the Caribbean
+558, 100,100,60, 0.0448, Pirates of the Caribbean
+559, 100,100,62, 0.0479, Pirates of the Caribbean
+560, 100,100,50, 0.0499, New York Gangs
+561, 100,100,56, 0.0339, New York Gangs
+562, 100,100,56, 0.0773, Pirates of the Caribbean
+563, 100,100,84, 0.0449, Pirates of the Caribbean
+564, 100,100,62, 0.0389, Pirates of the Caribbean
+565, 100,100,80, 0.0489, Pirates of the Caribbean
+566, 100,100,78, 0.0459, New York Gangs
+567, 100,100,66, 0.0419, Pirates of the Caribbean
+568, 100,100,50, 0.0423, New York Gangs
+569, 100,100,66, 0.0399, Pirates of the Caribbean
+570, 100,100,58, 0.0419, Pirates of the Caribbean
+571, 100,100,62, 0.0479, Pirates of the Caribbean
+572, 100,100,68, 0.0459, New York Gangs
+573, 100,100,90, 0.0509, New York Gangs
+574, 100,100,54, 0.0399, Pirates of the Caribbean
+575, 100,100,54, 0.0438, Pirates of the Caribbean
+576, 100,100,60, 0.0349, New York Gangs
+577, 100,100,60, 0.0349, New York Gangs
+578, 100,100,46, 0.0339, New York Gangs
+579, 100,100,54, 0.0374, Pirates of the Caribbean
+580, 100,100,58, 0.0389, New York Gangs
+581, 100,100,60, 0.0529, New York Gangs
+582, 100,100,58, 0.0418, New York Gangs
+583, 100,100,48, 0.0399, New York Gangs
+584, 100,100,46, 0.0419, Pirates of the Caribbean

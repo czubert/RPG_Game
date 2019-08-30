@@ -25,7 +25,7 @@ class Team:
         types_of_characters = [characters.Sorceress, characters.Warrior, characters.Support, characters.Voodoo]
         [self.add_character(random.choice(types_of_characters)()) for _ in range(number)]
 
-    def __getitem__(self, item: int):  # TODO: is it integer for sure, what is returned?
+    def __getitem__(self, item: int):
         return self.team.__getitem__(item)
 
     def __len__(self) -> int:

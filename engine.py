@@ -37,6 +37,7 @@ class Engine:
 
     def run_game(self) -> None:
         start_time = time.time()
+        random.shuffle(self.teams_list)  # randoms starting team
         self.fight()
         self.program_execution_time = round(time.time() - start_time, 4)
         # print(self.battle_summary())
@@ -48,7 +49,6 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
-        random.shuffle(self.teams_list)  # randoms starting team
 
         while all(self.teams_list):  # works until one team is dead
             tmp_list = self.teams_list.copy()  # copy of teams list, for generator

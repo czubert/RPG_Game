@@ -40,16 +40,16 @@ class DataSaver:
             game.run_game()
             round_number += 1
             with open(f"results/{self.set_file_name()}.csv", "a") as f:
-                f.write(f"{round_number}, {team1_size},{team2_size},{game.battle_summary()}\n")
+                f.write(f"{int(round_number)}, {int(team1_size)},{int(team2_size)},{game.battle_summary()}\n")
 
         program_execution_time = round(time.time() - start_time, 4)
         print(f'\nBuild in: {program_execution_time} s | {round(program_execution_time / 60, 4)} min | '
               f'{round((program_execution_time / 60) / 60, 4)} h')
 
 
-team1_characters = 100
-team2_characters = 100
-num_of_battles = 10
+team1_characters = 500
+team2_characters = 500
+num_of_battles = 70
 
 for i in range(6):
     data = f'data{i}'

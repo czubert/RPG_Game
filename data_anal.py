@@ -17,16 +17,14 @@ for file in sorted(glob.glob('results/*')):
 
 data = np.array(final_results)
 col = 3
-# # FIXME: the data after reading are always always always strings. To make a good plot you need to get numbers
-#
-data = data[np.argsort(data[:, col])]  # FIXME: Whoa. I don't know what it is.
+
+data = data[np.argsort(data[:, col])]
 
 X = data[:, 3]
 Y = data[:, 4]
 
-# for rounds in data:
-#     X.append(rounds[3])  # number rounds
-#     Y.append(rounds[4])  # duration of round
+X = X.astype(np.float)
+Y = Y.astype(np.float)
 
 # scatter plot
 plt.scatter(X, Y, s=10, c='red')

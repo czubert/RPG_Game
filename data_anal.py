@@ -1,19 +1,16 @@
 import glob
 import matplotlib.pyplot as plt
-
-plt.style.use('seaborn-whitegrid')
+import seaborn as sns
 import numpy as np
 
-# TODO: you use libraries in a project - create a requirements.txt file and list them there with their version numbers
-#  like:
-#  some_magical_library==4.3.1
+sns.set()
+
 final_results = []
 
 for file in sorted(glob.glob('results/*')):
     with open(file, 'r') as f:
         lines = f.readlines()
-        for line in lines:  # TODO: It's better to use extend (its way faster and doesn't require loop)
-            final_results.append(line.split(','))
+        final_results.extend([line.split(',') for line in lines])
 
 data = np.array(final_results)
 col = 3

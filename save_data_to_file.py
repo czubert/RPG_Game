@@ -13,11 +13,11 @@ class DataSaver:
     #     self.team_size = team_size
 
     @staticmethod
-    def set_path_name():
+    def create_path():
         # # creates folder for results if it doesn't exist, if it exists then it is just setting it up
-        newpath = 'results'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
+        new_path = 'results'
+        if not os.path.exists(new_path):
+            os.makedirs(new_path)
 
     def file_name(self):
         # # defines saved file name
@@ -29,7 +29,7 @@ class DataSaver:
     # with open(f"results/{game_name}.csv", "a") as f:
     #     f.write(f"Round number, Team 1 size,Team 2 size, Game rounds, Duration, Winning team")
 
-    def battle_simulation(self, team1_size, team2_size):
+    def data_save(self, team1_size, team2_size):
         start_time = time.time()
 
         round_number = 0
@@ -52,4 +52,4 @@ num_of_battles = 30
 
 for i in range(6):
     data = DataSaver(num_of_battles * i)
-    data.battle_simulation(team1_characters * i, team2_characters)
+    data.data_save(team1_characters * i, team2_characters)

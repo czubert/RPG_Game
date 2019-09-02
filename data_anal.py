@@ -5,33 +5,49 @@ import numpy as np
 
 sns.set()
 
-final_results = []
 
-for file in sorted(glob.glob('results/*')):
-    with open(file, 'r') as f:
-        lines = f.readlines()
-        final_results.extend([line.split(',') for line in lines])
+class DataAnalysis:
+    def __init__(self):
+        self.final_results = []
 
-data = np.array(final_results)
-col = 3
+    def analise_data(self, col):
+        self.split_data_for_analysis()
+        data = self.sort_data(col)
+        self.create_a_plot(data)
 
-data = data[np.argsort(data[:, col])]
+    def split_data_for_analysis(self):
+        for file in sorted(glob.glob('results/*')):
+            with open(file, 'r') as f:
+                lines = f.readlines()
+                self.final_results.extend([line.split(',') for line in lines])
 
-X = data[:, 3]
-Y = data[:, 4]
+    def sort_data(self, col):
+        data = np.array(self.final_results)
+        col = 3
+        data = data[np.argsort(data[:, col])]
+        return data
 
-X = X.astype(np.float)
-Y = Y.astype(np.float)
+    def create_a_plot(self, data):
+        X = data[:, 3]
+        Y = data[:, 4]
 
-# scatter plot
-plt.scatter(X, Y, s=10, c='red')
+        X = X.astype(np.float)
+        Y = Y.astype(np.float)
 
-# add title
-plt.title('Relationship Between number of rounds and time')
+        # scatter plot
+        plt.scatter(X, Y, s=10, c='red')
 
-# add x and y labels
-plt.xlabel('Number of rounds')
-plt.ylabel('Duration of one round')
+        # add title
+        plt.title('Relationship Between number of rounds and time')
 
-# show plot
-plt.show()
+        # add x and y labels
+        plt.xlabel('Number of rounds')
+        plt.ylabel('Duration of one round')
+
+        # show plot
+        plt.show()
+
+
+data1 = DataAnalysis()
+
+data1.analise_data(3)

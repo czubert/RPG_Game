@@ -46,10 +46,10 @@ class DataSaver:
               f'{round((program_execution_time / 60) / 60, 4)} h')
 
 
-team1_characters = 10
-team2_characters = 10
-num_of_battles = 30
+team1_characters = 100
+team2_characters = 100
+num_of_battles = 50
 
-for i in range(6):
-    data = DataSaver(num_of_battles * i)
-    data.data_save(team1_characters * i, team2_characters)
+for i in range(1,6):
+    data = DataSaver(num_of_battles)
+    data.data_save(team1_characters * i, team2_characters * i)

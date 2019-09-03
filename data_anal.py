@@ -17,19 +17,23 @@ class DataAnalysis:
         :param col: int
         :return: None
         """
+        self.read_data_for_analysis()
         self.split_data_for_analysis()
         data = self.sort_data(col)
         self.create_a_plot(data)
 
-    def split_data_for_analysis(self):
+    @staticmethod
+    def read_data_for_analysis():
         """
         Takes all files from folder 'results', reads it line by line and splits every each line into separate list
         :return: None
         """
         for file in sorted(glob.glob('results/*')):
             with open(file, 'r') as f:
-                lines = f.readlines()
-                self.final_results.extend([line.split(',') for line in lines])
+                return f.readlines()
+
+    def split_data_for_analysis(self):
+        self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])
 
     def sort_data(self, col):
         """
@@ -38,12 +42,10 @@ class DataAnalysis:
         :return: NumPy array
         """
         data = np.array(self.final_results)
-        col = 3
         data = data[np.argsort(data[:, col])]
         return data
 
-    @staticmethod
-    def create_a_plot(data):
+    def create_a_plot(self, data):
         """
         Creates a plot from all files in 'results' folder
         :param data: NumPy array of arrays
@@ -55,9 +57,6 @@ class DataAnalysis:
         x = x.astype(np.float)
         y = y.astype(np.float)
 
-        # scatter plot
-        plt.scatter(x, y, s=10, c='red')
-
         # add title
         plt.title('Relationship Between number of rounds and time')
 
@@ -65,12 +64,21 @@ class DataAnalysis:
         plt.xlabel('Number of rounds')
         plt.ylabel('Duration of one round')
 
+        self.trend_line(x, y)
+
+    @staticmethod
+    def trend_line(x, y):
+        """
+        Draws plot with trend line and labels
+        :param x: array of floats
+        :param y: array of floats
+        :return:
+        """
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
         line = slope * x + intercept
 
-        plt.plot(x, y, 'o', x, line)
-
-        # show plot
+        plt.plot(x, y, 'o')
+        plt.plot(x, line)
         plt.show()
 
 

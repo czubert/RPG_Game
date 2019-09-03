@@ -64,6 +64,8 @@ class DataAnalysis:
         plt.xlabel('Number of rounds')
         plt.ylabel('Duration of one round')
 
+        plt.plot(x, y, 'o')
+
         self.trend_line(x, y)
 
     @staticmethod
@@ -77,7 +79,6 @@ class DataAnalysis:
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
         line = slope * x + intercept
 
-        plt.plot(x, y, 'o')
         plt.plot(x, line)
         plt.show()
 

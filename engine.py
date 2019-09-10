@@ -82,7 +82,7 @@ class Engine:
 if __name__ == '__main__':
     starting_time = time.time()
     # # creates game object based on Engine class
-    game = Engine(10, 10)
+    game = Engine(10, 5)
 
     # # starts game
     game.run_game()

@@ -15,14 +15,10 @@ class Character(ABC):
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
                f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
 
-    def __init__(self, max_mana, defence, magic_immunity, mana_regen, hp_regen,
-                 mana_regen_lvl_up, hp_regen_lvl_up) -> None:
+    def __init__(self, mana_regen, hp_regen, mana_regen_lvl_up, hp_regen_lvl_up) -> None:
         self.name = names.get_first_name()
         self.current_hp = self.max_hp
-        self.max_mana = max_mana
         self.current_mana = self.max_mana
-        self.defence = defence
-        self.magic_immunity = magic_immunity
         self.mana_regen = mana_regen
         self.hp_regen = hp_regen
         self.mana_regen_lvl_up = mana_regen_lvl_up
@@ -91,15 +87,21 @@ class Character(ABC):
 
 
 class MagicType(Character, ABC):
+    defence = 0.3
+    magic_immunity = 0.65
+    max_mana = 450
+
     def __init__(self) -> None:
-        Character.__init__(self, hp_regen=0.01, hp_regen_lvl_up=0.0025, max_mana=450, mana_regen=0.02,
-                           mana_regen_lvl_up=0.005, magic_immunity=0.65, defence=0.3)
+        Character.__init__(self, hp_regen=0.01, hp_regen_lvl_up=0.0025, mana_regen=0.02, mana_regen_lvl_up=0.005)
 
 
 class CarryType(Character, ABC):
+    defence = 0.6
+    magic_immunity = 0.25
+    max_mana = 200
+
     def __init__(self) -> None:
-        Character.__init__(self, hp_regen=0.02, hp_regen_lvl_up=0.005, max_mana=200, mana_regen=0.01,
-                           mana_regen_lvl_up=0.0025, magic_immunity=0.25, defence=0.6)
+        Character.__init__(self, hp_regen=0.02, hp_regen_lvl_up=0.005, mana_regen=0.01, mana_regen_lvl_up=0.0025)
 
 
 class Warrior(CarryType):

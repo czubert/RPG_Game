@@ -9,6 +9,7 @@ class Character(ABC):
     lvl = 1
     exp = 0
     exp_for_lvl = 500
+    exp_gained = 250
 
     def __str__(self) -> str:
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
@@ -68,17 +69,18 @@ class Character(ABC):
                                 self.max_mana)  # hp regeneration# mana regeneration
 
     def get_exp(self) -> None:
-        self.exp += 250
+        self.exp += self.exp_gained
 
         if self.exp > self.exp_for_lvl:
             self.lvl_up()
 
     def lvl_up(self) -> None:
         self.lvl += 1
-        self.exp_for_lvl = (1250 * self.lvl)
+        self.exp_for_lvl += (1250 * self.lvl)
         self.max_hp += (50 * self.lvl)
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
+        self.exp_gained += 50 * self.lvl
 
     def regeneration_upgr_after_lvl_up(self, mana_regen_lvl_up: int, hp_regen_lvl_up: int) -> None:
         self.mana_regen += mana_regen_lvl_up * self.lvl
@@ -104,12 +106,12 @@ class Warrior(CarryType):
     max_hp = 1300
     spell_mana_cost = 200
     physical_dmg = 200 + random.randint(0, 100)
+    spell_dmg = random.randint(0, 200)
 
     def __init__(self) -> None:
         """
         Creates warrior character object
         """
-        self.spell_dmg = random.randint(0, 200)
         CarryType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -131,12 +133,12 @@ class Sorceress(MagicType):
     max_hp = 900
     spell_mana_cost = 35
     physical_dmg = random.randint(50, 100)
+    spell_dmg = 50 + random.randint(0, 60)
 
     def __init__(self) -> None:
         """
         Creates sorceress character object
         """
-        self.spell_dmg = 50 + random.randint(0, 60)
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -172,10 +174,9 @@ class Support(MagicType):
     max_hp = 800
     spell_mana_cost = 95
     physical_dmg = random.randint(50, 70)
+    healing_power = 100 + random.randint(40, 100)
 
     def __init__(self) -> None:
-
-        self.healing_power = 100 + random.randint(40, 100)
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -218,9 +219,9 @@ class Voodoo(MagicType):
     max_hp = 1000
     spell_mana_cost = 55
     physical_dmg = 50
+    spell_dmg = 75 + random.randint(0, 30)
 
     def __init__(self) -> None:
-        self.spell_dmg = 75 + random.randint(0, 30)
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:

@@ -6,13 +6,17 @@ import modifiers
 
 
 class Character(ABC):
-    def __init__(self, max_hp, max_mana, defence, magic_immunity, mana_regen, hp_regen, spell_mana_cost,
+    lvl = 1
+    exp = 0
+    exp_for_lvl = 500
+
+    def __str__(self) -> str:
+        return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
+               f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
+
+    def __init__(self, max_mana, defence, magic_immunity, mana_regen, hp_regen,
                  mana_regen_lvl_up, hp_regen_lvl_up, physical_dmg) -> None:
         self.name = names.get_first_name()
-        self.lvl = 1
-        self.exp_for_lvl = 500  # experience needed to lvl_up
-        self.exp = 0
-        self.max_hp = max_hp
         self.current_hp = self.max_hp
         self.max_mana = max_mana
         self.current_mana = self.max_mana
@@ -20,7 +24,6 @@ class Character(ABC):
         self.magic_immunity = magic_immunity
         self.mana_regen = mana_regen
         self.hp_regen = hp_regen
-        self.spell_mana_cost = spell_mana_cost
         self.mana_regen_lvl_up = mana_regen_lvl_up
         self.hp_regen_lvl_up = hp_regen_lvl_up
         self.physical_dmg = physical_dmg
@@ -28,10 +31,6 @@ class Character(ABC):
         self.team = None
         self.modifier_list = []
         self.next_move = self.act
-
-    def __str__(self) -> str:
-        return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
-            f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
 
     @abstractmethod
     def act(self, other) -> None:
@@ -92,29 +91,29 @@ class Character(ABC):
 
 
 class MagicType(Character, ABC):
-    def __init__(self, max_hp: int, physical_dmg: int, spell_mana_cost: int) -> None:
-        Character.__init__(self, max_hp=max_hp, hp_regen=0.01, hp_regen_lvl_up=0.0025,
-                           max_mana=450, mana_regen=0.02, mana_regen_lvl_up=0.005, spell_mana_cost=spell_mana_cost,
-                           magic_immunity=0.65, defence=0.3,
-                           physical_dmg=physical_dmg)
+    def __init__(self, physical_dmg: int) -> None:
+        Character.__init__(self, hp_regen=0.01, hp_regen_lvl_up=0.0025, max_mana=450, mana_regen=0.02,
+                           mana_regen_lvl_up=0.005, magic_immunity=0.65, defence=0.3, physical_dmg=physical_dmg)
 
 
 class CarryType(Character, ABC):
-    def __init__(self, max_hp: int, physical_dmg: int, spell_mana_cost: int) -> None:
-        Character.__init__(self, max_hp=max_hp, hp_regen=0.02, hp_regen_lvl_up=0.005,
-                           max_mana=200, mana_regen=0.01, mana_regen_lvl_up=0.0025, spell_mana_cost=spell_mana_cost,
-                           magic_immunity=0.25, defence=0.6,
-                           physical_dmg=physical_dmg)
+    def __init__(self, physical_dmg: int) -> None:
+        Character.__init__(self, hp_regen=0.02, hp_regen_lvl_up=0.005,
+                           max_mana=200, mana_regen=0.01, mana_regen_lvl_up=0.0025,
+                           magic_immunity=0.25, defence=0.6, physical_dmg=physical_dmg)
 
 
 class Warrior(CarryType):
+    max_hp = 1300
+    spell_mana_cost = 200
+
     def __init__(self) -> None:
         """
         Creates warrior character object
         """
         tmp_physical_dmg = 200 + random.randint(0, 100)
         self.spell_dmg = random.randint(0, 200)
-        CarryType.__init__(self, max_hp=1300, physical_dmg=tmp_physical_dmg, spell_mana_cost=200)
+        CarryType.__init__(self, physical_dmg=tmp_physical_dmg)
 
     def act(self, other: Character) -> None:
         self.attack(other)
@@ -132,13 +131,16 @@ class Warrior(CarryType):
 
 
 class Sorceress(MagicType):
+    max_hp = 900
+    spell_mana_cost = 35
+
     def __init__(self) -> None:
         """
         Creates sorceress character object
         """
         tmp_physical_dmg = random.randint(50, 100)
         self.spell_dmg = 50 + random.randint(0, 60)
-        MagicType.__init__(self, max_hp=900, physical_dmg=tmp_physical_dmg, spell_mana_cost=35)
+        MagicType.__init__(self, physical_dmg=tmp_physical_dmg)
 
     def act(self, other: Character) -> None:
         if self.current_mana >= self.spell_mana_cost:
@@ -170,11 +172,13 @@ class Support(MagicType):
     """
     Creates support character object
     """
+    max_hp = 800
+    spell_mana_cost = 95
 
     def __init__(self) -> None:
         tmp_physical_dmg = random.randint(50, 70)
         self.healing_power = 100 + random.randint(40, 100)
-        MagicType.__init__(self, max_hp=800, physical_dmg=tmp_physical_dmg, spell_mana_cost=95)
+        MagicType.__init__(self, physical_dmg=tmp_physical_dmg)
 
     def act(self, other: Character) -> None:
         if self.current_mana >= self.spell_mana_cost:
@@ -213,9 +217,12 @@ class Support(MagicType):
 
 
 class Voodoo(MagicType):
+    max_hp = 1000
+    spell_mana_cost = 55
+
     def __init__(self) -> None:
         self.spell_dmg = 75 + random.randint(0, 30)
-        MagicType.__init__(self, max_hp=1000, physical_dmg=50, spell_mana_cost=55)
+        MagicType.__init__(self, physical_dmg=50)
 
     def act(self, other: Character) -> None:
         if self.current_mana >= self.spell_mana_cost:

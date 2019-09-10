@@ -11,7 +11,7 @@ class DataAnalysis:
     def __init__(self):
         self.final_results = []
 
-    def analise_data(self, col):
+    def analise_data(self):
         """
         Runs sequence of methods. Clears data, sort it and makes a plot.
         :param col: int
@@ -19,7 +19,7 @@ class DataAnalysis:
         """
         self.read_data_for_analysis()
         self.split_data_for_analysis()
-        data = self.sort_data(col)
+        data = self.sort_data()
         self.create_a_plot(data)
 
     @staticmethod
@@ -35,14 +35,12 @@ class DataAnalysis:
     def split_data_for_analysis(self):
         self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])
 
-    def sort_data(self, col):
+    def sort_data(self):
         """
-        Changes python list to NumPy array and sorts data with specific 'col'(column) as a parameter
-        :param col: int
+        Changes python list to NumPy array and sorts data with specific 'col'(column) as a paramete
         :return: NumPy array
         """
         data = np.array(self.final_results)
-        data = data[np.argsort(data[:, col])]
         return data
 
     def create_a_plot(self, data):
@@ -51,6 +49,7 @@ class DataAnalysis:
         :param data: NumPy array of arrays
         :return: None
         """
+
         x = data[:, 3]
         y = data[:, 4]
 
@@ -65,7 +64,6 @@ class DataAnalysis:
         plt.ylabel('Duration of one round')
 
         plt.plot(x, y, 'o')
-
         self.trend_line(x, y)
 
     @staticmethod
@@ -85,4 +83,4 @@ class DataAnalysis:
 
 data1 = DataAnalysis()
 
-data1.analise_data(3)
+data1.analise_data()

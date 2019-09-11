@@ -25,11 +25,11 @@ class DataSaver:
         game_name = f'{x.year}-{x.month}-{x.day}-{x.hour}{x.minute:03} - {self.num_of_games} games'
         return game_name
 
-    # # sets the header of the files
-    # with open(f"results/{game_name}.csv", "a") as f:
-    #     f.write(f"Round number, Team 1 size,Team 2 size, Game rounds, Duration, Winning team")
+    def save_data(self, team1_size, team2_size, round_number, game):
+        with open(f"results/{self.file_name()}.csv", "a") as f:
+            f.write(f"{int(round_number)}, {int(team1_size)},{int(team2_size)},{game.battle_summary()}\n")
 
-    def data_save(self, team1_size, team2_size):
+    def run(self, team1_size, team2_size):
         start_time = time.time()
 
         round_number = 0
@@ -37,19 +37,20 @@ class DataSaver:
         for num in range(self.num_of_games):
             game = engine.Engine(team1_size, team2_size)
             game.run_game()
+
             round_number += 1
-            with open(f"results/{self.file_name()}.csv", "a") as f:
-                f.write(f"{int(round_number)}, {int(team1_size)},{int(team2_size)},{game.battle_summary()}\n")
+
+            self.save_data(team1_size, team2_size, round_number, game)
 
         program_execution_time = round(time.time() - start_time, 4)
+
         print(f'\nBuild in: {program_execution_time} s | {round(program_execution_time / 60, 4)} min | '
               f'{round((program_execution_time / 60) / 60, 4)} h')
 
 
 team1_characters = 10
 team2_characters = 10
-num_of_battles = 10
-for j in range(1, 30):
-    for i in range(1,4):
-        data = DataSaver(num_of_battles ** i)
-        data.data_save(team1_characters, team2_characters)
+num_of_battles = 5
+for i in range(1,3):
+    data = DataSaver(num_of_battles ** i)
+    data.run(team1_characters, team2_characters)

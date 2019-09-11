@@ -32,6 +32,7 @@ class DataAnalysis:
 
     def split_data_for_analysis(self):
         self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])
+        print(self.final_results)
 
     def create_a_plot(self):
         """

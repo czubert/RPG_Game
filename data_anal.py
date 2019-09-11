@@ -17,10 +17,8 @@ class DataAnalysis:
         :param col: int
         :return: None
         """
-        self.read_data_for_analysis()
         self.split_data_for_analysis()
-        data = self.sort_data()
-        self.create_a_plot(data)
+        self.create_a_plot()
 
     @staticmethod
     def read_data_for_analysis():
@@ -35,20 +33,13 @@ class DataAnalysis:
     def split_data_for_analysis(self):
         self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])
 
-    def sort_data(self):
-        """
-        Changes python list to NumPy array and sorts data with specific 'col'(column) as a paramete
-        :return: NumPy array
-        """
-        data = np.array(self.final_results)
-        return data
-
-    def create_a_plot(self, data):
+    def create_a_plot(self):
         """
         Creates a plot from all files in 'results' folder
         :param data: NumPy array of arrays
         :return: None
         """
+        data = np.array(self.final_results)
 
         x = data[:, 3]
         y = data[:, 4]

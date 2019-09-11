@@ -54,13 +54,13 @@ class Character(ABC):
         return min(self.team.opponent_team, key=lambda x: x.current_hp)
 
     def regenerate(self) -> None:
-        self.regenerate_hp()
-        self.regenerate_mana()
+        self._regenerate_hp()
+        self._regenerate_mana()
 
-    def regenerate_hp(self) -> None:
+    def _regenerate_hp(self) -> None:
         self.current_hp = min(self.max_hp, self.current_hp + self.hp_regen * self.max_hp)  # hp regeneration
 
-    def regenerate_mana(self) -> None:
+    def _regenerate_mana(self) -> None:
         self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
                                 self.max_mana)  # hp regeneration# mana regeneration
 
@@ -72,8 +72,8 @@ class Character(ABC):
 
     def lvl_up(self) -> None:
         self.lvl += 1
-        self.exp_for_lvl += (1250 * self.lvl)
-        self.max_hp += (50 * self.lvl)
+        self.exp_for_lvl += 1250 * self.lvl
+        self.max_hp += 50 * self.lvl
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
         self.exp_gained += 50 * self.lvl

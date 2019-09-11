@@ -49,7 +49,7 @@ class DataSaver:
 team1_characters = 10
 team2_characters = 10
 num_of_battles = 10
-
-for i in range(1,6):
-    data = DataSaver(num_of_battles ** i)
-    data.data_save(team1_characters, team2_characters)
+for j in range(1, 30):
+    for i in range(1,4):
+        data = DataSaver(num_of_battles ** i)
+        data.data_save(team1_characters, team2_characters)

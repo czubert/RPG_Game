@@ -73,6 +73,6 @@ class DataAnalysis:
         plt.show()
 
 
-data1 = DataAnalysis()
-
-data1.analise_data()
+if __name__ == '__main__':
+    data1 = DataAnalysis()
+    data1.analise_data()

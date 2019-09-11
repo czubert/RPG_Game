@@ -8,7 +8,7 @@ class Team:
         self.name = name
         self.team = []
         self.opponent_team = None
-        self.generator_field = None
+        self.generator = None
 
     def __str__(self) -> str:
         return ' \n'.join([element.__str__() for element in self.team])
@@ -53,8 +53,7 @@ class Team:
         char.next_move(target)
 
     # generator going through team list one by one, if it reaches the end it raise an error
-    def find_attacking_character(self):  # TODO hints: is yield a return?
-        # return random.choice(self.team)
+    def find_attacking_character(self):
         for char in self.team:
             yield char
         yield None

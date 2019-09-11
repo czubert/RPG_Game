@@ -64,25 +64,56 @@ class Character(ABC):
         self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
                                 self.max_mana)  # hp regeneration# mana regeneration
 
-    def get_exp(self) -> None:
-        self.exp += self.exp_gained
+    # def get_exp(self) -> None:
+    #     self.exp += self.exp_gained
+    #
+    #     if self.exp > self.exp_for_lvl:
+    #         self.lvl_up()
 
+    def get_exp(self, other) -> None:
+        """
+        Gives exp to character after killing opponent, based on fighters strength.
+        :param other: character object
+        :return: None
+        """
+        self.check_str_and_give_exp(other)
+        self.check_if_lvl_up()
+
+    def check_if_lvl_up(self) -> None:
+        """
+        Checks if hero collected experience to gain next level
+        :return: None
+        """
         if self.exp > self.exp_for_lvl:
             self.lvl_up()
 
+    def check_str_and_give_exp(self, other) -> None:
+        """
+        Checks if opponent is stronger/weaker or equally strong and give exp depending on it
+        :param other: character object
+        :return: None
+        """
+        exp_gained = 250 + 50 * (self.lvl - 1)
+
+        if self.lvl == other.lvl:
+            self.exp += exp_gained
+        elif self.lvl > other.lvl:
+            self.exp += exp_gained * 1.5
+        else:
+            self.exp += exp_gained * 0.5
+
     def lvl_up(self) -> None:
         self.lvl += 1
-        self.exp_for_lvl += 1250 * self.lvl
+        self.exp_for_lvl += 1250 * self.lvl * 2
         self.max_hp += 50 * self.lvl
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
-        self.exp_gained += 50 * self.lvl
 
     def regeneration_upgr_after_lvl_up(self, mana_regen_lvl_up: int, hp_regen_lvl_up: int) -> None:
         self.mana_regen += mana_regen_lvl_up * self.lvl
         self.hp_regen += hp_regen_lvl_up * self.lvl
 
-    def do_nothing(self, other) -> None:  # TODO hints
+    def do_nothing(self, other) -> None:
         pass
 
 
@@ -120,7 +151,7 @@ class Warrior(CarryType):
         self.attack(other)
 
         if self.remove_if_dead(other):
-            self.get_exp()
+            self.get_exp(other)
 
     def attack(self, other: Character) -> None:
         """
@@ -150,7 +181,7 @@ class Sorceress(MagicType):
             self.attack(other)
 
         if self.remove_if_dead(other):
-            self.get_exp()
+            self.get_exp(other)
 
     def stun(self, other: Character) -> None:
         """
@@ -185,11 +216,11 @@ class Support(MagicType):
         if self.current_mana >= self.spell_mana_cost:
             self.heal(other)
             if other.max_hp == other.current_hp:
-                self.get_exp()
+                self.get_exp(other)
         else:
             self.attack(other)
             if self.remove_if_dead(other):
-                self.get_exp()
+                self.get_exp(other)
 
     def heal(self, other: Character) -> None:
         """

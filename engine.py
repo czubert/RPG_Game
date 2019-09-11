@@ -37,8 +37,11 @@ class Engine:
 
     def run_game(self) -> None:
         start_time = time.time()
+
         random.shuffle(self.teams_list)  # randoms starting team
+
         self.fight()
+
         self.program_execution_time = round(time.time() - start_time, 4)
         # print(self.battle_summary())
 
@@ -54,11 +57,11 @@ class Engine:
             tmp_list = self.teams_list.copy()  # copy of teams list, for generator
 
             for team in tmp_list:
-                team.generator_field = team.find_attacking_character()  # sets generator 'object'
+                team.generator = team.find_attacking_character()  # sets generator 'object'
 
             while tmp_list:
                 for team in tmp_list:
-                    char = next(team.generator_field)
+                    char = next(team.generator)
                     if char is None:
                         tmp_list.remove(team)
                     else:

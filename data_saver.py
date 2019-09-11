@@ -10,6 +10,7 @@ class DataSaver:
         # # defines number of games and the size of a team (the size is 10 to the power of team_size) and it defines how
         # many different matches will be played like: 2 - 10x10 and 100x100
         self.num_of_games = num_of_games
+
     #     self.team_size = team_size
 
     @staticmethod
@@ -48,9 +49,10 @@ class DataSaver:
               f'{round((program_execution_time / 60) / 60, 4)} h')
 
 
-team1_characters = 10
-team2_characters = 10
-num_of_battles = 5
-for i in range(1,3):
-    data = DataSaver(num_of_battles ** i)
-    data.run(team1_characters, team2_characters)
+if __name__ == '__main__':
+    team1_characters = 10
+    team2_characters = 10
+    num_of_battles = 5
+    for i in range(1, 3):
+        data = DataSaver(num_of_battles ** i)
+        data.run(team1_characters, team2_characters)

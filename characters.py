@@ -62,34 +62,29 @@ class Character(ABC):
         self._regenerate_mana()
 
     def _regenerate_hp(self) -> None:
+        """
+        Regenerates hp when called. For example At the end of the round and after getting lvl up
+        :return: None
+        """
         self.current_hp = min(self.max_hp, self.current_hp + self.hp_regen * self.max_hp)  # hp regeneration
 
     def _regenerate_mana(self) -> None:
+        """
+        Regenerates hp when called. For example At the end of the round and after getting lvl up
+        :return: None
+        """
         self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
                                 self.max_mana)  # hp regeneration# mana regeneration
 
-    # def get_exp(self) -> None:
-    #     self.exp += self.exp_gained
-    #
-    #     if self.exp > self.exp_for_lvl:
-    #         self.lvl_up()
-
-    # def get_exp(self, other) -> None:
-    #     """
-    #     Gives exp to character after killing opponent, based on fighters strength.
-    #     :param other: character object
-    #     :return: None
-    #     """
-    #     self.check_str_and_give_exp(other)
-
     def get_exp(self, other) -> None:
         """
-        Checks if opponent is stronger/weaker or equally strong and give exp depending on it
+        Gives experience based on opponent level
         :param other: character object
         :return: None
         """
-        exp_gained = 250 + 50 * (self.lvl - 1)
+        exp_gained = 250  # amount of exp gained after kill
 
+        # experience gained based on lvl of killed opponent
         i = 0
         while other.lvl != i:
             i += 1
@@ -98,23 +93,27 @@ class Character(ABC):
             self.check_lvl()
             print(self.exp, self.lvl)
 
-
-        if self.lvl > other.lvl:
+        # bonus experience for a kill, when opponent is equally strong as attacking character or stronger
+        if self.lvl == other.lvl:
             self.exp += exp_gained * 0.1
         elif self.lvl < other.lvl:
             self.exp += exp_gained * 0.5
 
     def check_lvl(self):
+        """
+        Checks lvl of hero based on experience gained during fights.
+        Every time the loop matches the conditions, it calls lvl_up, so hero gets all benefits from lvl_up
+        :return:
+        """
         i = self.lvl
-        # print(self.lvl, self.exp)
-        while self.exp > (1000 * i + 500) / 2:
+
+        while self.exp > (1000 * i + 500) / 2:  # algorithm, lvl depends on
             i += 1
             self.lvl_up()
-        # print(self.lvl, self.exp)
+
 
     def lvl_up(self) -> None:
         self.lvl += 1
-        # self.exp_for_lvl += 1250 * self.lvl * 2
         self.max_hp += 50 * self.lvl
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()

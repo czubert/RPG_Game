@@ -32,14 +32,16 @@ class DataAnalysis:
 
     def split_data_for_analysis(self):
         self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])
-        print(self.final_results)
 
+
+    # REDO plot doesn't work - takes only last file
     def create_a_plot(self):
         """
         Creates a plot from all files in 'results' folder
         :param data: NumPy array of arrays
         :return: None
         """
+        print(self.final_results)
         data = np.array(self.final_results)
 
         x = data[:, 3]

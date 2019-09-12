@@ -6,10 +6,14 @@ import modifiers
 
 
 class Character(ABC):
-    lvl = 1
-    exp = 0
-    exp_for_lvl = 500
-    exp_gained = 250
+    lvl = 1  # initial character lvl
+    exp = 0  # initial character experience
+    exp_for_lvl = 500  # initial experience needed for next level
+    exp_gained = 250  # initial experience per kill
+    max_hp = None  # initial max hp, defined by specific character class
+    max_mana = None  # initial max mana, defined by specific character class
+    defence = None  # initial defence, defined by specific character class
+    magic_immunity = None  # initial magic immunity, defined by specific character class
 
     def __str__(self) -> str:
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
@@ -46,7 +50,7 @@ class Character(ABC):
         else:
             return False
 
-    def find_weakest_character(self):  # TODO hints about return... Character doesn't work
+    def find_weakest_character(self) -> object:   # WHAT hints about return doesn't work
         """
         Finds weakest character from team
         :return: character object
@@ -95,11 +99,17 @@ class Character(ABC):
         """
         exp_gained = 250 + 50 * (self.lvl - 1)
 
-        if self.lvl == other.lvl:
-            self.exp += exp_gained
-        elif self.lvl > other.lvl:
-            self.exp += exp_gained * 1.5
-        else:
+        for i in range(10000):
+            self.check_if_lvl_up()
+            if other.lvl == i:
+                self.exp += exp_gained * 1.5 * (i ** 2) + 10000
+                print('aaa')
+                return
+
+
+        if self.lvl > other.lvl:
+            self.exp += exp_gained * 0.1
+        elif self.lvl < other.lvl:
             self.exp += exp_gained * 0.5
 
     def lvl_up(self) -> None:

@@ -84,7 +84,7 @@ class Engine:
 
 if __name__ == '__main__':
     # # creates game object based on Engine class
-    game = Engine(10, 5)
+    game = Engine(1000, 50)
 
     # # starts game
     game.run_game()

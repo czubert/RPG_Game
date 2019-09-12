@@ -81,7 +81,8 @@ class Character(ABC):
         :return: None
         """
         self.check_str_and_give_exp(other)
-        self.check_if_lvl_up()
+        # self.check_if_lvl_up()
+        self.check_lvl()
 
     def check_if_lvl_up(self) -> None:
         """
@@ -91,6 +92,13 @@ class Character(ABC):
         if self.exp > self.exp_for_lvl:
             self.lvl_up()
 
+    def check_lvl(self):
+        i = 1
+        while self.exp > (100 ** i + 500) / 2:
+            i += 1
+            self.lvl_up()
+
+
     def check_str_and_give_exp(self, other) -> None:
         """
         Checks if opponent is stronger/weaker or equally strong and give exp depending on it
@@ -99,11 +107,13 @@ class Character(ABC):
         """
         exp_gained = 250 + 50 * (self.lvl - 1)
 
+        # while
+
         for i in range(10000):
-            self.check_if_lvl_up()
+            self.check_lvl()
             if other.lvl == i:
-                self.exp += exp_gained * 1.5 * (i ** 2) + 10000
-                print('aaa')
+                self.exp += exp_gained * 1.5 * (i ** 2) + 100
+                # print('aaa')
                 return
 
 

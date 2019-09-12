@@ -50,7 +50,7 @@ class Character(ABC):
         else:
             return False
 
-    def find_weakest_character(self) -> object:   # WHAT hints about return doesn't work
+    def find_weakest_character(self) -> object:  # WHAT hints about return doesn't work
         """
         Finds weakest character from team
         :return: character object
@@ -74,32 +74,15 @@ class Character(ABC):
     #     if self.exp > self.exp_for_lvl:
     #         self.lvl_up()
 
+    # def get_exp(self, other) -> None:
+    #     """
+    #     Gives exp to character after killing opponent, based on fighters strength.
+    #     :param other: character object
+    #     :return: None
+    #     """
+    #     self.check_str_and_give_exp(other)
+
     def get_exp(self, other) -> None:
-        """
-        Gives exp to character after killing opponent, based on fighters strength.
-        :param other: character object
-        :return: None
-        """
-        self.check_str_and_give_exp(other)
-        # self.check_if_lvl_up()
-        self.check_lvl()
-
-    def check_if_lvl_up(self) -> None:
-        """
-        Checks if hero collected experience to gain next level
-        :return: None
-        """
-        if self.exp > self.exp_for_lvl:
-            self.lvl_up()
-
-    def check_lvl(self):
-        i = 1
-        while self.exp > (100 ** i + 500) / 2:
-            i += 1
-            self.lvl_up()
-
-
-    def check_str_and_give_exp(self, other) -> None:
         """
         Checks if opponent is stronger/weaker or equally strong and give exp depending on it
         :param other: character object
@@ -107,14 +90,13 @@ class Character(ABC):
         """
         exp_gained = 250 + 50 * (self.lvl - 1)
 
-        # while
-
-        for i in range(10000):
+        i = 0
+        while other.lvl != i:
+            i += 1
+        else:
+            self.exp += (exp_gained * 1.5) * (10 ** i)
             self.check_lvl()
-            if other.lvl == i:
-                self.exp += exp_gained * 1.5 * (i ** 2) + 100
-                # print('aaa')
-                return
+            print(self.exp, self.lvl)
 
 
         if self.lvl > other.lvl:
@@ -122,9 +104,17 @@ class Character(ABC):
         elif self.lvl < other.lvl:
             self.exp += exp_gained * 0.5
 
+    def check_lvl(self):
+        i = self.lvl
+        # print(self.lvl, self.exp)
+        while self.exp > (1000 * i + 500) / 2:
+            i += 1
+            self.lvl_up()
+        # print(self.lvl, self.exp)
+
     def lvl_up(self) -> None:
         self.lvl += 1
-        self.exp_for_lvl += 1250 * self.lvl * 2
+        # self.exp_for_lvl += 1250 * self.lvl * 2
         self.max_hp += 50 * self.lvl
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()

@@ -67,7 +67,7 @@ class Engine:
                     else:
                         if team.opponent_team.team:
                             team.team_act(char)
-                print(self.teams_list[0][0].exp)
+
             # on round end
             for team in self.teams_list:
                 team.after_round_regenerate_mana_and_hp()
@@ -84,7 +84,7 @@ class Engine:
 
 if __name__ == '__main__':
     # # creates game object based on Engine class
-    game = Engine(100, 5)
+    game = Engine(10000, 5)
 
     # # starts game
     game.run_game()

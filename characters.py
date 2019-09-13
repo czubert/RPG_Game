@@ -103,7 +103,6 @@ class Character(ABC):
             self.check_if_lvl_up()
             if other.lvl == i:
                 self.exp += exp_gained * 1.5 * (i ** 2) + 10000
-                print('aaa')
                 return
 
 

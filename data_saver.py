@@ -50,9 +50,10 @@ class DataSaver:
 
 
 if __name__ == '__main__':
-    team1_characters = 100
-    team2_characters = 100
-    num_of_battles = 50
-    for i in range(1, 3):
-        data = DataSaver(num_of_battles ** i)
-        data.run(team1_characters, team2_characters)
+    team1_characters = 1
+    team2_characters = 1
+    num_of_battles = 5
+
+    for i in range(0, 3):
+        data = DataSaver(num_of_battles)
+        data.run(team1_characters * 10 ** i, team2_characters * 10 ** i)

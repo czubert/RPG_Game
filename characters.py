@@ -89,7 +89,7 @@ class Character(ABC):
         while other.lvl != i:
             i += 1
         else:
-            self.exp += (exp_gained * 1.5) * (10 ** i)
+            self.exp += (exp_gained * 1.5) * (10 * i)
             self.check_lvl()
             print(self.exp, self.lvl)
 
@@ -110,11 +110,12 @@ class Character(ABC):
         while self.exp > (1000 * i + 500) / 2:  # algorithm, lvl depends on
             i += 1
             self.lvl_up()
-
+        self.exp_for_lvl = self.lvl / 1000 - 500 / 2
 
     def lvl_up(self) -> None:
         self.lvl += 1
         self.max_hp += 50 * self.lvl
+        self.physical_dmg += 400 * self.lvl
         self.regeneration_upgr_after_lvl_up(self.mana_regen_lvl_up, self.hp_regen_lvl_up)
         self.regenerate()
 
@@ -147,13 +148,13 @@ class CarryType(Character, ABC):
 class Warrior(CarryType):
     max_hp = 1300
     spell_mana_cost = 200
-    physical_dmg = 200 + random.randint(0, 100)
     spell_dmg = random.randint(0, 200)
 
     def __init__(self) -> None:
         """
         Creates warrior character object
         """
+        self.physical_dmg = 200 + random.randint(0, 100)
         CarryType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -167,20 +168,20 @@ class Warrior(CarryType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        dmg_by_lvl = 1 + self.lvl * 0.1
+        dmg_by_lvl = 1 + self.lvl * 0.3
         other.current_hp -= int((self.physical_dmg * dmg_by_lvl) * (1 - other.defence))
 
 
 class Sorceress(MagicType):
     max_hp = 900
     spell_mana_cost = 35
-    physical_dmg = random.randint(50, 100)
     spell_dmg = 50 + random.randint(0, 60)
 
     def __init__(self) -> None:
         """
         Creates sorceress character object
         """
+        self.physical_dmg = random.randint(50, 100)
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -206,7 +207,8 @@ class Sorceress(MagicType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int((self.physical_dmg * (1 + self.lvl * 0.1)) * (1 - other.defence))
+        dmg_by_lvl = 1 + self.lvl * 0.1
+        other.current_hp -= int((self.physical_dmg * dmg_by_lvl) * (1 - other.defence))
 
 
 class Support(MagicType):
@@ -214,11 +216,11 @@ class Support(MagicType):
     Creates support character object
     """
     max_hp = 800
-    spell_mana_cost = 95
-    physical_dmg = random.randint(50, 70)
-    healing_power = 100 + random.randint(40, 100)
+    spell_mana_cost = 180
+    healing_power = 10 + random.randint(40, 100)
 
     def __init__(self) -> None:
+        self.physical_dmg = random.randint(50, 70)
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:
@@ -254,16 +256,17 @@ class Support(MagicType):
         Skill of character, deals damage to opponent
         :param other: opponent character object
         """
-        other.current_hp -= int(self.physical_dmg * (1 + self.lvl * 0.1))
+        dmg_by_lvl = 1 + self.lvl * 0.1
+        other.current_hp -= int((self.physical_dmg * dmg_by_lvl) * (1 - other.defence))
 
 
 class Voodoo(MagicType):
     max_hp = 1000
     spell_mana_cost = 55
-    physical_dmg = 50
     spell_dmg = 75 + random.randint(0, 30)
 
     def __init__(self) -> None:
+        self.physical_dmg = 50
         MagicType.__init__(self)
 
     def act(self, other: Character) -> None:

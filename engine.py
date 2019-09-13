@@ -42,6 +42,8 @@ class Engine:
 
         self.fight()
 
+        print(self.battle_summary())
+
         self.program_execution_time = round(time.time() - start_time, 4)
         # print(self.battle_summary())
 
@@ -90,3 +92,4 @@ if __name__ == '__main__':
     game.run_game()
 
     print(game.battle_summary())
+

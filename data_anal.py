@@ -26,9 +26,12 @@ class DataAnalysis:
         Takes all files from folder 'results', reads it line by line and splits every each line into separate list
         :return: None
         """
+        tmp_results = []
         for file in sorted(glob.glob('results/*')):
             with open(file, 'r') as f:
-                return f.readlines()
+                tmp_results.extend(f.readlines())
+            print(tmp_results)
+        return tmp_results
 
     def split_data_for_analysis(self):
         self.final_results.extend([line.split(',') for line in self.read_data_for_analysis()])

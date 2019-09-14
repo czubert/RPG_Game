@@ -19,7 +19,7 @@ class Character(ABC):
 
     def __str__(self) -> str:
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
-               f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Type: {self.type_name}"
+               f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Type: {self.char_type}"
 
     def __init__(self, mana_regen, hp_regen, mana_regen_lvl_up, hp_regen_lvl_up) -> None:
         self.name = names.get_first_name()
@@ -144,7 +144,7 @@ class CarryType(Character, ABC):
 
 
 class Warrior(CarryType):
-    type_name = 'Warrior'
+    char_type = 'Warrior'
     max_hp = 1300
     spell_mana_cost = 200
     spell_dmg = random.randint(0, 200)

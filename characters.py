@@ -85,32 +85,28 @@ class Character(ABC):
         exp_gained = 250  # amount of exp gained after kill
 
         # experience gained based on lvl of killed opponent
-        i = 0
-        while other.lvl != i:
-            i += 1
-        else:
-            self.exp += (exp_gained * 1.5) * (10 * i)
-            self.check_lvl()
-            print(self.exp, self.lvl)
+        self.exp += exp_gained * 15 * other.lvl
 
         # bonus experience for a kill, when opponent is equally strong as attacking character or stronger
         if self.lvl == other.lvl:
-            self.exp += exp_gained * 0.1
+            self.exp += exp_gained * 0.1 * other.lvl
         elif self.lvl < other.lvl:
-            self.exp += exp_gained * 0.5
+            self.exp += exp_gained * 0.5 * other.lvl
 
-    def check_lvl(self):
+        self.set_accurate_lvl()
+        print(self.exp, self.lvl)
+
+    def set_accurate_lvl(self):
         """
         Checks lvl of hero based on experience gained during fights.
         Every time the loop matches the conditions, it calls lvl_up, so hero gets all benefits from lvl_up
         :return:
         """
-        i = self.lvl
 
-        while self.exp > (1000 * i + 500) / 2:  # algorithm, lvl depends on
-            i += 1
+        while self.exp > (1000 * self.lvl + 250):  # algorithm, establish level of hero
             self.lvl_up()
-        self.exp_for_lvl = self.lvl / 1000 - 500 / 2
+
+        self.exp_for_lvl = self.lvl * 1000 + 1000  # sets experience needed for next level
 
     def lvl_up(self) -> None:
         self.lvl += 1

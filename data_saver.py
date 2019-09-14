@@ -53,6 +53,6 @@ if __name__ == '__main__':
     team1_characters = 100
     team2_characters = 100
     num_of_battles = 1
-    for i in range(1, 3):
+    for i in range(1, 2):
         data = DataSaver(num_of_battles* 10**i)
         data.run(team1_characters, team2_characters)

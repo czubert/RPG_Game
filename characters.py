@@ -12,6 +12,7 @@ class Character(ABC):
     exp_gained = 250  # initial experience per kill
     max_hp = None  # initial max hp, defined by specific character class
     max_mana = None  # initial max mana, defined by specific character class
+    physical_dmg = None  # initial physical dm, defined by specific character class
     defence = None  # initial defence, defined by specific character class
     magic_immunity = None  # initial magic immunity, defined by specific character class
 

@@ -12,12 +12,14 @@ class Character(ABC):
     exp_gained = 250  # initial experience per kill
     max_hp = None  # initial max hp, defined by specific character class
     max_mana = None  # initial max mana, defined by specific character class
+    physical_dmg = None
     defence = None  # initial defence, defined by specific character class
     magic_immunity = None  # initial magic immunity, defined by specific character class
+    char_type = None
 
     def __str__(self) -> str:
         return f"Player: {self.name}, Level: {self.lvl}, Exp: {self.exp}/{self.exp_for_lvl}, " \
-               f"Max HP: {self.max_hp}, Current HP: {self.current_hp}"
+               f"Max HP: {self.max_hp}, Current HP: {self.current_hp}, Type: {self.type_name}"
 
     def __init__(self, mana_regen, hp_regen, mana_regen_lvl_up, hp_regen_lvl_up) -> None:
         self.name = names.get_first_name()
@@ -74,7 +76,7 @@ class Character(ABC):
         :return: None
         """
         self.current_mana = min(self.max_mana, self.current_mana + self.mana_regen *
-                                self.max_mana)  # hp regeneration# mana regeneration
+                                self.max_mana)  # mana regeneration
 
     def get_exp(self, other) -> None:
         """
@@ -94,7 +96,7 @@ class Character(ABC):
             self.exp += exp_gained * 0.5 * other.lvl
 
         self.set_accurate_lvl()
-        print(self.exp, self.lvl)
+        print(f'{self.exp} - {self.lvl}')
 
     def set_accurate_lvl(self):
         """
@@ -142,6 +144,7 @@ class CarryType(Character, ABC):
 
 
 class Warrior(CarryType):
+    type_name = 'Warrior'
     max_hp = 1300
     spell_mana_cost = 200
     spell_dmg = random.randint(0, 200)
@@ -169,6 +172,7 @@ class Warrior(CarryType):
 
 
 class Sorceress(MagicType):
+    type_name = 'Sorceress'
     max_hp = 900
     spell_mana_cost = 35
     spell_dmg = 50 + random.randint(0, 60)
@@ -211,6 +215,7 @@ class Support(MagicType):
     """
     Creates support character object
     """
+    type_name = 'Support'
     max_hp = 800
     spell_mana_cost = 180
     healing_power = 10 + random.randint(40, 100)
@@ -257,6 +262,7 @@ class Support(MagicType):
 
 
 class Voodoo(MagicType):
+    type_name = 'Voodoo'
     max_hp = 1000
     spell_mana_cost = 55
     spell_dmg = 75 + random.randint(0, 30)

@@ -42,10 +42,10 @@ class Engine:
 
         self.fight()
 
-        print(self.battle_summary())
 
         self.program_execution_time = round(time.time() - start_time, 4)
-        # print(self.battle_summary())
+
+        print(self.battle_summary())
 
     def fight(self) -> None:
         """
@@ -80,13 +80,14 @@ class Engine:
         winning_team = list(filter(bool, self.teams_list))
 
         # return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
-        return f"{self.rounds}, {self.program_execution_time}, {winning_team[0].name}, {winning_team[0][0].exp}, " \
-               f"{winning_team[0][0].lvl}, {winning_team[0][0].exp_for_lvl}{winning_team[0][0].team}"
+        return f"{self.rounds}, {self.program_execution_time}, {winning_team[0].name},"
+               # f"{winning_team[0][0].exp}/{winning_team[0][0].exp_for_lvl} - " \
+               # f"{round(winning_team[0][0].exp / winning_team[0][0].exp_for_lvl * 100, 2)}%, {winning_team[0][0].lvl}"
 
 
 if __name__ == '__main__':
     # # creates game object based on Engine class
-    game = Engine(10000, 5)
+    game = Engine(1000, 50)
 
     # # starts game
     game.run_game()

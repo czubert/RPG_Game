@@ -9,6 +9,7 @@ class Team:
         self.team = []
         self.opponent_team = None
         self.generator = None
+        self.number_of_survivors = len(self.team)
 
     def __str__(self) -> str:
         return ' \n'.join([element.__str__() for element in self.team])

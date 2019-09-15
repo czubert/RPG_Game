@@ -23,7 +23,7 @@ class DataSaver:
     def file_name(self):
         # # defines saved file name
         x = datetime.datetime.now()
-        game_name = f'{x.year}-{x.month}-{x.day}-{x.hour}{x.minute:03} - {self.num_of_games} games'
+        game_name = f'{x.year}-{x.month}-{x.day}-{x.hour} - {self.num_of_games} games'
         return game_name
 
     def save_data(self, team1_size, team2_size, round_number, game):
@@ -50,9 +50,9 @@ class DataSaver:
 
 
 if __name__ == '__main__':
-    team1_characters = 100
-    team2_characters = 100
+    team1_characters = 10
+    team2_characters = 10
     num_of_battles = 1
-    for i in range(1, 2):
-        data = DataSaver(num_of_battles* 10**i)
-        data.run(team1_characters, team2_characters)
+    for i in range(0, 4):
+        data = DataSaver(num_of_battles + 10 * i)
+        data.run(team1_characters + 3 ** i, team2_characters + 3 ** i)

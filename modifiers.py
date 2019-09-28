@@ -38,7 +38,9 @@ class Poison(Modifier):
     def poison(self) -> None:
         if self.duration > 0:
             self.target.current_hp -= self.damage
-            self.caster.remove_if_dead(self.target)
+            if self.target not in self.target.team:
+                print('dupa')
+                # self.target.remove_if_dead(self.target)
             self.duration -= 1
         else:
             self.target.modifier_list.remove(self)

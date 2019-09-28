@@ -1,4 +1,5 @@
 import time
+import itertools
 
 from teams import Team
 from characters import *
@@ -9,6 +10,8 @@ class Engine:
         self.teams_list = []
         self.rounds = 0
         self.program_execution_time = 0
+        self.team1_size = team1_size
+        self.team2_size = team2_size
         self.set_teams(team1_size, team2_size)
 
     def create_new_team(self, name: str) -> Team:
@@ -40,8 +43,8 @@ class Engine:
 
         random.shuffle(self.teams_list)  # randoms starting team
 
+        # self.terminate_process()
         self.fight()
-
 
         self.program_execution_time = round(time.time() - start_time, 4)
 
@@ -54,21 +57,41 @@ class Engine:
         After attack/support it changes the team to another one.
         :return: Stops attack if chosen character is stunned
         """
+        while True:  # works until one team is dead
+            # tmp_list = self.teams_list.copy()  # copy of teams list, for generator
+            gen_list = [i.find_attacking_character() for i in self.teams_list]
+            pair_of_characters = itertools.zip_longest(*gen_list)
 
-        while all(self.teams_list):  # works until one team is dead
-            tmp_list = self.teams_list.copy()  # copy of teams list, for generator
-
-            for team in tmp_list:
-                team.generator = team.find_attacking_character()  # sets generator 'object'
-
-            while tmp_list:
-                for team in tmp_list:
-                    char = next(team.generator)
+            for char_pairs_tuples in pair_of_characters:
+                for char in char_pairs_tuples:
                     if char is None:
-                        tmp_list.remove(team)
+                        continue
                     else:
-                        if team.opponent_team.team:
-                            team.team_act(char)
+                        if any([i.empty for i in self.teams_list]):
+                            return
+                        char.team.team_act(char)
+
+            #
+            # for team in self.teams_list:
+            #     team.generator = team.find_attacking_character()  # sets generator 'object'
+            #     if team.generator is None:
+            #         continue
+            #     else:
+            #         char = next(team.generator)
+            #         if char is None:
+            #             self.teams_list.remove(team)
+            #         else:
+            #             # if team.opponent_team.team:
+            #             team.team_act(char)
+
+            # while tmp_list:
+            #     for team in tmp_list:
+            #         char = next(team.generator)
+            #         if char is None:
+            #             tmp_list.remove(team)
+            #         else:
+            #             if team.opponent_team.team:
+            #                 team.team_act(char)
 
             # on round end
             for team in self.teams_list:
@@ -81,8 +104,6 @@ class Engine:
 
         # return f"Team:{winning_team.name}\n Battle took: {self.rounds} rounds, {self.program_execution_time} s"
         return f"{self.rounds}, {self.program_execution_time}, {winning_team[0].name},"
-               # f"{winning_team[0][0].exp}/{winning_team[0][0].exp_for_lvl} - " \
-               # f"{round(winning_team[0][0].exp / winning_team[0][0].exp_for_lvl * 100, 2)}%, {winning_team[0][0].lvl}"
 
 
 if __name__ == '__main__':
